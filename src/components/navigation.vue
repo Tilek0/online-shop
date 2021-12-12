@@ -6,11 +6,15 @@
     <div class="nav-link">
       <router-link to="woman">Woman</router-link>
       <router-link to="man">Man</router-link>
-      <router-link to="junior">Boy</router-link>
-      <router-link to="junior">Girl</router-link>
+      <router-link to="boy">Boy</router-link>
+      <router-link to="girl">Girl</router-link>
     </div>
     <div class="nav-icons">
-      <input type="search"><img src="../assets/icons/search.png" alt="img">
+      <div class="nav-icons_search">
+        <div>
+          <input type="text" placeholder=" " required>
+        </div>
+      </div>
       <router-link to="/admin"><img src="../assets/icons/admin.png" alt="img"></router-link>
       <router-link to="/bag"><img src="../assets/icons/bag.png" alt="img"></router-link>
     </div>
@@ -24,6 +28,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$search-time: 800ms;
+$reset-time: 150ms;
+$color-pink: #f26659;
 .nav {
   &-divider {
     position: relative;
@@ -41,30 +48,53 @@ export default {
       margin: 15%;
       font-size: 18px;
       &:hover {
-        color: #f26659;
-        border-bottom: 1px solid #f26659;
+        color: $color-pink;
+        border-bottom: 1px solid $color-pink;
       }
     }
   }
   &-icons {
     position: absolute;
     top: 0.5%;
-    right: 10%;
+    right: 15%;
     display: flex;
     align-items: center;
     :nth-child(n) {
       margin: 0 10%;
-      width: 30px;
     }
-    :nth-child(1) {
-      margin: 0;
+    img {
+      width: 35px;
     }
-    input {
-      background: transparent;
-      border: none;
-      outline: none;
-      border-bottom: 1px black solid;
-      width: 70px;
+    &_search {
+      div {
+        display: inline-block;
+        position: relative;
+        &:after {
+          content: "";
+          background: black;
+          width: 3px;
+          height: 15px;
+          position: absolute;
+          top: 25px;
+          right: 0.5px;
+          transform: rotate(135deg);
+        }
+        input {
+          color: black;
+          font-size: 16px;
+          background: transparent;
+          width: 12px;
+          height: 12px;
+          padding: 7px;
+          border: solid 3px black;
+          outline: none;
+          border-radius: 35px;
+          transition: width 0.5s;
+          &:focus,:not(:placeholder-shown) {
+            width: 250px;
+          }
+        }
+      }
     }
   }
 }
