@@ -2,15 +2,13 @@
   <div class="home">
     <section class="home-section">
       <div class="home-section_link">
-        <router-link to="/man">MAN</router-link>
-        <router-link to="/woman">WOMAN</router-link>
+        <router-link to="Categories" v-for="adult in adults" :key="adult">{{ adult }}</router-link>
       </div>
       <img src="../assets/man&woman.jpg" alt="img" class="home-section_imgAdult">
     </section>
     <section class="home-section">
       <div class="home-section_link">
-        <router-link to="boy">BOY</router-link>
-        <router-link to="girl">GIRL</router-link>
+        <router-link to="Categories" v-for="jun in juniors" :key="jun">{{ jun }}</router-link>
       </div>
       <img src="../assets/junior.jpg" alt="img" class="home-section_img">
     </section>
@@ -21,6 +19,12 @@
 export default {
   name: "Home",
   components: {
+  },
+  data() {
+    return {
+      adults: ['Man','Woman'],
+      juniors: ['Boy','Girl']
+    }
   },
 };
 </script>
@@ -50,20 +54,21 @@ export default {
         top: 50%;
         left: 25%;
         font-size: 70px;
-        padding: 1%;
+        padding: .5% 2%;
         :hover {
           color: black;
         }
         &::after{
           content: "";
           background: #8ca9d3;
-          mix-blend-mode: exclusion;
           width: calc(100% + 20px);
           height: 0;
           position: absolute;
           bottom: -4px;
           left: -10px;
           transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+          opacity: .5;
+          border-radius: 20px;
         }
 
         &:hover::after{
@@ -75,17 +80,18 @@ export default {
         top: 50%;
         right: 25%;
         font-size: 70px;
-        padding: 1%;
+        padding: .5% 2%;
         &::after{
           content: "";
           background: #f26659;
-          mix-blend-mode: exclusion;
           width: calc(100% + 20px);
           height: 0;
           position: absolute;
           bottom: -4px;
           left: -10px;
           transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+          opacity: .5;
+          border-radius: 20px;
         }
 
         &:hover::after{

@@ -4,10 +4,7 @@
       <img src="../assets/icons/waves.svg" alt="img">
     </div>
     <div class="nav-link">
-      <router-link to="woman">Woman</router-link>
-      <router-link to="man">Man</router-link>
-      <router-link to="boy">Boy</router-link>
-      <router-link to="girl">Girl</router-link>
+      <router-link :to="val.to" v-for="val in values" :key="val.name">{{ val.name }}</router-link>
     </div>
     <div class="nav-icons">
       <div class="nav-icons_search">
@@ -23,7 +20,21 @@
 
 <script>
 export default {
-  name: "navigation"
+  name: "navigation",
+  data() {
+    return {
+      values: [
+          {name: 'Man', to:'Categories'},
+          {name: 'Woman', to:'Categories'},
+          {name: 'Boy', to:'Categories'},
+          {name: 'Girl', to:'Categories'},
+          {name: 'Home', to:'/'},
+      ]
+    }
+  },
+  methods: {
+
+  }
 }
 </script>
 
@@ -32,6 +43,11 @@ $search-time: 800ms;
 $reset-time: 150ms;
 $color-pink: #f26659;
 .nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
   &-divider {
     position: relative;
     img {
@@ -41,7 +57,7 @@ $color-pink: #f26659;
   }
   &-link {
     position: absolute;
-    top: 0.5%;
+    top: 5%;
     left: 6%;
     a {
       color: black;
@@ -55,7 +71,7 @@ $color-pink: #f26659;
   }
   &-icons {
     position: absolute;
-    top: 0.5%;
+    top: 5%;
     right: 15%;
     display: flex;
     align-items: center;
@@ -76,7 +92,7 @@ $color-pink: #f26659;
           height: 15px;
           position: absolute;
           top: 25px;
-          right: 0.5px;
+          right: -10%;
           transform: rotate(135deg);
         }
         input {
