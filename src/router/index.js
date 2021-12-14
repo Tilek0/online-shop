@@ -1,8 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import categories from "../views/categories";
-import catalog from "../views/catalog";
+import Categories from "../views/Categories";
+import Catalog from "../views/Catalog";
+import Items from "../views/Items";
 
 Vue.use(VueRouter);
 
@@ -15,12 +16,17 @@ const routes = [
   {
     path: "/Categories",
     name: "Categories",
-    component: categories,
+    component: Categories,
   },
   {
     path: "/Catalog",
     name: "Catalog",
-    component: catalog,
+    component: Catalog,
+  },
+  {
+    path: "/Items",
+    name: "Items",
+    component: Items,
   }
 ];
 

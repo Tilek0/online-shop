@@ -9,7 +9,7 @@
     <div class="nav-icons">
       <div class="nav-icons_search">
         <div>
-          <input type="text" placeholder=" " required>
+          <input type="text" placeholder=" " @blur="clearText" v-model="searchText">
         </div>
       </div>
       <router-link to="/admin"><img src="../assets/icons/admin.png" alt="img"></router-link>
@@ -23,6 +23,7 @@ export default {
   name: "navigation",
   data() {
     return {
+      searchText: '',
       values: [
           {name: 'Man', to:'Categories'},
           {name: 'Woman', to:'Categories'},
@@ -33,7 +34,9 @@ export default {
     }
   },
   methods: {
-
+    clearText() {
+      this.searchText = ''
+    }
   }
 }
 </script>
@@ -58,7 +61,7 @@ $color-pink: #f26659;
   &-link {
     position: absolute;
     top: 5%;
-    left: 6%;
+    left: 4%;
     a {
       color: black;
       margin: 15%;

@@ -14,7 +14,7 @@
 <script>
 import categoryItem from "../components/categoryItem";
 export default {
-  name: "categories",
+  name: "Categories",
   components: {
     categoryItem
   },

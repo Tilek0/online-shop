@@ -4,7 +4,7 @@
     <div class="catalog">
       <catalog-items
           v-for="item in catalog"
-          :key="item.name"
+          :key="item.id"
           :catalog_data="item"
       />
     </div>
@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import CatalogItems from "../components/catalogItems";
+import catalogItems from "../components/catalogItems";
 export default {
-  name: "catalog",
+  name: "Catalog",
   components: {
-    CatalogItems,
+    catalogItems,
   },
   data () {
     return {
@@ -24,17 +24,17 @@ export default {
         {
           name: "Jeans",
           price: '150',
-          image: "jeans.jpg"
+          image: "jeans.jpg",
         },
         {
           name: "Jeans",
           price: '150',
-          image: "jeans.jpg"
+          image: "jeans.jpg",
         },
         {
           name: "Jeans",
           price: '150',
-          image: "jeans.jpg"
+          image: "jeans.jpg",
         },
         {
           name: "Coat",
@@ -55,6 +55,26 @@ export default {
           name: "Shirts",
           price: '100',
           image: "shirts.jpg"
+        },
+        {
+          name: "Shirts",
+          price: '100',
+          image: "shirts.jpg"
+        },
+        {
+          name: "Shirts",
+          price: '100',
+          image: "shirts.jpg"
+        },
+        {
+          name: "Shoes",
+          price: '250',
+          image: "shoes.jpg"
+        },
+        {
+          name: "Shoes",
+          price: '250',
+          image: "shoes.jpg"
         },
         {
           name: "Shoes",
@@ -78,13 +98,23 @@ export default {
         },
       ],
     }
+  },
+  mounted() {
+    this.addId()
+  },
+  methods: {
+    addId() {
+      this.catalog.forEach(item => {
+        item.id = `${Date.now()}`
+      })
+    }
   }
 }
 </script>
 
 <style scoped>
 .catalog {
-  margin-top: 5%;
+  margin-top: 3%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;

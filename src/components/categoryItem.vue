@@ -27,12 +27,17 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
+  box-shadow: 7px 7px 15px 2px rgba(0, 0, 0, .6);
+  border-radius: 20px;
+  background: #f0eff4;
+  transition: .5s ease;
   &:hover {
     color: #f26659;
+    transform: translate(-3%,-8%);
   }
-  &::after{
+  &::after {
     content: "";
-    background: #f26659;
+    background: #ebc999;
     width: 100%;
     height: 0;
     position: absolute;
@@ -42,8 +47,7 @@ export default {
     opacity: .4;
     border-radius: 20px;
   }
-
-  &:hover::after,img{
+  &:hover::after {
     height: 100%;
   }
   &-icon {

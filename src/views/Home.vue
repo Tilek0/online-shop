@@ -32,12 +32,17 @@ export default {
 .home {
   padding: 0;
   margin: 0;
+  overflow: hidden;
   &-section {
     height: 100%;
     width: 100%;
     position: relative;
     padding: 0;
     margin: 0;
+    transition: .7s ease;
+    &:hover {
+      transform: scale(1.2);
+    }
     &_img {
       width: 100%;
     }

@@ -1,6 +1,6 @@
 <template>
   <div class="catalog">
-    <div class="catalog-items" @click="$router.push('/Item')">
+    <div class="catalog-items" @click="$router.push('/Items')">
       <div class="catalog-items_img"><img :src="require('../assets/man/categories/'+ catalog_data.image)" alt="img"></div>
       <div class="catalog-items_desc">
         <p>{{catalog_data.name}}</p>
@@ -30,9 +30,11 @@ export default {
     display: flex;
     flex-direction: column;
     transition: .4s ease-in;
+    border-radius: 15px;
+    background: #f0eff4;
     &:hover {
       color: #f26659;
-      opacity: .6;
+      box-shadow: 7px 7px 15px 2px rgba(0, 0, 0, .5);
     }
     &_img {
       width: 200px;
