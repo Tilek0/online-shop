@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <h1>Catalog</h1>
     <div class="catalog">
       <catalog-items
@@ -112,11 +112,16 @@ export default {
 }
 </script>
 
-<style scoped>
-.catalog {
-  margin-top: 3%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+<style lang="scss" scoped>
+.main {
+  margin-bottom: 17%;
+  .catalog {
+    margin-top: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
 }
+
+
 </style>

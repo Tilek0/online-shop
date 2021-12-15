@@ -57,7 +57,7 @@ export default {
       :nth-child(1) {
         position: absolute;
         top: 50%;
-        left: 25%;
+        left: 33%;
         font-size: 70px;
         padding: .5% 2%;
         :hover {
@@ -72,7 +72,7 @@ export default {
           bottom: -4px;
           left: -10px;
           transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-          opacity: .5;
+          opacity: .4;
           border-radius: 20px;
         }
 
@@ -83,7 +83,7 @@ export default {
       :nth-child(2) {
         position: absolute;
         top: 50%;
-        right: 25%;
+        right: 30%;
         font-size: 70px;
         padding: .5% 2%;
         &::after{
@@ -95,7 +95,7 @@ export default {
           bottom: -4px;
           left: -10px;
           transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-          opacity: .5;
+          opacity: .4;
           border-radius: 20px;
         }
 

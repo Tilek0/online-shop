@@ -79,10 +79,22 @@ $color-pink: #f26659;
     display: flex;
     align-items: center;
     :nth-child(n) {
-      margin: 0 10%;
+      margin: 0 9%;
     }
     img {
       width: 35px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-right-color: rgba(255, 255, 255, 0.3);
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+      padding: 13px;
+      border-radius: 20px;
+      transition: .5s;
+      &:hover {
+        transform: perspective(500px) translate3d(0, 10px, 150px);
+      }
     }
     &_search {
       div {

@@ -1,13 +1,18 @@
 <template>
   <div class="myButton">
-    <button><slot></slot></button>
+    <button @click="myButtonEvent"><slot></slot></button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "myButton"
-}
+  name: "myButton",
+  methods: {
+    myButtonEvent() {
+      this.$emit('myButtonEvent')
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

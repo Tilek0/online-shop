@@ -27,9 +27,13 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
-  box-shadow: 7px 7px 15px 2px rgba(0, 0, 0, .6);
   border-radius: 20px;
-  background: #f0eff4;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-right-color: rgba(255, 255, 255, 0.3);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
   transition: .5s ease;
   &:hover {
     color: #f26659;

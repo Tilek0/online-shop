@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <h1>{{product.title}}</h1>
     <item :product_data="product"/>
   </div>
@@ -32,5 +32,7 @@ export default {
 </script>
 
 <style scoped>
-
+.main {
+  margin-bottom: 7%;
+}
 </style>

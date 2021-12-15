@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <h1>Categories</h1>
     <div class="category">
       <category-item
@@ -36,9 +36,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.category {
-  margin-top: 5%;
-  display: flex;
-  justify-content: space-evenly;
+.main {
+  width: 100%;
+  height: 100vh;
+  .category {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-evenly;
+  }
 }
+
 </style>
