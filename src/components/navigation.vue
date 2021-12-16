@@ -13,7 +13,7 @@
         </div>
       </div>
       <router-link to="/admin"><img src="../assets/icons/admin.png" alt="img"></router-link>
-      <router-link to="/bag"><img src="../assets/icons/bag.png" alt="img"></router-link>
+      <router-link to="/Bag"><img src="../assets/icons/bag.png" alt="img"></router-link>
     </div>
   </div>
 </template>
@@ -60,11 +60,22 @@ $color-pink: #f26659;
   }
   &-link {
     position: absolute;
-    top: 5%;
+    top: 8%;
     left: 4%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-right-color: rgba(255, 255, 255, 0.3);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    width: 25%;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     a {
       color: black;
-      margin: 15%;
       font-size: 18px;
       &:hover {
         color: $color-pink;
@@ -74,7 +85,7 @@ $color-pink: #f26659;
   }
   &-icons {
     position: absolute;
-    top: 5%;
+    top: 8%;
     right: 15%;
     display: flex;
     align-items: center;
@@ -82,7 +93,7 @@ $color-pink: #f26659;
       margin: 0 9%;
     }
     img {
-      width: 35px;
+      width: 27px;
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(2px);
       border: 1px solid rgba(255, 255, 255, 0.2);

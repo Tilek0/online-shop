@@ -7,10 +7,11 @@
       <h2>Ask me</h2>
       <input type="email" placeholder="Example@example.com" v-model="form.email">
       <input type="text" placeholder="Name:" v-model="form.name">
-      <textarea cols="30" rows="2" placeholder="type text..." v-model="form.desc"/>
+      <textarea placeholder="type text..." v-model="form.desc"/>
       <my-button class="nav-askForm_btn">Send</my-button>
       <my-button class="nav-askForm_btn" @myButtonEvent="resetForm">Clear</my-button>
     </div>
+    <h2 class="nav-askForm_text">Follow me on</h2>
     <div class="nav-contact">
       <a :href="icon.link" v-for="icon in social" :key="icon.name">
         <img
@@ -92,17 +93,31 @@ export default {
     z-index: -1;
     img {
       width: 100%;
-      height: 230px;
+      height: 180px;
     }
   }
   &-askForm {
+    display: none;
+    /////////////////////////////////////////////////////
     width: 15%;
     position: absolute;
     bottom: 0;
     left: 45%;
-    padding: 10px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-right-color: rgba(255, 255, 255, 0.3);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    &_text {
+      position: absolute;
+      top: -11.5rem;
+      left: 16%;
+    }
     input {
-      width: 100%;
+      width: 90%;
       border: none;
       outline: none;
       background: transparent;
@@ -120,14 +135,17 @@ export default {
       margin-bottom: 10px;
       ::v-deep {
         button {
-          background: #f26659;
           padding: 3% 0;
-          color: black;
+          background: transparent;
+          border: 2px solid #f26659;
+          transition: .2s ease-in;
           &:hover {
+            background: #f26659;
             color: #f0eff4;
           }
           &:active {
             background: linear-gradient(160deg, #8ca9d3, #f0eff4);
+            border: none;
           }
         }
       }
@@ -136,19 +154,19 @@ export default {
   &-contact {
     position: absolute;
     left: 8%;
-    bottom: 70px;
-    width: 23%;
+    bottom: 60px;
+    width: 25%;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(2px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-right-color: rgba(255, 255, 255, 0.3);
     border-bottom-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
-    padding: 10px;
     border-radius: 20px;
+    padding: 5px;
     img {
-      width: 40px;
-      margin-right: 5%;
+      width: 10%;
+      margin: 0 10px;
       transition: .5s;
       &:hover {
         transform: perspective(500px) translate3d(0, -10px, 150px);

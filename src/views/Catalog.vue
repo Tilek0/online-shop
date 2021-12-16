@@ -114,7 +114,7 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-  margin-bottom: 17%;
+  margin-bottom: 20%;
   .catalog {
     margin-top: 3%;
     display: flex;

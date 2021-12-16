@@ -172,15 +172,19 @@ export default {
           &__btn {
             ::v-deep {
               button {
-                background: #f26659;
-                padding: 1rem 0;
+                background: transparent;
+                border: 3px solid #f26659;
+                transition: .2s ease-in;
+                padding: .8rem 0;
                 color: black;
                 &:hover {
+                  background: #f26659;
                   color: #f0eff4;
                   box-shadow: 7px 7px 15px rgba(0, 0, 0, 0.5);
                 }
                 &:active {
                   background: linear-gradient(160deg, #8ca9d3, #f0eff4);
+                  border: none;
                 }
               }
             }

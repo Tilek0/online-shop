@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <navigation />
+    <modal-bag v-show="bagShow" class="modalBag"></modal-bag>
     <router-view />
     <footer-nav />
   </div>
@@ -8,11 +9,18 @@
 <script>
 import navigation from "./components/navigation";
 import footerNav from "./components/footerNav";
+import modalBag from "./components/modalBag";
 export default {
   components: {
     navigation,
     footerNav,
+    modalBag
   },
+  data() {
+    return {
+      bagShow: false,
+    }
+  }
 };
 </script>
 <style lang="scss">
@@ -32,6 +40,19 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  width: 100%;
+  height: 100%;
+  .modalBag {
+    width: 30%;
+    position: fixed;
+    top: 10%;
+    right: 15%;
+    ::v-deep {
+      .bagPack {
+        background: #f0eff4;
+      }
+    }
+  }
 }
 a {
   text-decoration: none;
