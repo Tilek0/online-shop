@@ -3,11 +3,18 @@
     <div class="modal-title">
       <h2>Shopping Bag</h2>
       <div class="modal-title-exit">
-        <my-button>X</my-button>
+        <my-button @myButtonEvent="closeModal">X</my-button>
       </div>
     </div>
     <div class="modal-buttons">
-      <my-button v-for="item in btn" :key="item" class="modal-buttons_btn">{{item.name}}</my-button>
+      <my-button
+          class="modal-buttons_btn"
+          @myButtonEvent="bagLink"
+      >VIEW BAG</my-button>
+      <my-button
+          class="modal-buttons_btn"
+          @myButtonEvent="proceedLink"
+      >PROCEED TO CHECKOUT</my-button>
     </div>
     <div class="modal-bag">
       <bag-item></bag-item>
@@ -26,10 +33,17 @@ export default {
   },
   data() {
     return {
-      btn: [
-        {name: 'VIEW BAG', to: '/Bag'},
-        {name: 'PROCEED TO CHECKOUT', to: '/Purchase'}
-      ]
+    }
+  },
+  methods: {
+    closeModal() {
+      this.$emit('closeModal');
+    },
+    bagLink() {
+      this.$router.push('/Bag');
+    },
+    proceedLink() {
+      this.$router.push('/Proceed');
     }
   }
 }
@@ -89,6 +103,13 @@ export default {
             border: none;
           }
         }
+      }
+    }
+  }
+  &-bag {
+    ::v-deep {
+      .bagPack {
+        background: #f0eff4;
       }
     }
   }

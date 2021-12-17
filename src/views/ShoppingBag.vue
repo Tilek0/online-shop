@@ -20,22 +20,17 @@
         </div>
       </div>
     </div>
-    <div class="showModal">
-      <modal-bag></modal-bag>
-    </div>
   </div>
 </template>
 
 <script>
 import bagItem from "../components/bagItem";
 import myButton from "../components/myButton";
-import modalBag from "../components/modalBag";
 export default {
   name: "ShoppingBag",
   components: {
     bagItem,
     myButton,
-    modalBag
   },
   data() {
     return {}
@@ -44,17 +39,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.showModal {
-  width: 30%;
-  position: fixed;
-  top: 10%;
-  right: 15%;
-  ::v-deep {
-    .bagPack {
-      background: #f0eff4;
-    }
-  }
-}
 .bag {
   margin-top: 5%;
   width: 100%;

@@ -1,0 +1,120 @@
+<template>
+  <div class="sideBar">
+    <div class="sideBar-wearNav">
+      <p v-for="item in names" :key="item">{{item}}</p>
+      <my-button>Clear Filter</my-button>
+    </div>
+    <div>
+      <h2>Size</h2>
+      <div class="filter">
+        <div class="check" v-for="one in size" :key="one">
+          <input type="checkbox">
+          <p class="check-p">{{one.name}}</p>
+          <p>({{one.quant}})</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>Price</h2>
+      <input type="range">
+    </div>
+    <div>
+      <h2>Colour</h2>
+      <div class="filter">
+        <div class="check" v-for="color in colours" :key="color">
+          <input type="checkbox">
+          <p class="check-p">{{color.name}}</p>
+          <p>({{color.quant}})</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import myButton from "./myButton";
+export default {
+  name: "sideBar",
+  components: {
+    myButton
+  },
+  data() {
+    return {
+      names: ['Jeans', 'Coat','Jackets','Shirts','Shoes'],
+      size: [
+        {name: 'XS', quant: '2'},
+        {name: 'S', quant: '3'},
+        {name: 'M', quant: '4'},
+        {name: 'L', quant: '5'},
+        {name: 'XXL', quant: '9'},
+        {name: 'XL', quant: '7'},
+        {name: 'XXS', quant: '3'},
+        {name: 'XXXL', quant: '2'},
+      ],
+      colours: [
+        {name: 'red', quant: '1'},
+        {name: 'black', quant: '3'},
+        {name: 'white', quant: '7'},
+        {name: 'green', quant: '2'},
+        {name: 'yellow', quant: '8'},
+        {name: 'blue', quant: '6'},
+      ]
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.sideBar {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-right-color: rgba(255, 255, 255, 0.3);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 2%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  &-wearNav {
+    ::v-deep {
+      button {
+        padding: 2% 0;
+        background: transparent;
+        border: 2px solid #f26659;
+        transition: .2s ease-in;
+        &:hover {
+          background: #f26659;
+          color: #f0eff4;
+        }
+        &:active {
+          background: linear-gradient(160deg, #8ca9d3, #f0eff4);
+          border: none;
+        }
+      }
+    }
+  }
+  h2 {
+    border-bottom: 1px solid #000000;
+  }
+  .check {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    &-p {
+      margin-left: 3%;
+    }
+  }
+  .filter {
+    width: 100%;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+}
+</style>

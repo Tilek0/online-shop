@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <navigation />
-    <modal-bag v-show="bagShow" class="modalBag"></modal-bag>
+    <navigation @openModal="openModal" />
+    <div class="showModal" v-if="modalView">
+      <modal-bag
+          @closeModal="closeModal"
+      ></modal-bag>
+    </div>
     <router-view />
     <footer-nav />
   </div>
@@ -14,11 +18,19 @@ export default {
   components: {
     navigation,
     footerNav,
-    modalBag
+    modalBag,
   },
   data() {
     return {
-      bagShow: false,
+      modalView: false,
+    }
+  },
+  methods: {
+    openModal() {
+      this.modalView = true;
+    },
+    closeModal() {
+      this.modalView = false;
     }
   }
 };
@@ -42,16 +54,13 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  .modalBag {
+  .showModal {
     width: 30%;
+    min-height: 60%;
     position: fixed;
     top: 10%;
     right: 15%;
-    ::v-deep {
-      .bagPack {
-        background: #f0eff4;
-      }
-    }
+    z-index: 1;
   }
 }
 a {

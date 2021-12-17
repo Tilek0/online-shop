@@ -13,7 +13,7 @@
         </div>
       </div>
       <router-link to="/admin"><img src="../assets/icons/admin.png" alt="img"></router-link>
-      <router-link to="/Bag"><img src="../assets/icons/bag.png" alt="img"></router-link>
+      <div @click="openModal"><img src="../assets/icons/bag.png" alt="img"></div>
     </div>
   </div>
 </template>
@@ -36,6 +36,9 @@ export default {
   methods: {
     clearText() {
       this.searchText = ''
+    },
+    openModal() {
+      this.$emit('openModal')
     }
   }
 }
