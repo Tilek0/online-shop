@@ -1,19 +1,41 @@
 <template>
-  <div class="nav">
+  <div class="nav" @mouseleave="hideLinks = ''">
     <div class="nav-divider">
       <img src="../assets/icons/waves.svg" alt="img">
     </div>
     <div class="nav-link">
-      <router-link :to="val.to" v-for="val in values" :key="val.name">{{ val.name }}</router-link>
+      <div
+          class="to"
+          v-for="(val,i) in values"
+          :key="val.name"
+          @mouseover="dropLinks(i)"
+          @click="link(i)"
+      >{{ val.name }}</div>
+    </div>
+    <div class="nav-hideLinks" v-if="hideLinks">
+      <div
+          class="to"
+          v-for="(item,i) in hideLinks.desc"
+          :key="item.name"
+          @click="hideLink(i)"
+      >{{item.name}}</div>
     </div>
     <div class="nav-icons">
       <div class="nav-icons_search">
         <div>
-          <input type="text" placeholder=" " @blur="clearText" v-model="searchText">
+          <input
+              type="text"
+              @blur="clearText"
+              v-model="searchText"
+          >
         </div>
       </div>
-      <router-link to="/admin"><img src="../assets/icons/admin.png" alt="img"></router-link>
-      <div @click="openModal"><img src="../assets/icons/bag.png" alt="img"></div>
+      <router-link to="/admin">
+        <img src="../assets/icons/admin.png" alt="img">
+      </router-link>
+      <div @click="openModal">
+        <img src="../assets/icons/bag.png" alt="img">
+      </div>
     </div>
   </div>
 </template>
@@ -25,20 +47,80 @@ export default {
     return {
       searchText: '',
       values: [
-          {name: 'Man', to:'Categories'},
-          {name: 'Woman', to:'Categories'},
-          {name: 'Boy', to:'Categories'},
-          {name: 'Girl', to:'Categories'},
-          {name: 'Home', to:'/'},
-      ]
+          {
+            name: 'Man',
+            to:'Categories',
+            desc: [
+              {name: 'MJeans', to: '/Catalog'},
+              {name: 'MCoats', to: '/Catalog'},
+              {name: 'MShirts', to: '/Catalog'},
+              {name: 'MShoes', to: '/Catalog'},
+              {name: 'MTrousers', to: '/Catalog'},
+            ]
+          },
+          {
+            name: 'Woman',
+            to:'Categories',
+            desc: [
+              {name: 'WJeans', to: '/Catalog'},
+              {name: 'WCoats', to: '/Catalog'},
+              {name: 'WDresses', to: '/Catalog'},
+              {name: 'WShoes', to: '/Catalog'},
+              {name: 'WTrousers', to: '/Catalog'},
+            ]
+          },
+          {
+            name: 'Boy',
+            to:'Categories',
+            desc: [
+              {name: 'BJeans', to: '/Catalog'},
+              {name: 'BCoats', to: '/Catalog'},
+              {name: 'BShirts', to: '/Catalog'},
+              {name: 'BShoes', to: '/Catalog'},
+              {name: 'BTrousers', to: '/Catalog'},
+            ]
+          },
+          {
+            name: 'Girl',
+            to:'Categories',
+            desc: [
+              {name: 'GJeans', to: '/Catalog'},
+              {name: 'GCoats', to: '/Catalog'},
+              {name: 'GDresses', to: '/Catalog'},
+              {name: 'GShoes', to: '/Catalog'},
+              {name: 'GTrousers', to: '/Catalog'},
+            ]
+          },
+          {
+            name: 'Home',
+            to:'/'
+          },
+      ],
+      hideLinks: '',
     }
   },
+  components: {
+  },
   methods: {
+    link(i) {
+      const link = this.values.find((item,index) => {
+        return index === i
+      });
+      this.$router.push(link.to);
+    },
+    dropLinks(i) {
+      this.hideLinks = this.values.find((item, index) => {
+        return index === i
+      });
+    },
+    hideLink() {
+      this.$router.push('/Catalog')
+    },
     clearText() {
-      this.searchText = ''
+      this.searchText = '';
     },
     openModal() {
-      this.$emit('openModal')
+      this.$emit('openModal');
     }
   }
 }
@@ -61,6 +143,14 @@ $color-pink: #f26659;
       height: 70px;
     }
   }
+  .to {
+    color: black;
+    font-size: 18px;
+    &:hover {
+      color: $color-pink;
+      border-bottom: 1px solid $color-pink;
+    }
+  }
   &-link {
     position: absolute;
     top: 8%;
@@ -77,14 +167,25 @@ $color-pink: #f26659;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    a {
-      color: black;
-      font-size: 18px;
-      &:hover {
-        color: $color-pink;
-        border-bottom: 1px solid $color-pink;
-      }
-    }
+    cursor: pointer;
+  }
+  &-hideLinks {
+    position: absolute;
+    top: 80%;
+    left: 4%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-right-color: rgba(255, 255, 255, 0.3);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    width: 25%;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    cursor: pointer;
   }
   &-icons {
     position: absolute;

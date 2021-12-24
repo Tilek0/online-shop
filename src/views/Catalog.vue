@@ -141,7 +141,7 @@ export default {
     width: 25%;
     height: 85%;
     position: fixed;
-    top: 8%;
+    top: 12.5%;
     left: .5%;
   }
 }

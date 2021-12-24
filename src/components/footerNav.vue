@@ -79,7 +79,7 @@ export default {
 
 <style lang="scss" scoped>
 .nav {
-  margin-top: 15%;
+  margin-top: 13%;
   position: relative;
   bottom: 0;
   left: 0;
@@ -98,7 +98,6 @@ export default {
   }
   &-askForm {
     display: none;
-    /////////////////////////////////////////////////////
     width: 15%;
     position: absolute;
     bottom: 0;
