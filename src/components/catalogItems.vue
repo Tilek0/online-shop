@@ -1,10 +1,18 @@
 <template>
   <div class="catalog">
-    <div class="catalog-items" @click="$router.push('/Items')">
-      <div class="catalog-items_img"><img :src="require('../assets/man/categories/'+ catalog_data.image)" alt="img"></div>
+    <div class="catalog-items">
+      <div class="catalog-items_img" @click="$router.push('/Items')">
+        <img :src="require('../assets/man/categories/'+ catalog_data.image)" alt="img">
+      </div>
       <div class="catalog-items_desc">
-        <p>{{catalog_data.name}}</p>
-        <p>{{catalog_data.price}}</p>
+        <div @click="$router.push('/Items')">
+          <p>{{catalog_data.name}}</p>
+          <p>{{catalog_data.price}}</p>
+        </div>
+        <div class="catalog-items_desc__like" @click="isLike = !isLike">
+          <img src="../assets/icons/emptyLike.png" alt="like" v-if="!isLike">
+          <img src="../assets/icons/like.png" alt="like" v-else>
+        </div>
       </div>
     </div>
   </div>
@@ -19,6 +27,11 @@ export default {
       default() {
         return {}
       }
+    }
+  },
+  data() {
+    return {
+      isLike: false,
     }
   }
 }
@@ -52,6 +65,26 @@ export default {
         transition: .7s ease;
         &:hover {
           transform: scale(1.3);
+        }
+      }
+    }
+    &_desc {
+      display: flex;
+      justify-content: space-around;
+      p {
+        margin: 1px;
+      }
+      &__like {
+        width: 35px;
+        height: 35px;
+        padding: 5px;
+        img {
+          width: 100%;
+          height: 100%;
+          transition: .3s ease;
+          &:hover {
+            transform: perspective(500px) translate3d(0, -5px, 100px);
+          }
         }
       }
     }

@@ -19,11 +19,17 @@
           >
         </div>
         <div class="item-card_info">
-          <h1 :style="{transform: visualItem ? `translateZ(150px)` : `translateZ(0)`}">
-            {{product_data.title}}
-          </h1>
+          <div class="item-card_info__title">
+            <h1 :style="{transform: visualItem ? `translateZ(150px)` : `translateZ(0)`}">
+              {{ product_data.title }}
+            </h1>
+            <div class="item-card_info__title__like" @click="isLike = !isLike">
+              <img src="../assets/icons/emptyLike.png" alt="like" v-if="!isLike">
+              <img src="../assets/icons/like.png" alt="like" v-else>
+            </div>
+          </div>
           <h3 :style="{transform: visualItem ? `translateZ(125px)` : `translateZ(0)`}">
-            Price: {{product_data.price}}
+            Price: {{ product_data.price }}
           </h3>
           <h2>Size:</h2>
           <div class="item-card_info_sizes"
@@ -37,7 +43,7 @@
               class="item-card_info_purchase"
               :style="{transform: visualItem ? `translateZ(75px)` : `translateZ(0)`}"
           >
-            <my-button class="item-card_info_purchase__btn">Purchase</my-button>
+            <my-button class="item-card_info_purchase__btn">Add to bag</my-button>
           </div>
         </div>
       </div>
@@ -47,6 +53,7 @@
 
 <script>
 import myButton from "./myButton";
+
 export default {
   name: "item",
   components: {
@@ -69,7 +76,7 @@ export default {
   },
   computed: {},
   methods: {
-    addMouse: function(e) {
+    addMouse: function (e) {
       let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
       let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
       this.rotateStyle.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
@@ -100,6 +107,7 @@ export default {
     justify-content: center;
     align-items: center;
     perspective: 900px;
+
     &-card {
       transform-style: preserve-3d;
       background: #f0eff4;
@@ -108,12 +116,14 @@ export default {
       border-radius: 30px;
       padding: 0 4rem;
       box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 0, 0, 0.2);
+
       &_staff {
         transform-style: preserve-3d;
         min-height: 35vh;
         display: flex;
         align-items: center;
         justify-content: center;
+
         img {
           width: 20rem;
           z-index: 2;
@@ -132,31 +142,61 @@ export default {
           z-index: 1;
         }
       }
+
       &_info {
         transform-style: preserve-3d;
-        h1 {
-          font-size: 3rem;
-          transition: all 0.75s ease-out;
+
+        &__title {
+          transform-style: preserve-3d;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          h1 {
+            font-size: 3rem;
+            transition: all 0.75s ease-out;
+          }
+          &__like {
+            width: 35px;
+            height: 35px;
+            padding: 5px;
+            margin-left: 1rem;
+            transform-style: preserve-3d;
+            img {
+              width: 100%;
+              height: 100%;
+              transition: .3s ease;
+              &:hover {
+                transform: perspective(500px) translate3d(0, -5px, 100px);
+              }
+            }
+          }
         }
+
+
         h3 {
           font-size: 1.7rem;
           padding: .2rem 0;
           font-weight: lighter;
           transition: all 0.75s ease-out;
         }
+
         h2 {
           color: #8ca9d3;
         }
+
         &_sizes {
           transform-style: preserve-3d;
           transition: all 0.75s ease-out;
           display: inline-block;
+
           &__btn {
             margin: 0 .5rem;
+
             ::v-deep {
               button {
                 background: #ebc999;
                 padding: .5rem 2rem;
+
                 &:active {
                   background: linear-gradient(160deg, #8ca9d3, #f0eff4);
                 }
@@ -164,11 +204,13 @@ export default {
             }
           }
         }
+
         &_purchase {
           transform-style: preserve-3d;
           margin-top: 2rem;
           transition: all 0.75s ease-out;
           width: 100%;
+
           &__btn {
             ::v-deep {
               button {
@@ -177,11 +219,13 @@ export default {
                 transition: .2s ease-in;
                 padding: .8rem 0;
                 color: black;
+
                 &:hover {
                   background: #f26659;
                   color: #f0eff4;
                   box-shadow: 7px 7px 15px rgba(0, 0, 0, 0.5);
                 }
+
                 &:active {
                   background: linear-gradient(160deg, #8ca9d3, #f0eff4);
                   border: none;

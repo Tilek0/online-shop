@@ -1,9 +1,10 @@
 <template>
   <div class="nav">
-    <div class="nav-divider">
+    <div class="nav-divider" @click="visibleForm = !visibleForm">
       <img src="../assets/icons/footer.svg" alt="shop">
     </div>
-    <div class="nav-askForm">
+    <div class="nav-button" @click="openAksForm">Ask me</div>
+    <div class="nav-askForm" v-if="visibleForm">
       <h2>Ask me</h2>
       <input type="email" placeholder="Example@example.com" v-model="form.email">
       <input type="text" placeholder="Name:" v-model="form.name">
@@ -30,6 +31,7 @@ export default {
   },
   data() {
     return {
+      visibleForm: false,
       form: {
         email: '',
         name: '',
@@ -72,7 +74,10 @@ export default {
   methods: {
     resetForm() {
       this.form.email = this.form.name = this.form.desc = '';
-    }
+    },
+    openAksForm() {
+      this.visibleForm = true
+    },
   }
 }
 </script>
@@ -96,8 +101,28 @@ export default {
       height: 180px;
     }
   }
+  &-button {
+    position: absolute;
+    bottom: 10rem;
+    left: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-right-color: rgba(255, 255, 255, 0.3);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    transition: .2s ease-in;
+    &:hover {
+      background: #f26659;
+      color: #f0eff4;
+      cursor: pointer;
+    }
+  }
   &-askForm {
-    display: none;
     width: 15%;
     position: absolute;
     bottom: 0;
@@ -110,6 +135,7 @@ export default {
     border-bottom-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
+    transition: .8s all;
     &_text {
       position: absolute;
       top: -11.5rem;

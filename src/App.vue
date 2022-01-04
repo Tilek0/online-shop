@@ -6,8 +6,10 @@
           @closeModal="closeModal"
       ></modal-bag>
     </div>
-    <router-view />
-    <footer-nav />
+    <div @click="closeModal">
+      <router-view/>
+    </div>
+    <footer-nav ref="closeContact"/>
   </div>
 </template>
 <script>
@@ -31,6 +33,7 @@ export default {
     },
     closeModal() {
       this.modalView = false;
+      this.$refs.closeContact.visibleForm = false;
     }
   }
 };
