@@ -6,12 +6,12 @@
     </div>
     <div class="bagPack-item">
       <div class="bagPack-item-img">
-        <img src="../assets/woman/categories/dresses.jpg" alt="dresses">
+        <img src="../assets/woman/dressBlue.jpg" alt="dresses">
       </div>
       <div class="bagPack-item-content">
         <div class="bagPack-item-content-title">
           <p>{{}}</p>
-          <my-button>X</my-button>
+          <my-button><img src="../assets/icons/exit.png" alt="#"></my-button>
         </div>
         <div class="bagPack-item-content_info">
           <div>
@@ -28,9 +28,9 @@
         <div class="bagPack-item-content-quantity">
           <p>Quantity:</p>
           <div class="bagPack-item-content-quantity-btn">
-            <my-button class="bagPack-item-content-quantity-btn_add">+</my-button>
+            <my-button><img src="../assets/icons/plus.png" alt="#"></my-button>
             <p>1</p>
-            <my-button class="bagPack-item-content-quantity-btn_add">-</my-button>
+            <my-button><img src="../assets/icons/minus.png" alt="#"></my-button>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@ export default {
   }
   &-item {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     &-img {
       width: 200px;
       height: 280px;
@@ -85,10 +85,15 @@ export default {
         align-items: center;
         justify-content: space-between;
         padding: 0 3%;
+        img {
+          width: 100%;
+          height: 100%;
+        }
         ::v-deep{
           button {
             background: transparent;
-            padding: 5px 10px;
+            width: 65%;
+            padding-top: 5px;
             &:active {
               background: #f26659;
             }
@@ -106,18 +111,21 @@ export default {
           display: flex;
           justify-content: center;
           align-items: center;
-          p {
-            margin: 0 10px;
+          img {
+            width: 100%;
+            height: 100%;
           }
-          &_add {
-            ::v-deep{
-              button {
-                background: transparent;
-                padding: 2px 5px;
-                font-size: 16px;
-                &:active {
-                  background: #f26659;
-                }
+          p {
+            margin: 0 5px;
+          }
+          ::v-deep{
+            button {
+              background: transparent;
+              width: 60%;
+              padding-top: 5px;
+              font-size: 16px;
+              &:active {
+                background: #f26659;
               }
             }
           }

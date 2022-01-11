@@ -2,7 +2,7 @@
   <div>
     <div class="category" @click="$router.push('Catalog')">
       <div class="category-icon">
-        <img :src="require('../assets/woman/categories/' + category_data.image)" alt="img">
+        <img :src="require('../assets/woman/' + category_data.image)" alt="img">
       </div>
       <div class="category-desc">{{category_data.name}}</div>
     </div>

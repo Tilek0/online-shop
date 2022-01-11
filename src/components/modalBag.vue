@@ -3,7 +3,7 @@
     <div class="modal-title">
       <h2>Shopping Bag</h2>
       <div class="modal-title-exit">
-        <my-button @myButtonEvent="closeModal">X</my-button>
+        <my-button @myButtonEvent="closeModal"><img src="../assets/icons/exit.png" alt="#"></my-button>
       </div>
     </div>
     <div class="modal-buttons">
@@ -68,11 +68,16 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    img {
+      width: 100%;
+      height: 100%;
+    }
     &-exit {
       ::v-deep{
         button {
           background: transparent;
-          padding: 5px 10px;
+          width: 65%;
+          padding-top: 5px;
           &:active {
             background: #f26659;
           }
@@ -109,7 +114,7 @@ export default {
   &-bag {
     ::v-deep {
       .bagPack {
-        background: #f0eff4;
+        background: #ebc999;
       }
     }
   }

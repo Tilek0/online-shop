@@ -21,11 +21,11 @@ export default {
   data () {
     return {
       categories: [
-        {name: "Dresses", image: "dresses.jpg"},
-        {name: "Jeans", image: "Jeans.jpg"},
-        {name: "Coat", image: "Outerwear.png"},
-        {name: "Shirts", image: "Shirts.jpg"},
-        {name: "Shoes", image: "sneakers.jpg"},
+        {name: "Dresses", image: "dressBlack.jpg"},
+        {name: "Trousers", image: "trousersBlue.jpg"},
+        {name: "Coat", image: "coatWhite.png"},
+        {name: "Shirts", image: "shirtPink.jpg"},
+        {name: "Shoes", image: "shoesRed.jpg"},
       ],
     }
   },

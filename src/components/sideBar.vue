@@ -1,14 +1,15 @@
 <template>
   <div class="sideBar">
-    <div class="sideBar-wearNav">
+    <div>
       <p v-for="item in names" :key="item">{{item}}</p>
       <my-button>Clear Filter</my-button>
     </div>
     <div>
       <h2>Size</h2>
-      <div class="filter">
-        <div class="check" v-for="one in size" :key="one">
-          <input type="checkbox">
+      <my-button @myButtonEvent="showSize">Select size</my-button>
+      <div class="filter" v-show="filter">
+        <div class="check" v-for="(one,i) in size" :key="i">
+          <input type="checkbox" @click="filter = !filter">
           <p class="check-p">{{one.name}}</p>
           <p>({{one.quant}})</p>
         </div>
@@ -20,9 +21,10 @@
     </div>
     <div>
       <h2>Colour</h2>
-      <div class="filter">
-        <div class="check" v-for="color in colours" :key="color">
-          <input type="checkbox">
+      <my-button @myButtonEvent="showColor">Select color</my-button>
+      <div class="filterSize" v-show="filterColor">
+        <div class="check" v-for="(color, index) in colours" :key="index">
+          <input type="checkbox" @click="filterColor = !filterColor">
           <p class="check-p">{{color.name}}</p>
           <p>({{color.quant}})</p>
         </div>
@@ -40,6 +42,8 @@ export default {
   },
   data() {
     return {
+      filter: false,
+      filterColor: false,
       names: ['Jeans', 'Coat','Jackets','Shirts','Shoes'],
       size: [
         {name: 'XS', quant: '2'},
@@ -60,12 +64,21 @@ export default {
         {name: 'blue', quant: '6'},
       ]
     }
+  },
+  methods: {
+    showSize() {
+      this.filter = true;
+    },
+    showColor() {
+      this.filterColor = true;
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .sideBar {
+  position: relative;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(2px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -75,24 +88,23 @@ export default {
   border-radius: 20px;
   padding: 2%;
   width: 100%;
-  height: 100%;
+  height: 75%;
   display: flex;
   flex-direction: column;
-  &-wearNav {
-    ::v-deep {
-      button {
-        padding: 2% 0;
-        background: transparent;
-        border: 2px solid #f26659;
-        transition: .2s ease-in;
-        &:hover {
-          background: #f26659;
-          color: #f0eff4;
-        }
-        &:active {
-          background: linear-gradient(160deg, #8ca9d3, #f0eff4);
-          border: none;
-        }
+  ::v-deep {
+    button {
+      padding: 2% 0;
+      background: transparent;
+      border: 2px solid #f26659;
+      transition: .2s ease-in;
+      width: 60%;
+      &:hover {
+        background: #f26659;
+        color: #f0eff4;
+      }
+      &:active {
+        background: linear-gradient(160deg, #8ca9d3, #f0eff4);
+        border: none;
       }
     }
   }
@@ -109,12 +121,30 @@ export default {
     }
   }
   .filter {
-    width: 100%;
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: 5%;
+    width: 400px;
     height: 160px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    background: #ebc999;
+    border-radius: 20px;
   }
-
+  .filterSize {
+    position: absolute;
+    z-index: 3;
+    top: 85%;
+    left: 5%;
+    width: 400px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background: #ebc999;
+    border-radius: 20px;
+  }
 }
 </style>

@@ -139,7 +139,7 @@ export default {
     &_text {
       position: absolute;
       top: -11.5rem;
-      left: 16%;
+      right: 18%;
     }
     input {
       width: 90%;
@@ -155,6 +155,8 @@ export default {
       border-bottom: 1px solid #000000;
       outline: none;
       margin-bottom: 5%;
+      width: 90%;
+      min-height: 50px;
     }
     &_btn {
       margin-bottom: 10px;
@@ -178,7 +180,7 @@ export default {
   }
   &-contact {
     position: absolute;
-    left: 8%;
+    right: 8%;
     bottom: 60px;
     width: 25%;
     background: rgba(255, 255, 255, 0.2);

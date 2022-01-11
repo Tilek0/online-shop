@@ -2,7 +2,7 @@
   <div class="catalog">
     <div class="catalog-items">
       <div class="catalog-items_img" @click="$router.push('/Items')">
-        <img :src="require('../assets/man/categories/'+ catalog_data.image)" alt="img">
+        <img :src="require('../assets/woman/'+ catalog_data.image)" alt="img">
       </div>
       <div class="catalog-items_desc">
         <div @click="$router.push('/Items')">
@@ -42,7 +42,7 @@ export default {
   &-items {
     display: flex;
     flex-direction: column;
-    transition: .4s ease-in;
+    transition: .3s ease-in;
     border-radius: 15px;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(2px);
@@ -52,7 +52,7 @@ export default {
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
     &:hover {
       color: #f26659;
-      box-shadow: 7px 7px 15px 2px rgba(0, 0, 0, .5);
+      box-shadow: 7px 20px 20px 3px rgba(0, 0, 0, .4);
     }
     &_img {
       width: 200px;
@@ -62,7 +62,7 @@ export default {
       img {
         width: 100%;
         height: 100%;
-        transition: .7s ease;
+        transition: .5s ease;
         &:hover {
           transform: scale(1.3);
         }

@@ -30,79 +30,79 @@ export default {
     return {
       catalog: [
         {
-          name: "Jeans",
+          name: "Trousers",
           price: '150',
-          image: "jeans.jpg",
-        },
-        {
-          name: "Jeans",
-          price: '150',
-          image: "jeans.jpg",
-        },
-        {
-          name: "Jeans",
-          price: '150',
-          image: "jeans.jpg",
-        },
-        {
-          name: "Coat",
-          price: '300',
-          image: "coat.jpg"
-        },
-        {
-          name: "Coat",
-          price: '300',
-          image: "coat.jpg"
-        },
-        {
-          name: "Coat",
-          price: '300',
-          image: "coat.jpg"
-        },
-        {
-          name: "Shirts",
-          price: '100',
-          image: "shirts.jpg"
-        },
-        {
-          name: "Shirts",
-          price: '100',
-          image: "shirts.jpg"
-        },
-        {
-          name: "Shirts",
-          price: '100',
-          image: "shirts.jpg"
-        },
-        {
-          name: "Shoes",
-          price: '250',
-          image: "shoes.jpg"
-        },
-        {
-          name: "Shoes",
-          price: '250',
-          image: "shoes.jpg"
-        },
-        {
-          name: "Shoes",
-          price: '250',
-          image: "shoes.jpg"
+          image: "trousersBlack.jpg",
         },
         {
           name: "Trousers",
           price: '150',
-          image: "trousers.png"
+          image: "trousersBlue.jpg",
         },
         {
           name: "Trousers",
           price: '150',
-          image: "trousers.png"
+          image: "trousersPink.jpg",
         },
         {
-          name: "Trousers",
+          name: "Coat",
+          price: '300',
+          image: "coatBlack.png"
+        },
+        {
+          name: "Coat",
+          price: '300',
+          image: "coatRed.jpg"
+        },
+        {
+          name: "Coat",
+          price: '300',
+          image: "coatWhite.png"
+        },
+        {
+          name: "Shirts",
+          price: '100',
+          image: "shirtBlack.jpg"
+        },
+        {
+          name: "Shirts",
+          price: '100',
+          image: "shirtRed.jpg"
+        },
+        {
+          name: "Shirts",
+          price: '100',
+          image: "shirtPink.jpg"
+        },
+        {
+          name: "Shoes",
+          price: '250',
+          image: "shoesBlue.jpg"
+        },
+        {
+          name: "Shoes",
+          price: '250',
+          image: "shoesBlack.jpg"
+        },
+        {
+          name: "Shoes",
+          price: '250',
+          image: "shoesPink.jpg"
+        },
+        {
+          name: "Dress",
           price: '150',
-          image: "trousers.png"
+          image: "dressBlack.jpg"
+        },
+        {
+          name: "Dress",
+          price: '150',
+          image: "dressBlue.jpg"
+        },
+        {
+          name: "Dress",
+          price: '150',
+          image: "dressWhite.jpg"
         },
       ],
     }
@@ -141,7 +141,7 @@ export default {
     width: 25%;
     height: 85%;
     position: fixed;
-    top: 12.5%;
+    top: 15%;
     left: .5%;
   }
 }
