@@ -8,6 +8,7 @@
           class="to"
           v-for="(val,i) in values"
           :key="val.name"
+          :class="{activeName: val.selected === true}"
           @mouseover="dropLinks(i)"
           @click="link(i)"
       >{{ val.name }}</div>
@@ -50,6 +51,7 @@ export default {
           {
             name: 'Man',
             to:'Categories',
+            selected: false,
             desc: [
               {name: 'MJeans', to: '/Catalog'},
               {name: 'MCoats', to: '/Catalog'},
@@ -61,6 +63,7 @@ export default {
           {
             name: 'Woman',
             to:'Categories',
+            selected: false,
             desc: [
               {name: 'WJeans', to: '/Catalog'},
               {name: 'WCoats', to: '/Catalog'},
@@ -72,6 +75,7 @@ export default {
           {
             name: 'Boy',
             to:'Categories',
+            selected: false,
             desc: [
               {name: 'BJeans', to: '/Catalog'},
               {name: 'BCoats', to: '/Catalog'},
@@ -83,6 +87,7 @@ export default {
           {
             name: 'Girl',
             to:'Categories',
+            selected: false,
             desc: [
               {name: 'GJeans', to: '/Catalog'},
               {name: 'GCoats', to: '/Catalog'},
@@ -93,16 +98,19 @@ export default {
           },
           {
             name: 'Home',
+            selected: false,
             to:'/'
           },
       ],
       hideLinks: '',
     }
   },
-  components: {
-  },
   methods: {
     link(i) {
+      this.values.forEach(item => item.selected = false);
+      this.values.find((item,index) =>
+          index === i
+      ).selected = true;
       const link = this.values.find((item,index) => {
         return index === i
       });
@@ -168,6 +176,10 @@ $color-pink: #f26659;
     flex-direction: row;
     justify-content: space-around;
     cursor: pointer;
+    .activeName {
+      color: $color-pink;
+      border-bottom: 1px solid $color-pink;
+    }
   }
   &-hideLinks {
     position: absolute;

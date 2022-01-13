@@ -1,7 +1,13 @@
 <template>
   <div class="sideBar">
-    <div>
-      <p v-for="item in names" :key="item">{{item}}</p>
+    <div @click="closeFilter">
+      <p
+          v-for="(item,i) in wears"
+          :key="item.name"
+          class="sideBar-active"
+          @click="selectName(i)"
+          :class="{activeName: item.selected === true}"
+      >{{item.name}}</p>
       <my-button>Clear Filter</my-button>
     </div>
     <div>
@@ -44,7 +50,13 @@ export default {
     return {
       filter: false,
       filterColor: false,
-      names: ['Jeans', 'Coat','Jackets','Shirts','Shoes'],
+      wears: [
+        {name:'Jeans',selected: false},
+        {name:'Coat',selected: false},
+        {name:'Jackets',selected: false},
+        {name:'Shirts',selected: false},
+        {name:'Shoes',selected: false},
+      ],
       size: [
         {name: 'XS', quant: '2'},
         {name: 'S', quant: '3'},
@@ -71,6 +83,16 @@ export default {
     },
     showColor() {
       this.filterColor = true;
+    },
+    closeFilter() {
+      this.filter = false;
+      this.filterColor = false;
+    },
+    selectName(i) {
+      this.wears.forEach(item => item.selected = false);
+      this.wears.find((item,index) =>
+          index === i
+      ).selected = true;
     }
   }
 }
@@ -88,9 +110,18 @@ export default {
   border-radius: 20px;
   padding: 2%;
   width: 100%;
-  height: 75%;
+  height: 73%;
   display: flex;
   flex-direction: column;
+  &-active {
+    border-radius: 15px;
+    padding: 1% 0;
+    margin: 1.5%;
+    cursor: pointer;
+  }
+  .activeName {
+    border: 2px solid #f26659;
+  }
   ::v-deep {
     button {
       padding: 2% 0;
