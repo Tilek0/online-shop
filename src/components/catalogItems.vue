@@ -64,7 +64,7 @@ export default {
         height: 100%;
         transition: .5s ease;
         &:hover {
-          transform: scale(1.3);
+          transform: scale(1.2);
         }
       }
     }

@@ -111,12 +111,5 @@ export default {
       }
     }
   }
-  &-bag {
-    ::v-deep {
-      .bagPack {
-        background: #ebc999;
-      }
-    }
-  }
 }
 </style>

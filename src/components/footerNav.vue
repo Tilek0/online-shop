@@ -1,11 +1,16 @@
 <template>
   <div class="nav">
-    <div class="nav-divider" @click="visibleForm = !visibleForm">
+    <div class="nav-divider" @click="closeForm">
       <img src="../assets/icons/footer.svg" alt="shop">
     </div>
     <div class="nav-button" @click="openAksForm">Ask me</div>
     <div class="nav-askForm" v-if="visibleForm">
-      <h2>Ask me</h2>
+      <div class="nav-askForm__tag">
+        <h2>Ask me</h2>
+        <my-button @myButtonEvent="closeForm">
+          <img src="../assets/icons/exit.png" alt="#">
+        </my-button>
+      </div>
       <input type="email" placeholder="Example@example.com" v-model="form.email">
       <input type="text" placeholder="Name:" v-model="form.name">
       <textarea placeholder="type text..." v-model="form.desc"/>
@@ -76,8 +81,11 @@ export default {
       this.form.email = this.form.name = this.form.desc = '';
     },
     openAksForm() {
-      this.visibleForm = true
+      this.visibleForm = true;
     },
+    closeForm() {
+      this.visibleForm = false;
+    }
   }
 }
 </script>
@@ -136,6 +144,25 @@ export default {
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
     transition: .8s all;
+    &__tag {
+      display: flex;
+      align-items: center;
+      justify-content: right;
+      ::v-deep {
+        button {
+          width: 45%;
+          padding-top: 5px;
+          background: transparent;
+          margin-left: 3.2rem;
+          &:active {
+            background: #f26659;
+          }
+        }
+      }
+      img {
+        width: 30px;
+      }
+    }
     &_text {
       position: absolute;
       top: -11.5rem;

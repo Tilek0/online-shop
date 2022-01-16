@@ -31,9 +31,9 @@
           >
         </div>
       </div>
-      <router-link to="/admin">
+      <div>
         <img src="../assets/icons/admin.png" alt="img">
-      </router-link>
+      </div>
       <div @click="openModal">
         <img src="../assets/icons/bag.png" alt="img">
       </div>

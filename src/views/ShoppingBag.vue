@@ -52,12 +52,7 @@ export default {
   &-order {
     width: 30%;
     height: 25%;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-right-color: rgba(255, 255, 255, 0.3);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+    background: #ebc999;
     border-radius: 20px;
     padding: 0 3%;
     &_sub {

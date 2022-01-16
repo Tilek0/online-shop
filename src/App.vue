@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navigation @openModal="openModal" />
+    <navigation @openModal="openModal" class="navigation"/>
     <div class="showModal" v-if="modalView">
       <modal-bag
           @closeModal="closeModal"
@@ -9,7 +9,7 @@
     <div @click="closeModal">
       <router-view/>
     </div>
-    <footer-nav ref="closeContact"/>
+    <footer-nav ref="closeContact" class="footer"/>
   </div>
 </template>
 <script>
@@ -45,7 +45,8 @@ body {
   box-sizing: border-box;
   font-family: Lobster Two, serif;
   font-size: 16px;
-  background: radial-gradient(circle, rgba(140,169,211,1) 0%, rgba(240,239,244,1) 100%);
+  background-color: #f0eff4;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='1' viewBox='0 0 40 1' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v1H0z' fill='%238ca9d3' fill-opacity='0.70' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 #app {
   font-family: Lobster Two, sans-serif;
@@ -57,13 +58,16 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
+  .navigation {
+    z-index: 10;
+  }
   .showModal {
     width: 30%;
     min-height: 60%;
     position: fixed;
     top: 10%;
     right: 15%;
-    z-index: 1;
+    z-index: 3;
   }
 }
 a {

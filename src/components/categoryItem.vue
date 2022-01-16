@@ -41,7 +41,7 @@ export default {
   }
   &::after {
     content: "";
-    background: #ebc999;
+    background: #8ca9d3;
     width: 100%;
     height: 0;
     position: absolute;
@@ -56,7 +56,7 @@ export default {
   }
   &-icon {
     width: 250px;
-    height: 350px;
+    height: 470px;
     background: #f0eff4;
     overflow: hidden;
     border-radius: 20px;
