@@ -1,17 +1,20 @@
 <template>
   <div class="catalog">
-    <div class="catalog-items">
-      <div class="catalog-items_img" @click="$router.push('/Items')">
-        <img :src="require('../assets/woman/'+ catalog_data.image)" alt="img">
+    <div class="catalog-items" v-for="(item, index) in catalog" :key="item.image">
+      <div class="catalog-items_img" @click="toCard(item)">
+        <img :src="require('../assets/man/'+ item.image)" alt="img" v-if="category.name === 'MAN'">
+        <img :src="require('../assets/woman/'+ item.image)" alt="img" v-else-if="category.name === 'WOMAN'">
+        <img :src="require('../assets/girl/'+ item.image)" alt="img" v-else-if="category.name === 'GIRL'">
+        <img :src="require('../assets/boy/'+ item.image)" alt="img" v-else>
       </div>
       <div class="catalog-items_desc">
         <div @click="$router.push('/Items')">
-          <p>{{catalog_data.name}}</p>
-          <p>{{catalog_data.price}}</p>
+          <p>{{item.name}}</p>
+          <p>{{item.price}}</p>
         </div>
-        <div class="catalog-items_desc__like" @click="isLike = !isLike">
-          <img src="../assets/icons/emptyLike.png" alt="like" v-if="!isLike">
-          <img src="../assets/icons/like.png" alt="like" v-else>
+        <div class="catalog-items_desc__like" @click="like(index)">
+          <img :src="require('../assets/icons/like.png')" alt="like" v-if="item.like !== null">
+          <img :src="require('../assets/icons/emptyLike.png')" alt="like" v-else>
         </div>
       </div>
     </div>
@@ -19,19 +22,37 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
+
 export default {
   name: "catalogItems",
-  props: {
-    catalog_data: {
-      type: Object,
-      default() {
-        return {}
-      }
-    }
-  },
   data() {
     return {
-      isLike: false,
+      category: '',
+      catalog: '',
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'GET_CATEGORY',
+      'GET_CATALOG'
+    ]),
+  },
+  mounted() {
+    this.catalog = this.GET_CATALOG;
+    this.category = this.GET_CATEGORY;
+  },
+  methods: {
+    ...mapActions([
+      'CATCH_PRODUCT',
+      'LIKE_CATALOG'
+    ]),
+    toCard(i) {
+      this.CATCH_PRODUCT(i)
+      this.$router.push('/Items')
+    },
+    like(i) {
+      this.LIKE_CATALOG(i)
     }
   }
 }
@@ -40,6 +61,7 @@ export default {
 <style lang="scss" scoped>
 .catalog {
   &-items {
+    margin: 8px;
     display: flex;
     flex-direction: column;
     transition: .3s ease-in;

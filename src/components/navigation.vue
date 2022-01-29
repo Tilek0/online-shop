@@ -10,7 +10,7 @@
           :key="val.name"
           :class="{activeName: val.selected === true}"
           @mouseover="dropLinks(i)"
-          @click="link(i)"
+          @click="link(val)"
       >{{ val.name }}</div>
     </div>
     <div class="nav-hideLinks" v-if="hideLinks">
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
 export default {
   name: "navigation",
   data() {
@@ -53,11 +54,10 @@ export default {
             to:'Categories',
             selected: false,
             desc: [
-              {name: 'MJeans', to: '/Catalog'},
-              {name: 'MCoats', to: '/Catalog'},
-              {name: 'MShirts', to: '/Catalog'},
-              {name: 'MShoes', to: '/Catalog'},
-              {name: 'MTrousers', to: '/Catalog'},
+              {name: 'Coats'},
+              {name: 'Shirts'},
+              {name: 'Shoes'},
+              {name: 'Trousers'},
             ]
           },
           {
@@ -65,11 +65,10 @@ export default {
             to:'Categories',
             selected: false,
             desc: [
-              {name: 'WJeans', to: '/Catalog'},
-              {name: 'WCoats', to: '/Catalog'},
-              {name: 'WDresses', to: '/Catalog'},
-              {name: 'WShoes', to: '/Catalog'},
-              {name: 'WTrousers', to: '/Catalog'},
+              {name: 'Coats'},
+              {name: 'Dresses'},
+              {name: 'Shoes'},
+              {name: 'Trousers'},
             ]
           },
           {
@@ -77,11 +76,10 @@ export default {
             to:'Categories',
             selected: false,
             desc: [
-              {name: 'BJeans', to: '/Catalog'},
-              {name: 'BCoats', to: '/Catalog'},
-              {name: 'BShirts', to: '/Catalog'},
-              {name: 'BShoes', to: '/Catalog'},
-              {name: 'BTrousers', to: '/Catalog'},
+              {name: 'Coats'},
+              {name: 'Shirts'},
+              {name: 'Shoes'},
+              {name: 'Trousers'},
             ]
           },
           {
@@ -89,11 +87,10 @@ export default {
             to:'Categories',
             selected: false,
             desc: [
-              {name: 'GJeans', to: '/Catalog'},
-              {name: 'GCoats', to: '/Catalog'},
-              {name: 'GDresses', to: '/Catalog'},
-              {name: 'GShoes', to: '/Catalog'},
-              {name: 'GTrousers', to: '/Catalog'},
+              {name: 'Coats'},
+              {name: 'Dresses'},
+              {name: 'Shoes'},
+              {name: 'Trousers'},
             ]
           },
           {
@@ -105,16 +102,21 @@ export default {
       hideLinks: '',
     }
   },
+  computed: {
+    ...mapGetters([
+      'GET_PRODUCTS',
+    ]),
+  },
   methods: {
     link(i) {
       this.values.forEach(item => item.selected = false);
       this.values.find((item,index) =>
           index === i
       ).selected = true;
-      const link = this.values.find((item,index) => {
-        return index === i
-      });
-      this.$router.push(link.to);
+      // const link = this.values.find((item,index) => {
+      //   return index === i
+      // });
+      this.$router.push('/Categories');
     },
     dropLinks(i) {
       this.hideLinks = this.values.find((item, index) => {

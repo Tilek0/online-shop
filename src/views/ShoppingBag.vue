@@ -3,6 +3,7 @@
     <h2>Shopping Bag</h2>
     <div class="bag">
       <div class="bag-item">
+        <p v-if="!bagView.length">BUG IS EMPTY</p>
         <bag-item></bag-item>
       </div>
       <div class="bag-order">
@@ -26,6 +27,7 @@
 <script>
 import bagItem from "../components/bagItem";
 import myButton from "../components/myButton";
+import {mapGetters} from "vuex";
 export default {
   name: "ShoppingBag",
   components: {
@@ -33,7 +35,17 @@ export default {
     myButton,
   },
   data() {
-    return {}
+    return {
+      bagView: ''
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'GET_BUG'
+    ])
+  },
+  mounted() {
+    this.bagView = this.GET_BUG
   }
 }
 </script>
@@ -48,6 +60,9 @@ export default {
   &-item {
     width: 50%;
     height: 60%;
+    p {
+      font-size: 25px;
+    }
   }
   &-order {
     width: 30%;

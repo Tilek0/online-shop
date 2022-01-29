@@ -17,6 +17,7 @@
       >PROCEED TO CHECKOUT</my-button>
     </div>
     <div class="modal-bag">
+      <div v-show="!bagView.length" :style="{'font-size': '25px'}">BUG IS EMPTY</div>
       <bag-item></bag-item>
     </div>
   </div>
@@ -25,6 +26,7 @@
 <script>
 import myButton from "./myButton";
 import bagItem from "./bagItem";
+import {mapGetters} from "vuex";
 export default {
   name: "modalBag",
   components: {
@@ -33,7 +35,16 @@ export default {
   },
   data() {
     return {
+      bagView: ''
     }
+  },
+  computed: {
+    ...mapGetters([
+        'GET_BUG'
+    ])
+  },
+  mounted() {
+    this.bagView = this.GET_BUG;
   },
   methods: {
     closeModal() {

@@ -46,7 +46,7 @@ body {
   font-family: Lobster Two, serif;
   font-size: 16px;
   background-color: #f0eff4;
-  background-image: url("data:image/svg+xml,%3Csvg width='40' height='1' viewBox='0 0 40 1' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v1H0z' fill='%238ca9d3' fill-opacity='0.70' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='1' viewBox='0 0 40 1' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v1H0z' fill='%238ca9d3' fill-opacity='0.60' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 #app {
   font-family: Lobster Two, sans-serif;

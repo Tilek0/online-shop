@@ -51,11 +51,10 @@ export default {
       filter: false,
       filterColor: false,
       wears: [
-        {name:'Jeans',selected: false},
         {name:'Coat',selected: false},
-        {name:'Jackets',selected: false},
         {name:'Shirts',selected: false},
         {name:'Shoes',selected: false},
+        {name:'Trousers',selected: false},
       ],
       size: [
         {name: 'XS', quant: '2'},
