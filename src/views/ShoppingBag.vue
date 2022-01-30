@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h2>Shopping Bag</h2>
+    <h2>Shopping Cart</h2>
     <div class="bag">
       <div class="bag-item">
-        <p v-if="!bagView.length">BUG IS EMPTY</p>
+        <p v-if="!bagView.length">CART IS EMPTY</p>
         <bag-item></bag-item>
       </div>
       <div class="bag-order">
@@ -41,17 +41,19 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'GET_BUG'
+      'GET_CART'
     ])
   },
   mounted() {
-    this.bagView = this.GET_BUG
+    this.bagView = this.GET_CART
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .bag {
+  font-family: Arial;
+  font-weight: bold;
   margin-top: 5%;
   width: 100%;
   min-height: 100vh;

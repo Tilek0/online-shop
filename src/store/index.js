@@ -666,7 +666,7 @@ export default new Vuex.Store({
     selectedCategory: [],
     selectedCatalog: [],
     selectedProduct: [],
-    bug: [],
+    cart: [],
   },
   mutations: {
     PUT_CATEGORY(state,category) {
@@ -678,31 +678,31 @@ export default new Vuex.Store({
     PUT_PRODUCT(state, product) {
       state.selectedProduct = product
     },
-    PUT_BUG(state, product) {
+    PUT_CART(state, product) {
       let isProductExists = false;
-      if (state.bug.length) {
-        state.bug.map(function (item) {
+      if (state.cart.length) {
+        state.cart.map(function (item) {
           if (item.name === product.name) {
             isProductExists = true;
             item.quantity++
           }
         })
         if (!isProductExists) {
-          state.bug.push(product)
+          state.cart.push(product)
         }
       } else {
-        state.bug.push(product)
+        state.cart.push(product)
       }
     },
-    REMOVE_FROM_BUG: (state, index) => {
-      state.bug.splice(index, 1)
+    REMOVE_FROM_CART: (state, index) => {
+      state.cart.splice(index, 1)
     },
     INCREMENT: (state, index) => {
-      state.bug[index].quantity++
+      state.cart[index].quantity++
     },
     DECREMENT: (state, index) => {
-      if (state.bug[index].quantity > 1) {
-        state.bug[index].quantity--
+      if (state.cart[index].quantity > 1) {
+        state.cart[index].quantity--
       }
     },
     CATALOG_LIKE: (state ,index) => {
@@ -733,8 +733,8 @@ export default new Vuex.Store({
     CATCH_PRODUCT({commit}, product) {
       commit('PUT_PRODUCT', product)
     },
-    CATCH_BUG({commit}, product) {
-      commit('PUT_BUG', product)
+    CATCH_CART({commit}, product) {
+      commit('PUT_CART', product)
     },
     INCREMENT_PRODUCT({commit}, index) {
       commit('INCREMENT', index)
@@ -742,8 +742,8 @@ export default new Vuex.Store({
     DECREMENT_PRODUCT({commit}, index) {
       commit('DECREMENT', index)
     },
-    DELETE_FROM_BUG({commit}, index) {
-      commit('REMOVE_FROM_BUG', index)
+    DELETE_FROM_CART({commit}, index) {
+      commit('REMOVE_FROM_CART', index)
     },
     LIKE_CATALOG({commit}, index) {
       commit('CATALOG_LIKE' ,index)
@@ -765,8 +765,8 @@ export default new Vuex.Store({
     GET_PRODUCT(state) {
       return state.selectedProduct
     },
-    GET_BUG(state) {
-      return state.bug
+    GET_CART(state) {
+      return state.cart
     }
   },
   modules: {},

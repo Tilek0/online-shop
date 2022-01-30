@@ -56,7 +56,7 @@
                :key="one"
                :style="{transform: visualItem ? `translateZ(100px) translateY(-8px)` : `translateZ(0) translateY(0)`}"
           >
-            <my-button class="item-card_info_sizes__btn">{{ one }}</my-button>
+            <my-button class="item-card_info_sizes__btn" @myButtonEvent="addSize(one)">{{ one }}</my-button>
           </div>
           <div
               class="item-card_info_purchase"
@@ -80,6 +80,7 @@ export default {
   },
   data() {
     return {
+      selectedSize: '',
       product: '',
       category: '',
       visualItem: false,
@@ -100,10 +101,15 @@ export default {
   },
   methods: {
     ...mapActions([
-        'CATCH_BUG',
+        'CATCH_CART',
     ]),
     addToBug() {
-      this.CATCH_BUG(this.product);
+      // this.CATCH_CART(this.product);
+      this.product.selectedSize = this.selectedSize
+      console.log(this.product)
+    },
+    addSize(one) {
+      this.selectedSize = one;
     },
     addMouse: function (e) {
       let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
@@ -120,7 +126,6 @@ export default {
       this.rotateStyle.transform = `rotateY(0) rotateX(0)`;
     },
     like() {
-
     }
   }
 }
@@ -132,7 +137,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 7%;
+  margin-bottom: 20%;
 
   .item {
     width: 50%;
@@ -152,13 +157,13 @@ export default {
 
       &_staff {
         transform-style: preserve-3d;
-        min-height: 35vh;
+        height: 330px;
         display: flex;
         align-items: center;
         justify-content: center;
 
         img {
-          width: 20rem;
+          width: 330px;
           z-index: 2;
           transition: all 0.75s ease-out;
         }

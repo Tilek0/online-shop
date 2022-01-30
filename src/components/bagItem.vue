@@ -64,22 +64,22 @@ export default {
   },
   computed: {
     ...mapGetters([
-        'GET_BUG',
+        'GET_CART',
       'GET_CATEGORY',
     ]),
   },
   mounted() {
-    this.bug = this.GET_BUG;
+    this.bug = this.GET_CART;
     this.category = this.GET_CATEGORY
   },
   methods: {
     ...mapActions([
-      'DELETE_FROM_BUG',
+      'DELETE_FROM_CART',
       'INCREMENT_PRODUCT',
       'DECREMENT_PRODUCT'
     ]),
     deleteCard(i) {
-      this.DELETE_FROM_BUG(i)
+      this.DELETE_FROM_CART(i)
     },
     increment(i) {
       this.INCREMENT_PRODUCT(i)
@@ -93,6 +93,8 @@ export default {
 
 <style lang="scss" scoped>
 .bagPack {
+  font-family: Arial;
+  font-weight: bold;
   background: #ebc999;
   border-radius: 20px;
   width: 100%;
@@ -110,7 +112,7 @@ export default {
     justify-content: space-around;
     &-img {
       width: 200px;
-      height: 280px;
+      height: 100%;
       img {
         width: 100%;
         height: 90%;
@@ -157,8 +159,8 @@ export default {
           justify-content: center;
           align-items: center;
           img {
-            width: 100%;
-            height: 100%;
+            width: 25px;
+            height: 25px;
           }
           p {
             margin: 0 5px;
@@ -166,9 +168,8 @@ export default {
           ::v-deep{
             button {
               background: transparent;
-              width: 60%;
+              width: 100%;
               padding-top: 5px;
-              font-size: 16px;
               &:active {
                 background: #f26659;
               }

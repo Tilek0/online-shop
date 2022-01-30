@@ -1,7 +1,7 @@
 <template>
   <div class="modal">
     <div class="modal-title">
-      <h2>Shopping Bag</h2>
+      <h2>Shopping Cart</h2>
       <div class="modal-title-exit">
         <my-button @myButtonEvent="closeModal"><img src="../assets/icons/exit.png" alt="#"></my-button>
       </div>
@@ -10,14 +10,14 @@
       <my-button
           class="modal-buttons_btn"
           @myButtonEvent="bagLink"
-      >VIEW BAG</my-button>
+      >VIEW CART</my-button>
       <my-button
           class="modal-buttons_btn"
           @myButtonEvent="proceedLink"
       >PROCEED TO CHECKOUT</my-button>
     </div>
     <div class="modal-bag">
-      <div v-show="!bagView.length" :style="{'font-size': '25px'}">BUG IS EMPTY</div>
+      <div v-show="!bagView.length" :style="{'font-size': '25px'}">CART IS EMPTY</div>
       <bag-item></bag-item>
     </div>
   </div>
@@ -40,11 +40,11 @@ export default {
   },
   computed: {
     ...mapGetters([
-        'GET_BUG'
+        'GET_CART'
     ])
   },
   mounted() {
-    this.bagView = this.GET_BUG;
+    this.bagView = this.GET_CART;
   },
   methods: {
     closeModal() {
