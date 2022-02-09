@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -11,657 +10,704 @@ export default new Vuex.Store({
         clothes: [
           {
             name: 'coat',
-            frontImg: 'coatBlack.png',
+            frontImg: 'mcoatblack.png',
             coat: [
               {
-                name: 'Coat',
-                color: 'black',
+                name: 'CoatWinter',
                 price: '7000',
-                image: "coatBlack.png",
+                image: [
+                  {
+                    img: "mcoatblack.png",
+                    color: 'black',
+                    sizes: [
+                      {size: 40, left: 20,},
+                      {size: 48, left: 15,},
+                      {size: 50, left: 25,},
+                      {size: 52, left: 10,},
+                    ]
+                  },
+                  {
+                    img: "mcoatgreen.jpg",
+                    color: 'green',
+                    sizes: [
+                      {size: 40, left: 20,},
+                      {size: 48, left: 15,},
+                      {size: 50, left: 25,},
+                      {size: 52, left: 10,},
+                    ]
+                  },
+                  {
+                    img: "mcoatwhite.jpg",
+                    color: 'white',
+                    sizes: [
+                      {size: 40, left: 20,},
+                      {size: 48, left: 15,},
+                      {size: 50, left: 25,},
+                      {size: 52, left: 10,},
+                    ]
+                  },
+                ],
                 quantity: 1,
-                left: 40,
                 like: 0,
-                size: [44,48,50,52]
-              },
-              {
-                name: "Coat",
-                color: 'green',
-                price: '7000',
-                image: "coatGreen.jpg",
-                quantity: 1,
-                left: 40,
-                like: 0,
-                size: [44,48,50,52]
-              },
-              {
-                name: "Coat",
-                color: 'white',
-                price: '7000',
-                image: "coatWhite.jpg",
-                quantity: 1,
-                left: 40,
-                like: 0,
-                size: [44,48,50,52]
               },
             ],
           },
           {
             name: 'shirts',
-            frontImg: 'shirtBlack.jpg',
+            frontImg: 'mshirtblack.jpg',
             shirts: [
               {
                 name: "Shirts",
-                color: 'black',
                 price: '2500',
-                image: "shirtBlack.jpg",
+                image: [
+                  {
+                    img: "mshirtblack.jpg",
+                    color: 'black',
+                    sizes: [
+                      {size: 44, left: 10},
+                      {size: 46, left: 15},
+                      {size: 48, left: 20},
+                      {size: 50, left: 25},
+                    ]
+                  },
+                  {
+                    img: "mshirtred.jpg",
+                    color: 'red',
+                    sizes: [
+                      {size: 44, left: 10},
+                      {size: 46, left: 15},
+                      {size: 48, left: 20},
+                      {size: 50, left: 25},
+                    ]
+                  },
+                  {
+                    img: "mshirtwhite.jpg",
+                    color: 'white',
+                    sizes: [
+                      {size: 44, left: 10},
+                      {size: 46, left: 15},
+                      {size: 48, left: 20},
+                      {size: 50, left: 25},
+                    ]
+                  },
+                ],
                 quantity: 1,
-                left: 30,
                 like: 0,
-                size: [44,46,48,50]
-              },
-              {
-                name: "Shirts",
-                color: 'red',
-                price: '2500',
-                image: "shirtRed.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [44,46,48,50]
-              },
-              {
-                name: "Shirts",
-                color: 'white',
-                price: '2500',
-                image: "shirtWhite.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [44,46,48,50]
               },
             ],
           },
           {
             name: 'shoes',
-            frontImg: 'shoesBlack.jpg',
+            frontImg: 'mshoesblack.jpg',
             shoes: [
               {
                 name: "Shoes",
-                color: 'black',
                 price: '5000',
-                image: "shoesBlack.jpg",
+                image: [
+                  {
+                    img: "mshoesblack.jpg",
+                    color: 'black',
+                    sizes: [
+                      {size: 39, left: 20},
+                      {size: 40, left: 15},
+                      {size: 42, left: 10},
+                      {size: 44, left: 7},
+                    ]
+                  },                  {
+                    img: "mshoesblue.jpg",
+                    color: 'blue',
+                    sizes: [
+                      {size: 39, left: 20},
+                      {size: 40, left: 15},
+                      {size: 42, left: 10},
+                      {size: 44, left: 7},
+                    ]
+                  },
+                  {
+                    img: "mshoesbrown.jpg",
+                    color: 'brown',
+                    sizes: [
+                      {size: 39, left: 20},
+                      {size: 40, left: 15},
+                      {size: 42, left: 10},
+                      {size: 44, left: 7},
+                    ]
+                  },
+                  {
+                    img: "mshoeswhite.jpg",
+                    color: 'white',
+                    sizes: [
+                      {size: 39, left: 20},
+                      {size: 40, left: 15},
+                      {size: 42, left: 10},
+                      {size: 44, left: 7},
+                    ]
+                  },
+                ],
                 quantity: 1,
-                left: 20,
                 like: 0,
-                size: [39,40,42,44]
-              },
-              {
-                name: "Nike",
-                color: 'red',
-                price: '5000',
-                image: "nike.png",
-                quantity: 1,
-                left: 20,
-                like: 0,
-                size: [39,40,42,44]
               },
               {
                 name: "Adidas",
-                color: 'white',
                 price: '5000',
-                image: "adidas.png",
+                image: [
+                  {
+                    img: "mnike.png",
+                    color: 'red',
+                    sizes: [
+                      {size: 39, left: 20},
+                      {size: 40, left: 15},
+                      {size: 42, left: 10},
+                      {size: 44, left: 7},
+                    ]
+                  },
+                  {
+                    img: "madidas.png",
+                    color: 'white',
+                    sizes: [
+                      {size: 39, left: 20},
+                      {size: 40, left: 15},
+                      {size: 42, left: 10},
+                      {size: 44, left: 7},
+                    ]
+                  }
+                ],
                 quantity: 1,
-                left: 20,
                 like: 0,
-                size: [39,40,42,44]
-              },
-              {
-                name: "Shoes",
-                color: 'blue',
-                price: '5000',
-                image: "shoesBlue.jpg",
-                quantity: 1,
-                left: 20,
-                like: 0,
-                size: [39,40,42,44]
-              },
-              {
-                name: "Shoes",
-                color: 'brown',
-                price: '5000',
-                image: "shoesBrown.jpg",
-                quantity: 1,
-                left: 20,
-                like: 0,
-                size: [39,40,42,44]
-              },
-              {
-                name: "Shoes",
-                color: 'white',
-                price: '5000',
-                image: "shoesWhite.jpg",
-                quantity: 1,
-                left: 20,
-                like: 0,
-                size: [39,40,42,44]
               },
             ],
           },
           {
             name: 'trousers',
-            frontImg: 'trousersBlack.jpg',
+            frontImg: 'mtrousersblack.jpg',
             trousers: [
               {
                 name: "Trousers",
-                color: 'black',
                 price: '3000',
-                image: "trousersBlack.jpg",
+                image: [
+                  {
+                    img: "mtrousersblack.jpg",
+                    color: 'black',
+                    sizes: [
+                      {size: 32, left: 20},
+                      {size: 34, left: 14},
+                      {size: 38, left: 24},
+                      {size: 32, left: 22},
+                    ]
+                  },
+                  {
+                    img: "mtrousersblue.png",
+                    color: 'blue',
+                    sizes: [
+                      {size: 32, left: 20},
+                      {size: 34, left: 14},
+                      {size: 38, left: 24},
+                      {size: 32, left: 22},
+                    ]
+                  },
+                  {
+                    img: "mtrousersgreen.jpg",
+                    color: 'green',
+                    sizes: [
+                      {size: 32, left: 20},
+                      {size: 34, left: 14},
+                      {size: 38, left: 24},
+                      {size: 32, left: 22},
+                    ]
+                  }
+                ],
                 quantity: 1,
-                left: 50,
                 like: 0,
-                size: [32,34,38,42]
               },
               {
                 name: "Trousers",
-                color: 'blue',
                 price: '3000',
-                image: "trousersBlue.png",
+                image: [
+                  {
+                    img:  "mtrousersred.jpg",
+                    color: 'red',
+                    sizes: [
+                      {size: 32, left: 20},
+                      {size: 34, left: 14},
+                      {size: 38, left: 24},
+                      {size: 32, left: 22},
+                    ]
+                  },
+                  {
+                    img: "mtrouserswhite.jpg",
+                    color: 'white',
+                    sizes: [
+                      {size: 32, left: 20},
+                      {size: 34, left: 14},
+                      {size: 38, left: 24},
+                      {size: 32, left: 22},
+                    ]
+                  },
+                ],
                 quantity: 1,
-                left: 50,
                 like: 0,
-                size: [32,34,38,42]
-              },
-              {
-                name: "Trousers",
-                color: 'green',
-                price: '3000',
-                image: "trousersGreen.jpg",
-                quantity: 1,
-                left: 50,
-                like: 0,
-                size: [32,34,38,42]
-              },
-              {
-                name: "Trousers",
-                color: 'red',
-                price: '3000',
-                image: "trousersRed.jpg",
-                quantity: 1,
-                left: 50,
-                like: 0,
-                size: [32,34,38,42]
-              },
-              {
-                name: "Trousers",
-                color: 'white',
-                price: '3000',
-                image: "trousersWhite.jpg",
-                quantity: 1,
-                left: 50,
-                like: 0,
-                size: [32,34,38,42]
               },
             ],
           },
         ],
       },
-      {
-        name: 'WOMAN',
-        clothes: [
-          {
-            name: "coat",
-            frontImg: "coatBlack.png",
-            coat: [
-              {
-                name: "Coat",
-                color: 'black',
-                price: '7000',
-                image: "coatBlack.png",
-                quantity: 1,
-                left: 35,
-                like: 0,
-                size: [44,46,48,50]
-              },
-              {
-                name: "Coat",
-                color: 'red',
-                price: '7000',
-                image: "coatRed.jpg",
-                quantity: 1,
-                left: 35,
-                like: 0,
-                size: [44,46,48,50]
-              },
-              {
-                name: "Coat",
-                color: 'white',
-                price: '7000',
-                image: "coatWhite.png",
-                quantity: 1,
-                left: 35,
-                like: 0,
-                size: [44,46,48,50]
-              },
-            ],
-          },
-          {
-            name: "shirts",
-            frontImg: "shirtBlack.jpg",
-            shirts: [
-              {
-                name: "Shirts",
-                color: 'black',
-                price: '2500',
-                image: "shirtBlack.jpg",
-                quantity: 1,
-                left: 25,
-                like: 0,
-                size: [44,46,48,50]
-              },
-              {
-                name: "Shirts",
-                color: 'red',
-                price: '2500',
-                image: "shirtRed.jpg",
-                quantity: 1,
-                left: 25,
-                like: 0,
-                size: [44,46,48,50]
-              },
-              {
-                name: "Shirts",
-                color: 'pink',
-                price: '2500',
-                image: "shirtPink.jpg",
-                quantity: 1,
-                left: 25,
-                like: 0,
-                size: [44,46,48,50]
-              },
-            ],
-          },
-          {
-            name: "shoes",
-            frontImg: "shoesBlue.jpg",
-            shoes: [
-              {
-                name: "Shoes",
-                color: 'blue',
-                price: '5000',
-                image: "shoesBlue.jpg",
-                quantity: 1,
-                left: 60,
-                like: 0,
-                size: [36,37,38,39]
-              },
-              {
-                name: "Shoes",
-                color: 'black',
-                price: '5000',
-                image: "shoesBlack.jpg",
-                quantity: 1,
-                left: 60,
-                like: 0,
-                size: [36,37,38,39]
-              },
-              {
-                name: "Shoes",
-                color: 'pink',
-                price: '5000',
-                image: "shoesPink.jpg",
-                quantity: 1,
-                left: 60,
-                like: 0,
-                size: [36,37,38,39]
-              },
-            ],
-          },
-          {
-            name: 'trousers',
-            frontImg: "trousersBlack.jpg",
-            trousers: [
-              {
-                name: "Trousers",
-                color: 'black',
-                price: '3000',
-                image: "trousersBlack.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [30,32,34,36]
-              },
-              {
-                name: "Trousers",
-                color: 'blue',
-                price: '3000',
-                image: "trousersBlue.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [30,32,34,36]
-              },
-              {
-                name: "Trousers",
-                color: 'pink',
-                price: '3000',
-                image: "trousersPink.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [30,32,34,36]
-              },
-            ],
-          },
-        ],
-      },
-      {
-        name: 'BOY',
-        clothes: [
-          {
-            name: "coat",
-            frontImg: "coatBlack.jpg",
-            coat: [
-              {
-                name: "Coat",
-                color: 'black',
-                price: '7000',
-                image: "coatBlack.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [38,40,42,44]
-              },
-              {
-                name: "Coat",
-                color: 'blue',
-                price: '7000',
-                image: "coatBlue.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [38,40,42,44]
-              },
-              {
-                name: "Coat",
-                color: 'grey',
-                price: '7000',
-                image: "coatGrey.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [38,40,42,44]
-              },
-            ],
-          },
-          {
-            name: "shirts",
-            frontImg: "shirtBlack.jpg",
-            shirts: [
-              {
-                name: "Shirts",
-                color: 'black',
-                price: '2500',
-                image: "shirtBlack.jpg",
-                quantity: 1,
-                left: 20,
-                like: 0,
-                size: [34,36,38,40]
-              },
-              {
-                name: "Shirts",
-                color: 'white',
-                price: '2500',
-                image: "shirtWhite.jpg",
-                quantity: 1,
-                left: 20,
-                like: 0,
-                size: [34,36,38,40]
-              },
-              {
-                name: "Shirts",
-                color: 'yellow',
-                price: '2500',
-                image: "shirtYellow.jpg",
-                quantity: 1,
-                left: 20,
-                like: 0,
-                size: [34,36,38,40]
-              },
-            ],
-          },
-          {
-            name: "shoes",
-            frontImg: "shoesBrown.jpg",
-            shoes: [
-              {
-                name: "Shoes",
-                color: 'brown',
-                price: '5000',
-                image: "shoesBrown.jpg",
-                quantity: 1,
-                left: 40,
-                like: 0,
-                size: [28,30,34,36]
-              },
-              {
-                name: "Shoes",
-                color: 'black',
-                price: '5000',
-                image: "shoesBlack.jpg",
-                quantity: 1,
-                left: 40,
-                like: 0,
-                size: [28,30,34,36]
-              },
-              {
-                name: "Shoes",
-                color: 'blue',
-                price: '5000',
-                image: "shoesBlue.png",
-                quantity: 1,
-                left: 40,
-                like: 0,
-                size: [28,30,34,36]
-              },
-            ],
-          },
-          {
-            name: "trousers",
-            frontImg: "trousersBlack.jpg",
-            trousers: [
-              {
-                name: "Trousers",
-                color: 'black',
-                price: '3000',
-                image: "trousersBlack.jpg",
-                quantity: 1,
-                left: 20,
-                like: 0,
-                size: [24,26,28,30]
-              },
-              {
-                name: "Trousers",
-                color: 'blue',
-                price: '3000',
-                image: "trousersBlue.jpg",
-                quantity: 1,
-                left: 20,
-                like: 0,
-                size: [24,26,28,30]
-              },
-              {
-                name: "Trousers",
-                color: 'white',
-                price: '3000',
-                image: "trousersWhite.jpg",
-                quantity: 1,
-                left: 20,
-                like: 0,
-                size: [24,26,28,30]
-              },
-            ],
-          },
-        ],
-      },
-      {
-        name: 'GIRL',
-        clothes: [
-          {
-            name: "coat",
-            frontImg: "coatBlack.jpg",
-            coat: [
-              {
-                name: "Coat",
-                color: 'black',
-                price: '7000',
-                image: "coatBlack.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [34,36,38,40]
-              },
-              {
-                name: "Coat",
-                color: 'blue',
-                price: '7000',
-                image: "coatBlue.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [34,36,38,40]
-              },
-              {
-                name: "Coat",
-                color: 'red',
-                price: '7000',
-                image: "coatRed.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [34,36,38,40]
-              },
-              {
-                name: "Coat",
-                color: 'white',
-                price: '7000',
-                image: "coatWhite.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [34,36,38,40]
-              },
-            ],
-          },
-          {
-            name: "shirts",
-            frontImg: "shirtBlue.jpg",
-            shirts: [
-              {
-                name: "Shirts",
-                color: 'blue',
-                price: '2500',
-                image: "shirtBlue.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [32,34,36,38]
-              },
-              {
-                name: "Shirts",
-                color: 'red',
-                price: '2500',
-                image: "shirtRed.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [32,34,36,38]
-              },
-              {
-                name: "Shirts",
-                color: 'white',
-                price: '2500',
-                image: "shirtWhite.jpg",
-                quantity: 1,
-                left: 30,
-                like: 0,
-                size: [32,34,36,38]
-              },
-            ],
-          },
-          {
-            name: "shoes",
-            frontImg: "shoesBlue.jpg",
-            shoes: [
-              {
-                name: "Shoes",
-                color: 'blue',
-                price: '5000',
-                image: "shoesBlue.jpg",
-                quantity: 1,
-                left: 50,
-                like: 0,
-                size: [30,32,34,36]
-              },
-              {
-                name: "Shoes",
-                color: 'grey',
-                price: '5000',
-                image: "shoesGrey.jpg",
-                quantity: 1,
-                left: 50,
-                like: 0,
-                size: [30,32,34,36]
-              },
-              {
-                name: "Shoes",
-                color: 'pink',
-                price: '5000',
-                image: "shoesPink.jpg",
-                quantity: 1,
-                left: 50,
-                like: 0,
-                size: [30,32,34,36]
-              },
-            ],
-          },
-          {
-            name: "trousers",
-            frontImg: "trousersBlack.jpg",
-            trousers: [
-              {
-                name: "Trousers",
-                color: 'black',
-                price: '3000',
-                image: "trousersBlack.jpg",
-                quantity: 1,
-                left: 40,
-                like: 0,
-                size: [24,26,28,30]
-              },
-              {
-                name: "Trousers",
-                color: 'red',
-                price: '3000',
-                image: "trousersRed.jpg",
-                quantity: 1,
-                left: 40,
-                like: 0,
-                size: [24,26,28,30]
-              },
-              {
-                name: "Trousers",
-                color: 'white',
-                price: '3000',
-                image: "trousersWhite.jpg",
-                quantity: 1,
-                left: 40,
-                like: 0,
-                size: [24,26,28,30]
-              },
-            ],
-          },
-        ],
-      },
+      // {
+      //   name: 'WOMAN',
+      //   clothes: [
+      //     {
+      //       name: "coat",
+      //       frontImg: "wcoatblack.png",
+      //       coat: [
+      //         {
+      //           name: "Coat",
+      //           color: 'black',
+      //           price: '7000',
+      //           image: "wcoatblack.png",
+      //           quantity: 1,
+      //           left: 35,
+      //           like: 0,
+      //           size: [44,46,48,50]
+      //         },
+      //         {
+      //           name: "Coat",
+      //           color: 'red',
+      //           price: '7000',
+      //           image: "wcoatred.jpg",
+      //           quantity: 1,
+      //           left: 35,
+      //           like: 0,
+      //           size: [44,46,48,50]
+      //         },
+      //         {
+      //           name: "Coat",
+      //           color: 'white',
+      //           price: '7000',
+      //           image: "wcoatwhite.png",
+      //           quantity: 1,
+      //           left: 35,
+      //           like: 0,
+      //           size: [44,46,48,50]
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       name: "shirts",
+      //       frontImg: "wshirtblack.jpg",
+      //       shirts: [
+      //         {
+      //           name: "Shirts",
+      //           color: 'black',
+      //           price: '2500',
+      //           image: "wshirtblack.jpg",
+      //           quantity: 1,
+      //           left: 25,
+      //           like: 0,
+      //           size: [44,46,48,50]
+      //         },
+      //         {
+      //           name: "Shirts",
+      //           color: 'red',
+      //           price: '2500',
+      //           image: "wshirtred.jpg",
+      //           quantity: 1,
+      //           left: 25,
+      //           like: 0,
+      //           size: [44,46,48,50]
+      //         },
+      //         {
+      //           name: "Shirts",
+      //           color: 'pink',
+      //           price: '2500',
+      //           image: "wshirtpink.jpg",
+      //           quantity: 1,
+      //           left: 25,
+      //           like: 0,
+      //           size: [44,46,48,50]
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       name: "shoes",
+      //       frontImg: "wshoesblue.jpg",
+      //       shoes: [
+      //         {
+      //           name: "Shoes",
+      //           color: 'blue',
+      //           price: '5000',
+      //           image: "wshoesblue.jpg",
+      //           quantity: 1,
+      //           left: 60,
+      //           like: 0,
+      //           size: [36,37,38,39]
+      //         },
+      //         {
+      //           name: "Shoes",
+      //           color: 'black',
+      //           price: '5000',
+      //           image: "wshoesblack.jpg",
+      //           quantity: 1,
+      //           left: 60,
+      //           like: 0,
+      //           size: [36,37,38,39]
+      //         },
+      //         {
+      //           name: "Shoes",
+      //           color: 'pink',
+      //           price: '5000',
+      //           image: "wshoespink.jpg",
+      //           quantity: 1,
+      //           left: 60,
+      //           like: 0,
+      //           size: [36,37,38,39]
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       name: 'trousers',
+      //       frontImg: "wtrousersblack.jpg",
+      //       trousers: [
+      //         {
+      //           name: "Trousers",
+      //           color: 'black',
+      //           price: '3000',
+      //           image: "wtrousersblack.jpg",
+      //           quantity: 1,
+      //           left: 30,
+      //           like: 0,
+      //           size: [30,32,34,36]
+      //         },
+      //         {
+      //           name: "Trousers",
+      //           color: 'blue',
+      //           price: '3000',
+      //           image: "wtrousersblue.jpg",
+      //           quantity: 1,
+      //           left: 30,
+      //           like: 0,
+      //           size: [30,32,34,36]
+      //         },
+      //         {
+      //           name: "Trousers",
+      //           color: 'pink',
+      //           price: '3000',
+      //           image: "wtrouserspink.jpg",
+      //           quantity: 1,
+      //           left: 30,
+      //           like: 0,
+      //           size: [30,32,34,36]
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // },
+      // {
+      //   name: 'BOY',
+      //   clothes: [
+      //     {
+      //       name: "coat",
+      //       frontImg: "bcoatblack.jpg",
+      //       coat: [
+      //         {
+      //           name: "Coat",
+      //           color: 'black',
+      //           price: '7000',
+      //           image: "bcoatblack.jpg",
+      //           quantity: 1,
+      //           left: 30,
+      //           like: 0,
+      //           size: [38,40,42,44]
+      //         },
+      //         {
+      //           name: "Coat",
+      //           color: 'blue',
+      //           price: '7000',
+      //           image: "bcoatblue.jpg",
+      //           quantity: 1,
+      //           left: 30,
+      //           like: 0,
+      //           size: [38,40,42,44]
+      //         },
+      //         {
+      //           name: "Coat",
+      //           color: 'grey',
+      //           price: '7000',
+      //           image: "bcoatgrey.jpg",
+      //           quantity: 1,
+      //           left: 30,
+      //           like: 0,
+      //           size: [38,40,42,44]
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       name: "shirts",
+      //       frontImg: "bshirtblack.jpg",
+      //       shirts: [
+      //         {
+      //           name: "Shirts",
+      //           color: 'black',
+      //           price: '2500',
+      //           image: "bshirtblack.jpg",
+      //           quantity: 1,
+      //           left: 20,
+      //           like: 0,
+      //           size: [34,36,38,40]
+      //         },
+      //         {
+      //           name: "Shirts",
+      //           color: 'white',
+      //           price: '2500',
+      //           image: "bshirtwhite.jpg",
+      //           quantity: 1,
+      //           left: 20,
+      //           like: 0,
+      //           size: [34,36,38,40]
+      //         },
+      //         {
+      //           name: "Shirts",
+      //           color: 'yellow',
+      //           price: '2500',
+      //           image: "bshirtyellow.jpg",
+      //           quantity: 1,
+      //           left: 20,
+      //           like: 0,
+      //           size: [34,36,38,40]
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       name: "shoes",
+      //       frontImg: "bshoesbrown.jpg",
+      //       shoes: [
+      //         {
+      //           name: "Shoes",
+      //           color: 'brown',
+      //           price: '5000',
+      //           image: "bshoesbrown.jpg",
+      //           quantity: 1,
+      //           left: 40,
+      //           like: 0,
+      //           size: [28,30,34,36]
+      //         },
+      //         {
+      //           name: "Shoes",
+      //           color: 'black',
+      //           price: '5000',
+      //           image: "bshoesblack.jpg",
+      //           quantity: 1,
+      //           left: 40,
+      //           like: 0,
+      //           size: [28,30,34,36]
+      //         },
+      //         {
+      //           name: "Shoes",
+      //           color: 'blue',
+      //           price: '5000',
+      //           image: "bshoesblue.png",
+      //           quantity: 1,
+      //           left: 40,
+      //           like: 0,
+      //           size: [28,30,34,36]
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       name: "trousers",
+      //       frontImg: "btrousersblack.jpg",
+      //       trousers: [
+      //         {
+      //           name: "Trousers",
+      //           color: 'black',
+      //           price: '3000',
+      //           image: "btrousersblack.jpg",
+      //           quantity: 1,
+      //           left: 20,
+      //           like: 0,
+      //           size: [24,26,28,30]
+      //         },
+      //         {
+      //           name: "Trousers",
+      //           color: 'blue',
+      //           price: '3000',
+      //           image: "btrousersblue.jpg",
+      //           quantity: 1,
+      //           left: 20,
+      //           like: 0,
+      //           size: [24,26,28,30]
+      //         },
+      //         {
+      //           name: "Trousers",
+      //           color: 'white',
+      //           price: '3000',
+      //           image: "btrouserswhite.jpg",
+      //           quantity: 1,
+      //           left: 20,
+      //           like: 0,
+      //           size: [24,26,28,30]
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // },
+      // {
+      //   name: 'GIRL',
+      //   clothes: [
+      //     {
+      //       name: "coat",
+      //       frontImg: "gcoatblack.jpg",
+      //       coat: [
+      //         {
+      //           name: "Coat",
+      //           color: 'black',
+      //           price: '7000',
+      //           image: "gcoatblack.jpg",
+      //           quantity: 1,
+      //           left: 30,
+      //           like: 0,
+      //           size: [34,36,38,40]
+      //         },
+      //         {
+      //           name: "Coat",
+      //           color: 'blue',
+      //           price: '7000',
+      //           image: "gcoatblue.jpg",
+      //           quantity: 1,
+      //           left: 30,
+      //           like: 0,
+      //           size: [34,36,38,40]
+      //         },
+      //         {
+      //           name: "Coat",
+      //           color: 'red',
+      //           price: '7000',
+      //           image: "gcoatred.jpg",
+      //           quantity: 1,
+      //           left: 30,
+      //           like: 0,
+      //           size: [34,36,38,40]
+      //         },
+      //         {
+      //           name: "Coat",
+      //           color: 'white',
+      //           price: '7000',
+      //           image: "gcoatwhite.jpg",
+      //           quantity: 1,
+      //           left: 30,
+      //           like: 0,
+      //           size: [34,36,38,40]
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       name: "shirts",
+      //       frontImg: "gshirtblue.jpg",
+      //       shirts: [
+      //         {
+      //           name: "Shirts",
+      //           color: 'blue',
+      //           price: '2500',
+      //           image: "gshirtblue.jpg",
+      //           quantity: 1,
+      //           left: 30,
+      //           like: 0,
+      //           size: [32,34,36,38]
+      //         },
+      //         {
+      //           name: "Shirts",
+      //           color: 'red',
+      //           price: '2500',
+      //           image: "gshirtred.jpg",
+      //           quantity: 1,
+      //           left: 30,
+      //           like: 0,
+      //           size: [32,34,36,38]
+      //         },
+      //         {
+      //           name: "Shirts",
+      //           color: 'white',
+      //           price: '2500',
+      //           image: "gshirtwhite.jpg",
+      //           quantity: 1,
+      //           left: 30,
+      //           like: 0,
+      //           size: [32,34,36,38]
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       name: "shoes",
+      //       frontImg: "gshoesblue.jpg",
+      //       shoes: [
+      //         {
+      //           name: "Shoes",
+      //           color: 'blue',
+      //           price: '5000',
+      //           image: "gshoesblue.jpg",
+      //           quantity: 1,
+      //           left: 50,
+      //           like: 0,
+      //           size: [30,32,34,36]
+      //         },
+      //         {
+      //           name: "Shoes",
+      //           color: 'grey',
+      //           price: '5000',
+      //           image: "gshoesgrey.jpg",
+      //           quantity: 1,
+      //           left: 50,
+      //           like: 0,
+      //           size: [30,32,34,36]
+      //         },
+      //         {
+      //           name: "Shoes",
+      //           color: 'pink',
+      //           price: '5000',
+      //           image: "gshoespink.jpg",
+      //           quantity: 1,
+      //           left: 50,
+      //           like: 0,
+      //           size: [30,32,34,36]
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       name: "trousers",
+      //       frontImg: "gtrousersblack.jpg",
+      //       trousers: [
+      //         {
+      //           name: "Trousers",
+      //           color: 'black',
+      //           price: '3000',
+      //           image: "gtrousersblack.jpg",
+      //           quantity: 1,
+      //           left: 40,
+      //           like: 0,
+      //           size: [24,26,28,30]
+      //         },
+      //         {
+      //           name: "Trousers",
+      //           color: 'red',
+      //           price: '3000',
+      //           image: "gtrousersred.jpg",
+      //           quantity: 1,
+      //           left: 40,
+      //           like: 0,
+      //           size: [24,26,28,30]
+      //         },
+      //         {
+      //           name: "Trousers",
+      //           color: 'white',
+      //           price: '3000',
+      //           image: "gtrouserswhite.png",
+      //           quantity: 1,
+      //           left: 40,
+      //           like: 0,
+      //           size: [24,26,28,30]
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // },
     ],
     selectedCategory: [],
     selectedCatalog: [],
@@ -682,9 +728,9 @@ export default new Vuex.Store({
       let isProductExists = false;
       if (state.cart.length) {
         state.cart.map(function (item) {
-          if (item.name === product.name) {
+          if (item.ID === product.ID) {
             isProductExists = true;
-            item.quantity++
+            item.quantity++;
           }
         })
         if (!isProductExists) {
@@ -705,23 +751,6 @@ export default new Vuex.Store({
         state.cart[index].quantity--
       }
     },
-    CATALOG_LIKE: (state ,index) => {
-      if (state.selectedCatalog[index].like > 0) {
-        state.selectedCatalog[index].like--
-      }
-      else {
-        state.selectedCatalog[index].like++
-        console.log(state.selectedCatalog[index].like)
-      }
-    },
-    PRODUCT_LIKE: (state ,index) => {
-      if (state.selectedProduct[index].like > 0) {
-        state.selectedProduct[index].like--
-      }
-      else {
-        state.selectedProduct[index].like++
-      }
-    }
   },
   actions: {
     CATCH_CATEGORY({commit}, category) {
@@ -744,12 +773,6 @@ export default new Vuex.Store({
     },
     DELETE_FROM_CART({commit}, index) {
       commit('REMOVE_FROM_CART', index)
-    },
-    LIKE_CATALOG({commit}, index) {
-      commit('CATALOG_LIKE' ,index)
-    },
-    LIKE_PRODUCT({commit}, index) {
-      commit('CATALOG_LIKE' ,index)
     },
   },
   getters: {

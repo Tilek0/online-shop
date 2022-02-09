@@ -3,16 +3,13 @@
     <h1>Categories</h1>
     <div class="main-category">
       <div
-          v-for="item in category.clothes"
+          v-for="item in GET_CATEGORY.clothes"
           :key="item.name"
           class="main-category-item"
           @click="toCatalog(item)"
       >
         <div class="main-category-item_icon">
-          <img :src="require('../assets/man/' + item.frontImg)" alt="#" v-if="category.name === 'MAN'">
-          <img :src="require('../assets/woman/' + item.frontImg)" alt="#" v-else-if="category.name === 'WOMAN'">
-          <img :src="require('../assets/boy/' + item.frontImg)" alt="#" v-else-if="category.name === 'BOY'">
-          <img :src="require('../assets/girl/' + item.frontImg)" alt="#" v-else>
+          <img :src="require('../assets/' + item.frontImg)" alt="#">
         </div>
         <div class="main-category-item_desc">{{item.name}}</div>
       </div>
@@ -26,7 +23,7 @@ export default {
   name: "Categories",
   data () {
     return {
-      category: '',
+
     }
   },
   computed: {
@@ -34,15 +31,12 @@ export default {
       'GET_CATEGORY',
     ]),
   },
-  mounted() {
-    this.category = this.GET_CATEGORY
-  },
   methods: {
     ...mapActions([
       'CATCH_CATALOG'
     ]),
     toCatalog(i) {
-      let catalog = this.category.clothes.find(item => item.name === i.name);
+      let catalog = this.GET_CATEGORY.clothes.find(item => item.name === i.name);
       switch (i.name) {
         case 'trousers':
           this.CATCH_CATALOG(catalog.trousers)

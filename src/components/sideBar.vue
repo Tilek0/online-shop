@@ -2,11 +2,11 @@
   <div class="sideBar">
     <div @click="closeFilter">
       <p
-          v-for="(item,i) in wears"
+          v-for="(item,index) in GET_CATEGORY.clothes"
           :key="item.name"
           class="sideBar-active"
-          @click="selectName(i)"
-          :class="{activeName: item.selected === true}"
+          @click="selectName(item,index)"
+          :class="{activeName: nameIndex === index}"
       >{{item.name}}</p>
       <my-button>Clear Filter</my-button>
     </div>
@@ -14,10 +14,10 @@
       <h2>Size</h2>
       <my-button @myButtonEvent="showSize">Select size</my-button>
       <div class="filter" v-show="filter">
-        <div class="check" v-for="(one,i) in size" :key="i">
+        <div class="check" v-for="(one,i) in allSize" :key="i">
           <input type="checkbox" @click="filter = !filter">
-          <p class="check-p">{{one.name}}</p>
-          <p>({{one.quant}})</p>
+          <p class="check-p">{{one}}</p>
+<!--          <p>({{one.left}})</p>-->
         </div>
       </div>
     </div>
@@ -29,10 +29,10 @@
       <h2>Colour</h2>
       <my-button @myButtonEvent="showColor">Select color</my-button>
       <div class="filterSize" v-show="filterColor">
-        <div class="check" v-for="(color, index) in colours" :key="index">
-          <input type="checkbox" @click="filterColor = !filterColor">
-          <p class="check-p">{{color.name}}</p>
-          <p>({{color.quant}})</p>
+        <div class="check" v-for="(item, index) in GET_CATALOG" :key="index">
+          <input type="checkbox" @click="catchColor(item)">
+          <p class="check-p">{{item.color}}</p>
+          <p>({{item.left}})</p>
         </div>
       </div>
     </div>
@@ -41,6 +41,7 @@
 
 <script>
 import myButton from "./myButton";
+import {mapActions, mapGetters} from "vuex";
 export default {
   name: "sideBar",
   components: {
@@ -48,35 +49,30 @@ export default {
   },
   data() {
     return {
+      nameIndex: '',
       filter: false,
       filterColor: false,
-      wears: [
-        {name:'Coat',selected: false},
-        {name:'Shirts',selected: false},
-        {name:'Shoes',selected: false},
-        {name:'Trousers',selected: false},
-      ],
-      size: [
-        {name: 'XS', quant: '2'},
-        {name: 'S', quant: '3'},
-        {name: 'M', quant: '4'},
-        {name: 'L', quant: '5'},
-        {name: 'XXL', quant: '9'},
-        {name: 'XL', quant: '7'},
-        {name: 'XXS', quant: '3'},
-        {name: 'XXXL', quant: '2'},
-      ],
-      colours: [
-        {name: 'red', quant: '1'},
-        {name: 'black', quant: '3'},
-        {name: 'white', quant: '7'},
-        {name: 'green', quant: '2'},
-        {name: 'yellow', quant: '8'},
-        {name: 'blue', quant: '6'},
-      ]
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'GET_CATEGORY',
+      'GET_CATALOG',
+    ]),
+    allSize() {
+      let uniqueArray = [];
+      let allSize = [];
+      this.GET_CATALOG.forEach(item => item.size.map(item => uniqueArray.push(item)));
+      allSize = uniqueArray.filter(function(item, pos) {
+        return uniqueArray.indexOf(item) === pos;
+      });
+      return allSize
     }
   },
   methods: {
+    ...mapActions([
+      'CATCH_CATALOG'
+    ]),
     showSize() {
       this.filter = true;
     },
@@ -87,11 +83,27 @@ export default {
       this.filter = false;
       this.filterColor = false;
     },
-    selectName(i) {
-      this.wears.forEach(item => item.selected = false);
-      this.wears.find((item,index) =>
-          index === i
-      ).selected = true;
+    catchColor(i) {
+      let color = this.GET_CATALOG.filter(item => item.color === i.color)
+      this.CATCH_CATALOG(color)
+    },
+    selectName(i,index) {
+      let catalog = this.GET_CATEGORY.clothes.find(item => item.name === i.name);
+      switch (i.name) {
+        case 'trousers':
+          this.CATCH_CATALOG(catalog.trousers)
+          break;
+        case 'coat':
+          this.CATCH_CATALOG(catalog.coat)
+          break;
+        case 'shirts':
+          this.CATCH_CATALOG(catalog.shirts)
+          break;
+        case 'shoes':
+          this.CATCH_CATALOG(catalog.shoes)
+          break;
+      }
+      this.nameIndex = index;
     }
   }
 }

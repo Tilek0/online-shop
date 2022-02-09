@@ -4,7 +4,7 @@
     <div class="main">
       <div class="filterSide"></div>
       <div class="sideNav">
-        <side-bar></side-bar>
+<!--        <side-bar></side-bar>-->
       </div>
       <div class="catalog">
         <catalog-items />
@@ -15,13 +15,13 @@
 
 <script>
 import catalogItems from "../components/catalogItems";
-import sideBar from "../components/sideBar";
+// import sideBar from "../components/sideBar";
 
 export default {
   name: "Catalog",
   components: {
     catalogItems,
-    sideBar,
+    // sideBar,
   },
   data() {
     return {}
@@ -31,7 +31,7 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-  margin-bottom: 20%;
+  margin-bottom: 28%;
   display: flex;
   flex-direction: row;
   position: relative;

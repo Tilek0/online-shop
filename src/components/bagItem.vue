@@ -3,14 +3,11 @@
     <div class="bagPack" v-for="(item, index) of bug" :key="index">
       <div class="bagPack-totalInfo">
         <p>{{item.name}} :item</p>
-        <p>Subtotal: {{}}</p>
+        <p>Subtotal: {{item.ID}}</p>
       </div>
       <div class="bagPack-item">
         <div class="bagPack-item-img" v-if="bug">
-          <img :src="require('../assets/woman/' + item.image)" alt="dresses" v-if="category.name === 'WOMAN'">
-          <img :src="require('../assets/man/' + item.image)" alt="dresses" v-else-if="category.name === 'MAN'">
-          <img :src="require('../assets/girl/' + item.image)" alt="dresses" v-else-if="category.name === 'GIRL'">
-          <img :src="require('../assets/boy/' + item.image)" alt="dresses" v-else>
+          <img :src="require('../assets/' + item.image)" alt="dresses">
         </div>
         <div class="bagPack-item-content">
           <div class="bagPack-item-content-title">
@@ -26,7 +23,7 @@
             <div>
               <p>{{item.price}}</p>
               <p>{{item.color}}</p>
-              <p>{{}}</p>
+              <p>{{item.selectedSize}}</p>
             </div>
           </div>
           <div class="bagPack-item-content-quantity">
@@ -59,18 +56,15 @@ export default {
   data() {
     return {
       bug: '',
-      category: '',
     }
   },
   computed: {
     ...mapGetters([
         'GET_CART',
-      'GET_CATEGORY',
     ]),
   },
   mounted() {
     this.bug = this.GET_CART;
-    this.category = this.GET_CATEGORY
   },
   methods: {
     ...mapActions([
@@ -93,13 +87,14 @@ export default {
 
 <style lang="scss" scoped>
 .bagPack {
-  font-family: Arial;
+  font-family: Arial,serif;
   font-weight: bold;
   background: #ebc999;
   border-radius: 20px;
   width: 100%;
   height: 100%;
   margin-bottom: 12px;
+  padding-bottom: 2%;
   &-totalInfo {
     display: flex;
     justify-content: space-around;
@@ -133,13 +128,13 @@ export default {
           font-size: 25px;
         }
         img {
-          width: 100%;
-          height: 100%;
+          width: 25px;
+          height: 25px;
         }
         ::v-deep{
           button {
             background: transparent;
-            width: 65%;
+            width: 100%;
             padding-top: 5px;
             &:active {
               background: #f26659;

@@ -63,11 +63,14 @@ body {
   }
   .showModal {
     width: 30%;
-    min-height: 60%;
+    padding-right: 1.9%;
+    max-height: 65%;
     position: fixed;
     top: 10%;
     right: 15%;
     z-index: 3;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 a {

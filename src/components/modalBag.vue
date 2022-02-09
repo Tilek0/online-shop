@@ -17,7 +17,12 @@
       >PROCEED TO CHECKOUT</my-button>
     </div>
     <div class="modal-bag">
-      <div v-show="!bagView.length" :style="{'font-size': '25px'}">CART IS EMPTY</div>
+      <div
+          v-show="!bagView.length"
+          :style="{
+            'font-size': '25px',
+            color: '#f26659'
+          }">CART IS EMPTY</div>
       <bag-item></bag-item>
     </div>
   </div>

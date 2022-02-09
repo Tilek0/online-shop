@@ -6,20 +6,21 @@
     <div class="nav-link">
       <div
           class="to"
-          v-for="(val,i) in values"
+          v-for="(val,i) in product"
           :key="val.name"
-          :class="{activeName: val.selected === true}"
           @mouseover="dropLinks(i)"
           @click="link(val)"
-      >{{ val.name }}</div>
+      >{{ val.name }}
+      </div>
     </div>
     <div class="nav-hideLinks" v-if="hideLinks">
       <div
           class="to"
-          v-for="(item,i) in hideLinks.desc"
+          v-for="item in hideLinks.clothes"
           :key="item.name"
-          @click="hideLink(i)"
-      >{{item.name}}</div>
+          @click="nestedLink(item)"
+      >{{ item.name }}
+      </div>
     </div>
     <div class="nav-icons">
       <div class="nav-icons_search">
@@ -35,95 +36,76 @@
         <img src="../assets/icons/admin.png" alt="img">
       </div>
       <div @click="openModal">
-        <img src="../assets/icons/bag.png" alt="img">
+        <img src="../assets/icons/bag.png" alt="img" @mouseover="countPerspective = true"
+             @mouseleave="countLeave">
+        <div class="nav-icons_bagCount" :class="{'nav-icons_dinamicStyle': countPerspective}">
+          {{ this.GET_CART.length }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
+
 export default {
   name: "navigation",
   data() {
     return {
+      countPerspective: false,
+      product: [],
       searchText: '',
-      values: [
-          {
-            name: 'Man',
-            to:'Categories',
-            selected: false,
-            desc: [
-              {name: 'Coats'},
-              {name: 'Shirts'},
-              {name: 'Shoes'},
-              {name: 'Trousers'},
-            ]
-          },
-          {
-            name: 'Woman',
-            to:'Categories',
-            selected: false,
-            desc: [
-              {name: 'Coats'},
-              {name: 'Dresses'},
-              {name: 'Shoes'},
-              {name: 'Trousers'},
-            ]
-          },
-          {
-            name: 'Boy',
-            to:'Categories',
-            selected: false,
-            desc: [
-              {name: 'Coats'},
-              {name: 'Shirts'},
-              {name: 'Shoes'},
-              {name: 'Trousers'},
-            ]
-          },
-          {
-            name: 'Girl',
-            to:'Categories',
-            selected: false,
-            desc: [
-              {name: 'Coats'},
-              {name: 'Dresses'},
-              {name: 'Shoes'},
-              {name: 'Trousers'},
-            ]
-          },
-          {
-            name: 'Home',
-            selected: false,
-            to:'/'
-          },
-      ],
       hideLinks: '',
     }
   },
+  mounted() {
+    this.product = this.GET_PRODUCTS;
+    this.product.push({name: 'HOME'});
+  },
   computed: {
     ...mapGetters([
+      'GET_CART',
       'GET_PRODUCTS',
     ]),
   },
   methods: {
+    ...mapActions([
+        'CATCH_CATEGORY',
+        'CATCH_CATALOG'
+    ]),
     link(i) {
-      this.values.forEach(item => item.selected = false);
-      this.values.find((item,index) =>
-          index === i
-      ).selected = true;
-      // const link = this.values.find((item,index) => {
-      //   return index === i
-      // });
-      this.$router.push('/Categories');
+      let category = this.product.find(item => {
+        return item.name === i.name;
+      })
+      this.CATCH_CATEGORY(category)
+      if (i.name !== 'HOME') {
+        this.$router.push('/Categories');
+      } else {
+        this.$router.push('/');
+      }
     },
     dropLinks(i) {
-      this.hideLinks = this.values.find((item, index) => {
+      this.hideLinks = this.product.find((item, index) => {
         return index === i
       });
     },
-    hideLink() {
+    nestedLink(i) {
+      let catalog = this.hideLinks.clothes.find(item => item.name === i.name);
+      switch (i.name) {
+        case 'trousers':
+          this.CATCH_CATALOG(catalog.trousers)
+          break;
+        case 'coat':
+          this.CATCH_CATALOG(catalog.coat)
+          break;
+        case 'shirts':
+          this.CATCH_CATALOG(catalog.shirts)
+          break;
+        case 'shoes':
+          this.CATCH_CATALOG(catalog.shoes)
+          break;
+      }
       this.$router.push('/Catalog')
     },
     clearText() {
@@ -131,6 +113,9 @@ export default {
     },
     openModal() {
       this.$emit('openModal');
+    },
+    countLeave() {
+      this.countPerspective = false;
     }
   }
 }
@@ -146,21 +131,26 @@ $color-pink: #f26659;
   left: 0;
   z-index: 1;
   width: 100%;
+
   &-divider {
     position: relative;
+
     img {
       width: 100%;
       height: 70px;
     }
   }
+
   .to {
     color: black;
     font-size: 18px;
+
     &:hover {
       color: $color-pink;
       border-bottom: 1px solid $color-pink;
     }
   }
+
   &-link {
     position: absolute;
     top: 8%;
@@ -178,11 +168,13 @@ $color-pink: #f26659;
     flex-direction: row;
     justify-content: space-around;
     cursor: pointer;
+
     .activeName {
       color: $color-pink;
       border-bottom: 1px solid $color-pink;
     }
   }
+
   &-hideLinks {
     position: absolute;
     top: 80%;
@@ -201,15 +193,18 @@ $color-pink: #f26659;
     justify-content: space-around;
     cursor: pointer;
   }
+
   &-icons {
     position: absolute;
     top: 8%;
     right: 15%;
     display: flex;
     align-items: center;
+
     :nth-child(n) {
       margin: 0 9%;
     }
+
     img {
       width: 27px;
       background: rgba(255, 255, 255, 0.2);
@@ -221,14 +216,17 @@ $color-pink: #f26659;
       padding: 13px;
       border-radius: 20px;
       transition: .5s;
+
       &:hover {
         transform: perspective(500px) translate3d(0, 10px, 150px);
       }
     }
+
     &_search {
       div {
         display: inline-block;
         position: relative;
+
         &:after {
           content: "";
           background: black;
@@ -239,6 +237,7 @@ $color-pink: #f26659;
           right: -10%;
           transform: rotate(135deg);
         }
+
         input {
           color: black;
           font-size: 16px;
@@ -250,11 +249,25 @@ $color-pink: #f26659;
           outline: none;
           border-radius: 35px;
           transition: width 0.5s;
-          &:focus,:not(:placeholder-shown) {
+
+          &:focus, :not(:placeholder-shown) {
             width: 250px;
           }
         }
       }
+    }
+
+    &_dinamicStyle {
+      transform: perspective(500px) translate3d(0, 10px, 150px);
+    }
+
+    &_bagCount {
+      position: absolute;
+      top: 70%;
+      left: 100%;
+      font-weight: bold;
+      font-size: 20px;
+      transition: .5s;
     }
   }
 }

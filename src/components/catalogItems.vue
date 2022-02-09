@@ -1,19 +1,26 @@
 <template>
   <div class="catalog">
-    <div class="catalog-items" v-for="(item, index) in catalog" :key="item.image">
-      <div class="catalog-items_img" @click="toCard(item)">
-        <img :src="require('../assets/man/'+ item.image)" alt="img" v-if="category.name === 'MAN'">
-        <img :src="require('../assets/woman/'+ item.image)" alt="img" v-else-if="category.name === 'WOMAN'">
-        <img :src="require('../assets/girl/'+ item.image)" alt="img" v-else-if="category.name === 'GIRL'">
-        <img :src="require('../assets/boy/'+ item.image)" alt="img" v-else>
+    <div class="catalog-items" v-for="(item,index) in catalog" :key="index">
+      <div class="catalog-items_img"  @click="toCard(item)">
+        <img
+            :src="require(`../assets/${item.image.img}`)"
+            alt="img"
+        >
       </div>
       <div class="catalog-items_desc">
-        <div @click="$router.push('/Items')">
+        <div>
           <p>{{item.name}}</p>
           <p>{{item.price}}</p>
+          <div
+              v-for="(color,i) in item.color"
+              :key="i"
+              @click="takeColor(color,index)"
+              class="catalog-items_desc_color"
+              :style="{background: color}"
+          ></div>
         </div>
-        <div class="catalog-items_desc__like" @click="like(index)">
-          <img :src="require('../assets/icons/like.png')" alt="like" v-if="item.like !== null">
+        <div class="catalog-items_desc__like" @click="likeSwitch">
+          <img :src="require('../assets/icons/like.png')" alt="like" v-if="like">
           <img :src="require('../assets/icons/emptyLike.png')" alt="like" v-else>
         </div>
       </div>
@@ -28,31 +35,37 @@ export default {
   name: "catalogItems",
   data() {
     return {
-      category: '',
-      catalog: '',
+      like: false,
+      catalog: ''
     }
+  },
+  mounted() {
+    this.catalog = JSON.parse(JSON.stringify(this.GET_CATALOG))
+    let colors = this.catalog.map(item => item.image.map(item => item.color));
+    let firstImage = this.catalog.map(item => item.image[0]);
+    this.catalog.forEach((item, index) => {
+      item.image = firstImage[index];
+      item.color = colors[index];
+    })
   },
   computed: {
     ...mapGetters([
-      'GET_CATEGORY',
-      'GET_CATALOG'
+      'GET_CATALOG',
     ]),
-  },
-  mounted() {
-    this.catalog = this.GET_CATALOG;
-    this.category = this.GET_CATEGORY;
   },
   methods: {
     ...mapActions([
       'CATCH_PRODUCT',
-      'LIKE_CATALOG'
     ]),
     toCard(i) {
       this.CATCH_PRODUCT(i)
       this.$router.push('/Items')
     },
-    like(i) {
-      this.LIKE_CATALOG(i)
+    takeColor(color,i) {
+      this.catalog[i].image = this.GET_CATALOG[i].image.find(item => item.color === color)
+    },
+    likeSwitch() {
+      this.like = !this.like
     }
   }
 }
@@ -95,6 +108,15 @@ export default {
       justify-content: space-around;
       p {
         margin: 1px;
+      }
+      &_color {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: red;
+        margin: 5px 5px;
+        display: inline-block;
+        cursor: pointer;
       }
       &__like {
         width: 35px;

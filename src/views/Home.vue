@@ -41,7 +41,6 @@
 <script>
 import myButton from "../components/myButton";
 import {mapGetters,mapActions} from "vuex";
-
 export default {
   name: "Home",
   components: {
@@ -67,12 +66,12 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'GET_PRODUCTS'
+      'GET_PRODUCTS',
     ])
   },
   methods: {
     ...mapActions([
-       'CATCH_CATEGORY'
+      'CATCH_CATEGORY',
     ]),
     showPhoto(i) {
       this.hoverImage = this.backImage.find((item, index) => {

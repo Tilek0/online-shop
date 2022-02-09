@@ -13,27 +13,8 @@
         <div class="item-card_staff" v-if="product">
           <div class="item-card_staff_circle"></div>
           <img
-              :src="require('../assets/woman/' + product.image)"
+              :src="require('../assets/' + product.image.img)"
               alt="shop"
-              v-if="category.name === 'WOMAN'"
-              :style="{transform: visualItem ? `translateZ(200px) rotate(-40deg)` : `translateZ(0) rotate(0)`}"
-          >
-          <img
-              :src="require('../assets/man/' + product.image)"
-              alt="shop"
-              v-else-if="category.name === 'MAN'"
-              :style="{transform: visualItem ? `translateZ(200px) rotate(-40deg)` : `translateZ(0) rotate(0)`}"
-          >
-          <img
-              :src="require('../assets/girl/' + product.image)"
-              alt="shop"
-              v-else-if="category.name === 'GIRL'"
-              :style="{transform: visualItem ? `translateZ(200px) rotate(-40deg)` : `translateZ(0) rotate(0)`}"
-          >
-          <img
-              :src="require('../assets/boy/' + product.image)"
-              alt="shop"
-              v-else
               :style="{transform: visualItem ? `translateZ(200px) rotate(-40deg)` : `translateZ(0) rotate(0)`}"
           >
         </div>
@@ -42,27 +23,39 @@
             <h1 :style="{transform: visualItem ? `translateZ(150px)` : `translateZ(0)`}">
               {{ product.name }}
             </h1>
-            <div class="item-card_info__title__like" @click="like">
-              <img src="../assets/icons/emptyLike.png" alt="like" v-if="product.like === null">
+          </div>
+          <div class="item-card_info__underTitle">
+            <h3 :style="{transform: visualItem ? `translateZ(125px)` : `translateZ(0)`}">
+              Price: {{ product.price }}
+            </h3>
+            <div class="item-card_info__underTitle__like" @click="like">
+              <img src="../assets/icons/emptyLike.png" alt="like" v-if="!likeSwitch">
               <img src="../assets/icons/like.png" alt="like" v-else>
             </div>
           </div>
-          <h3 :style="{transform: visualItem ? `translateZ(125px)` : `translateZ(0)`}">
-            Price: {{ product.price }}
-          </h3>
           <h2>Size:</h2>
           <div class="item-card_info_sizes"
-               v-for="one in product.size"
-               :key="one"
+               v-for="(one,i) in product.image.sizes"
+               :key="i"
                :style="{transform: visualItem ? `translateZ(100px) translateY(-8px)` : `translateZ(0) translateY(0)`}"
           >
-            <my-button class="item-card_info_sizes__btn" @myButtonEvent="addSize(one)">{{ one }}</my-button>
+            <div
+                class="item-card_info_sizes__btn"
+                @click="addSize(one)"
+                :class="{activeSize: one === selectedSize}"
+            >{{ one.size }}
+            </div>
           </div>
           <div
               class="item-card_info_purchase"
               :style="{transform: visualItem ? `translateZ(75px)` : `translateZ(0)`}"
           >
-            <my-button class="item-card_info_purchase__btn" @myButtonEvent="addToBug">Add to bag</my-button>
+            <my-button
+                class="item-card_info_purchase__btn"
+                @myButtonEvent="addToBug"
+                :class="{'item-card_info_purchase__btn__empty' : emptySize }"
+            >{{ buttonText }}
+            </my-button>
           </div>
         </div>
       </div>
@@ -73,6 +66,7 @@
 <script>
 import myButton from "../components/myButton";
 import {mapActions, mapGetters} from "vuex";
+
 export default {
   name: "item",
   components: {
@@ -80,36 +74,43 @@ export default {
   },
   data() {
     return {
-      selectedSize: '',
+      buttonText: 'Add to bag',
+      emptySize: false,
+      selectedSize: null,
       product: '',
-      category: '',
       visualItem: false,
       rotateStyle: {
         transform: ''
       },
+      likeSwitch: false,
     }
   },
   computed: {
     ...mapGetters([
-        'GET_PRODUCT',
-        'GET_CATEGORY',
+      'GET_PRODUCT',
     ])
   },
   mounted() {
     this.product = this.GET_PRODUCT;
-    this.category = this.GET_CATEGORY;
+    this.product.ID = this.uid
   },
   methods: {
     ...mapActions([
-        'CATCH_CART',
+      'CATCH_CART',
     ]),
     addToBug() {
-      // this.CATCH_CART(this.product);
-      this.product.selectedSize = this.selectedSize
-      console.log(this.product)
+      if (this.selectedSize !== null) {
+        this.product.selectedSize = this.selectedSize;
+        this.CATCH_CART(this.product);
+      } else {
+        this.buttonText = 'Select size'
+        this.emptySize = true;
+      }
     },
     addSize(one) {
       this.selectedSize = one;
+      this.emptySize = false
+      this.buttonText = 'Add to bag'
     },
     addMouse: function (e) {
       let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
@@ -126,6 +127,7 @@ export default {
       this.rotateStyle.transform = `rotateY(0) rotateX(0)`;
     },
     like() {
+      this.likeSwitch = !this.likeSwitch;
     }
   }
 }
@@ -149,7 +151,7 @@ export default {
     &-card {
       transform-style: preserve-3d;
       background: #f0eff4;
-      min-height: 80vh;
+      min-height: 85vh;
       width: 35rem;
       border-radius: 30px;
       padding: 0 4rem;
@@ -164,9 +166,11 @@ export default {
 
         img {
           width: 330px;
+          max-height: 410px;
           z-index: 2;
           transition: all 0.75s ease-out;
         }
+
         &_circle {
           width: 15rem;
           height: 15rem;
@@ -185,31 +189,42 @@ export default {
         transform-style: preserve-3d;
 
         &__title {
+          margin-top: 10%;
           transform-style: preserve-3d;
           display: flex;
-          justify-content: center;
+          flex-direction: column;
           align-items: center;
+
           h1 {
             font-size: 3rem;
             transition: all 0.75s ease-out;
           }
+        }
+
+        &__underTitle {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transform-style: preserve-3d;
+
           &__like {
-            width: 35px;
-            height: 35px;
+            width: 45px;
+            height: 45px;
             padding: 5px;
             margin-left: 1rem;
             transform-style: preserve-3d;
+
             img {
               width: 100%;
               height: 100%;
-              transition: .3s ease;
+              transition: .4s ease;
+
               &:hover {
                 transform: perspective(500px) translate3d(0, -5px, 100px);
               }
             }
           }
         }
-
 
         h3 {
           font-size: 1.7rem;
@@ -229,17 +244,17 @@ export default {
 
           &__btn {
             margin: 0 .5rem;
+            border: none;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 30px;
+            background: #ebc999;
+            padding: .3rem 2rem;
+            cursor: pointer;
+            font-weight: bold;
+          }
 
-            ::v-deep {
-              button {
-                background: #ebc999;
-                padding: .5rem 2rem;
-
-                &:active {
-                  background: linear-gradient(160deg, #8ca9d3, #f0eff4);
-                }
-              }
-            }
+          .activeSize {
+            background: linear-gradient(160deg, #8ca9d3, #f0eff4);
           }
         }
 
@@ -253,6 +268,7 @@ export default {
             ::v-deep {
               button {
                 background: transparent;
+                font-size: 15px;
                 border: 3px solid #f26659;
                 transition: .2s ease-in;
                 padding: .8rem 0;
@@ -267,6 +283,18 @@ export default {
                 &:active {
                   background: linear-gradient(160deg, #8ca9d3, #f0eff4);
                   border: none;
+                }
+              }
+            }
+
+            &__empty {
+              ::v-deep {
+                button {
+                  color: red !important;
+
+                  &:hover {
+                    background: transparent;
+                  }
                 }
               }
             }

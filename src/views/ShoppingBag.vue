@@ -1,12 +1,18 @@
 <template>
   <div>
     <h2>Shopping Cart</h2>
+    <h3
+        v-if="!bagView.length"
+        :style="{
+          'font-size': '25px',
+          color: '#f26659'
+        }"
+    >CART IS EMPTY</h3>
     <div class="bag">
       <div class="bag-item">
-        <p v-if="!bagView.length">CART IS EMPTY</p>
         <bag-item></bag-item>
       </div>
-      <div class="bag-order">
+      <div class="bag-order" v-if="bagView.length">
         <h2>Order Summary</h2>
         <div class="bag-order_sub">
           <p>Subtotal:</p>
@@ -41,7 +47,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'GET_CART'
+      'GET_CART',
     ])
   },
   mounted() {
@@ -52,7 +58,7 @@ export default {
 
 <style lang="scss" scoped>
 .bag {
-  font-family: Arial;
+  font-family: Arial,serif;
   font-weight: bold;
   margin-top: 5%;
   width: 100%;
@@ -62,9 +68,6 @@ export default {
   &-item {
     width: 50%;
     height: 60%;
-    p {
-      font-size: 25px;
-    }
   }
   &-order {
     width: 30%;
