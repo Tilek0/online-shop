@@ -50,6 +50,9 @@ export default {
         case 'shoes':
           this.CATCH_CATALOG(catalog.shoes)
           break;
+        case 'out-wear':
+          this.CATCH_CATALOG(catalog.jacket)
+          break;
       }
       this.$router.push('/Catalog')
     }
@@ -98,7 +101,7 @@ export default {
       }
       &_icon {
         width: 250px;
-        height: 470px;
+        height: 400px;
         background: #f0eff4;
         overflow: hidden;
         border-radius: 20px;

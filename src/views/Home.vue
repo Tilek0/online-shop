@@ -24,13 +24,13 @@
       <div class="home-gift_tag">Gifts</div>
       <div class="home-gift-adults">
         <div class="giftLinks">
-          <router-link to="#" v-for="gift in gifts" :key="gift">{{ gift }}</router-link>
+          <router-link to="/Gift" v-for="gift in gifts" :key="gift">{{ gift }}</router-link>
         </div>
         <img src="../assets/man&woman.jpg" alt="img" class="giftImg">
       </div>
       <div class="home-gift-kids">
         <div class="giftLinks">
-          <router-link to="#" v-for="gift in gifts" :key="gift">{{ gift }}</router-link>
+          <router-link to="/Gift" v-for="gift in gifts" :key="gift">{{ gift }}</router-link>
         </div>
         <img src="../assets/junior.jpg" alt="img" class="giftImg">
       </div>

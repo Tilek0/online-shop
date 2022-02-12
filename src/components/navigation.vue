@@ -54,20 +54,27 @@ export default {
   data() {
     return {
       countPerspective: false,
-      product: [],
       searchText: '',
       hideLinks: '',
     }
   },
   mounted() {
-    this.product = this.GET_PRODUCTS;
-    this.product.push({name: 'HOME'});
+    if (this.product.find(item => item.name === 'HOME')) {
+      return ''
+    } else {
+      this.product.push({name: 'HOME'});
+    }
   },
   computed: {
     ...mapGetters([
       'GET_CART',
       'GET_PRODUCTS',
     ]),
+    product() {
+      let product = [];
+      product = this.GET_PRODUCTS;
+      return product;
+    }
   },
   methods: {
     ...mapActions([
@@ -79,10 +86,16 @@ export default {
         return item.name === i.name;
       })
       this.CATCH_CATEGORY(category)
-      if (i.name !== 'HOME') {
-        this.$router.push('/Categories');
+      if (category.name === 'HOME') {
+        if (this.$route.fullPath !== '/') {
+          this.$router.push('/');
+        }
+        return ''
       } else {
-        this.$router.push('/');
+        if (this.$route.fullPath !== '/Categories') {
+          this.$router.push('/Categories');
+        }
+        return ''
       }
     },
     dropLinks(i) {
@@ -105,8 +118,14 @@ export default {
         case 'shoes':
           this.CATCH_CATALOG(catalog.shoes)
           break;
+        case 'out-wear':
+          this.CATCH_CATALOG(catalog.jacket)
+          break;
       }
-      this.$router.push('/Catalog')
+      if (this.$route.fullPath !== '/Catalog') {
+        this.$router.push('/Catalog')
+      }
+      return ''
     },
     clearText() {
       this.searchText = '';

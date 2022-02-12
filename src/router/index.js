@@ -5,6 +5,7 @@ import Categories from "../views/Categories";
 import Catalog from "../views/Catalog";
 import Items from "../views/Items";
 import ShoppingBag from "../views/ShoppingBag";
+import Gift from "../views/Gift";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes = [
     path: "/Bag",
     name: "ShoppingBag",
     component: ShoppingBag,
+  },
+  {
+    path: "/Gift",
+    name: "Gift",
+    component: Gift,
   },
 ];
 

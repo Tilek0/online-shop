@@ -13,9 +13,9 @@
         <div class="item-card_staff" v-if="product">
           <div class="item-card_staff_circle"></div>
           <img
-              :src="require('../assets/' + product.image.img)"
+              :src="require('../assets/' + product.image[checkedColor].img)"
               alt="shop"
-              :style="{transform: visualItem ? `translateZ(200px) rotate(-40deg)` : `translateZ(0) rotate(0)`}"
+              :style="{transform: visualItem ? `translateZ(200px) rotate(-25deg)` : `translateZ(0) rotate(0)`}"
           >
         </div>
         <div class="item-card_info">
@@ -32,10 +32,25 @@
               <img src="../assets/icons/emptyLike.png" alt="like" v-if="!likeSwitch">
               <img src="../assets/icons/like.png" alt="like" v-else>
             </div>
+            <div
+                v-for="(color,i) in product.image"
+                :key="i"
+                class="item-card_info__underTitle__color"
+                :style="{
+                  background: i === checkedColor ? '#f26659' : '',
+                  transform: visualItem ? `translateZ(100px) translateY(-8px)` : `translateZ(0) translateY(0)`
+                  }"
+            >
+              <div
+                  @click="takeColor(i)"
+                  class="item-card_info__underTitle__color__selected"
+                  :style="{background: color.color}"
+              ></div>
+            </div>
           </div>
           <h2>Size:</h2>
           <div class="item-card_info_sizes"
-               v-for="(one,i) in product.image.sizes"
+               v-for="(one,i) in product.sizes"
                :key="i"
                :style="{transform: visualItem ? `translateZ(100px) translateY(-8px)` : `translateZ(0) translateY(0)`}"
           >
@@ -43,7 +58,7 @@
                 class="item-card_info_sizes__btn"
                 @click="addSize(one)"
                 :class="{activeSize: one === selectedSize}"
-            >{{ one.size }}
+            >{{ one }}
             </div>
           </div>
           <div
@@ -77,40 +92,49 @@ export default {
       buttonText: 'Add to bag',
       emptySize: false,
       selectedSize: null,
-      product: '',
       visualItem: false,
       rotateStyle: {
         transform: ''
       },
       likeSwitch: false,
+      checkedColor: 0,
     }
   },
+  mounted() {
+
+  },
+
   computed: {
     ...mapGetters([
       'GET_PRODUCT',
-    ])
+    ]),
+    product() {
+      let getProduct = this.GET_PRODUCT
+      getProduct.ID = this.uid;
+      return getProduct
+    }
   },
-  mounted() {
-    this.product = this.GET_PRODUCT;
-    this.product.ID = this.uid
-  },
+
   methods: {
     ...mapActions([
       'CATCH_CART',
     ]),
     addToBug() {
       if (this.selectedSize !== null) {
-        this.product.selectedSize = this.selectedSize;
-        this.CATCH_CART(this.product);
+        let image = JSON.parse(JSON.stringify(this.product));
+        image.selectedSize = this.selectedSize;
+        image.image = image.image[this.checkedColor];
+        delete image.colors;
+        this.CATCH_CART(image);
       } else {
-        this.buttonText = 'Select size'
+        this.buttonText = 'Select size, color';
         this.emptySize = true;
       }
     },
     addSize(one) {
       this.selectedSize = one;
-      this.emptySize = false
-      this.buttonText = 'Add to bag'
+      this.emptySize = false;
+      this.buttonText = 'Add to bag';
     },
     addMouse: function (e) {
       let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
@@ -118,13 +142,17 @@ export default {
       this.rotateStyle.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
     },
     changeMouse() {
-      this.visualItem = true
-      this.rotateStyle.transition = 'none'
+      this.visualItem = true;
+      this.rotateStyle.transition = 'none';
     },
     resetMouse() {
       this.visualItem = false
       this.rotateStyle.transition = `all 0.5s ease`;
       this.rotateStyle.transform = `rotateY(0) rotateX(0)`;
+    },
+    takeColor (i) {
+      this.checkedColor = i;
+
     },
     like() {
       this.likeSwitch = !this.likeSwitch;
@@ -140,6 +168,7 @@ export default {
   align-items: center;
   justify-content: center;
   margin-bottom: 20%;
+  margin-top: 4%;
 
   .item {
     width: 50%;
@@ -154,7 +183,7 @@ export default {
       min-height: 85vh;
       width: 35rem;
       border-radius: 30px;
-      padding: 0 4rem;
+      padding: 1rem 4rem;
       box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 0, 0, 0.2);
 
       &_staff {
@@ -203,7 +232,7 @@ export default {
 
         &__underTitle {
           display: flex;
-          justify-content: center;
+          justify-content: space-around;
           align-items: center;
           transform-style: preserve-3d;
 
@@ -222,6 +251,19 @@ export default {
               &:hover {
                 transform: perspective(500px) translate3d(0, -5px, 100px);
               }
+            }
+          }
+          &__color {
+            border-radius: 50%;
+            display: inline-block;
+            padding: 7px;
+            transition: .5s ease;
+            box-shadow: 0 0 20px 3px rgba(0, 0, 0, .8);
+            &__selected {
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              cursor: pointer;
             }
           }
         }

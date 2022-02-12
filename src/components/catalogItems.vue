@@ -3,7 +3,7 @@
     <div class="catalog-items" v-for="(item,index) in catalog" :key="index">
       <div class="catalog-items_img"  @click="toCard(item)">
         <img
-            :src="require(`../assets/${item.image.img}`)"
+            :src="require(`../assets/${item.image[index === firstColor ? secondColor : 0].img}`)"
             alt="img"
         >
       </div>
@@ -11,16 +11,20 @@
         <div>
           <p>{{item.name}}</p>
           <p>{{item.price}}</p>
-          <div
-              v-for="(color,i) in item.color"
-              :key="i"
-              @click="takeColor(color,index)"
-              class="catalog-items_desc_color"
-              :style="{background: color}"
-          ></div>
+          <div class="catalog-items_desc_color"
+               v-for="(color,i) in item.image"
+               :key="i"
+               :style="{background: index === firstColor && i === secondColor ? '#f26659' : ''}"
+          >
+            <div
+                @click="takeColor(color,index,i)"
+                class="catalog-items_desc_color__selected"
+                :style="{background: color.color}"
+            ></div>
+          </div>
         </div>
-        <div class="catalog-items_desc__like" @click="likeSwitch">
-          <img :src="require('../assets/icons/like.png')" alt="like" v-if="like">
+        <div class="catalog-items_desc__like" @click="likeSwitch(index)">
+          <img :src="require('../assets/icons/like.png')" alt="like" v-if="item.like !== 0">
           <img :src="require('../assets/icons/emptyLike.png')" alt="like" v-else>
         </div>
       </div>
@@ -36,36 +40,45 @@ export default {
   data() {
     return {
       like: false,
-      catalog: ''
+      firstColor: 0,
+      secondColor: 0,
     }
   },
-  mounted() {
-    this.catalog = JSON.parse(JSON.stringify(this.GET_CATALOG))
-    let colors = this.catalog.map(item => item.image.map(item => item.color));
-    let firstImage = this.catalog.map(item => item.image[0]);
-    this.catalog.forEach((item, index) => {
-      item.image = firstImage[index];
-      item.color = colors[index];
-    })
+  watch: {
+    catalog() {
+      this.firstColor = 0;
+      this.secondColor = 0;
+    }
   },
   computed: {
     ...mapGetters([
       'GET_CATALOG',
     ]),
+    catalog() {
+      return this.GET_CATALOG;
+    }
   },
   methods: {
     ...mapActions([
       'CATCH_PRODUCT',
+      'INCREMENT_LIKE_CATALOG',
+      'DECREMENT_LIKE_CATALOG',
     ]),
     toCard(i) {
-      this.CATCH_PRODUCT(i)
-      this.$router.push('/Items')
+      this.CATCH_PRODUCT(i);
+      this.$router.push('/Items');
     },
-    takeColor(color,i) {
-      this.catalog[i].image = this.GET_CATALOG[i].image.find(item => item.color === color)
+    takeColor(color,index,i) {
+      this.firstColor = index;
+      this.secondColor = i;
     },
-    likeSwitch() {
-      this.like = !this.like
+    likeSwitch(i) {
+      this.like = !this.like;
+      if (this.like === true) {
+        this.INCREMENT_LIKE_CATALOG(i);
+      }else {
+        this.DECREMENT_LIKE_CATALOG(i);
+      }
     }
   }
 }
@@ -105,18 +118,23 @@ export default {
     }
     &_desc {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       p {
-        margin: 1px;
+        margin: 2px;
+        text-align: start;
       }
       &_color {
-        width: 20px;
-        height: 20px;
         border-radius: 50%;
-        background: red;
-        margin: 5px 5px;
         display: inline-block;
-        cursor: pointer;
+        margin: 0 3px;
+        box-shadow: 0 0 20px 3px rgba(0, 0, 0, .6);
+        &__selected {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          margin: 5px 5px;
+          cursor: pointer;
+        }
       }
       &__like {
         width: 35px;

@@ -62,8 +62,8 @@ body {
     z-index: 10;
   }
   .showModal {
-    width: 30%;
-    padding-right: 1.9%;
+    width: max-content;
+    padding-right: 2.2%;
     max-height: 65%;
     position: fixed;
     top: 10%;
@@ -71,6 +71,7 @@ body {
     z-index: 3;
     overflow-y: auto;
     overflow-x: hidden;
+    border-radius: 20px;
   }
 }
 a {

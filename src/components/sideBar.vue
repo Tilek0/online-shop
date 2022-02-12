@@ -1,25 +1,31 @@
 <template>
   <div class="sideBar">
-    <div @click="closeFilter">
+    <div>
       <p
           v-for="(item,index) in GET_CATEGORY.clothes"
-          :key="item.name"
+          :key="index"
           class="sideBar-active"
           @click="selectName(item,index)"
           :class="{activeName: nameIndex === index}"
-      >{{item.name}}</p>
-      <my-button>Clear Filter</my-button>
+      >{{ item.name }}</p>
+      <my-button @myButtonEvent="closeFilter">Clear Filter</my-button>
     </div>
     <div>
       <h2>Size</h2>
       <my-button @myButtonEvent="showSize">Select size</my-button>
-      <div class="filter" v-show="filter">
-        <div class="check" v-for="(one,i) in allSize" :key="i">
-          <input type="checkbox" @click="filter = !filter">
-          <p class="check-p">{{one}}</p>
-<!--          <p>({{one.left}})</p>-->
-        </div>
-      </div>
+            <div class="filter sizePosition" v-show="isFilterSize">
+              <div
+                  class="check"
+                  v-for="(one,i) in allSize"
+                  :key="i"
+                  :style="{background: i === checkedSize ? '#f26659' : ''}"
+              >
+                <div
+                    @click="takeSize(one,i)"
+                    class="selected"
+                >{{one}}</div>
+              </div>
+            </div>
     </div>
     <div>
       <h2>Price</h2>
@@ -28,11 +34,19 @@
     <div>
       <h2>Colour</h2>
       <my-button @myButtonEvent="showColor">Select color</my-button>
-      <div class="filterSize" v-show="filterColor">
-        <div class="check" v-for="(item, index) in GET_CATALOG" :key="index">
-          <input type="checkbox" @click="catchColor(item)">
-          <p class="check-p">{{item.color}}</p>
-          <p>({{item.left}})</p>
+      <div class="filter colorPosition" v-show="isFilterColor">
+        <div
+            class="check"
+            v-for="(color, i) in allColor"
+            :key="i"
+            :style="{background: i === checkedColor ? '#f26659' : ''}"
+        >
+          <div
+              @click="takeColor(color,i)"
+              class="selected"
+              :style="{background: color}"
+          ></div>
+          <p class="check-p">{{ color }}</p>
         </div>
       </div>
     </div>
@@ -42,6 +56,7 @@
 <script>
 import myButton from "./myButton";
 import {mapActions, mapGetters} from "vuex";
+
 export default {
   name: "sideBar",
   components: {
@@ -49,10 +64,14 @@ export default {
   },
   data() {
     return {
+      checkedColor: '',
+      checkedSize: '',
       nameIndex: '',
-      filter: false,
-      filterColor: false,
+      isFilterSize: false,
+      isFilterColor: false,
     }
+  },
+  mounted() {
   },
   computed: {
     ...mapGetters([
@@ -62,32 +81,54 @@ export default {
     allSize() {
       let uniqueArray = [];
       let allSize = [];
-      this.GET_CATALOG.forEach(item => item.size.map(item => uniqueArray.push(item)));
-      allSize = uniqueArray.filter(function(item, pos) {
+      let newArr = JSON.parse(JSON.stringify(this.GET_CATALOG))
+      newArr.forEach(item => item.sizes.forEach(item => uniqueArray.push(item)));
+      allSize = uniqueArray.filter((item, pos) => {
         return uniqueArray.indexOf(item) === pos;
       });
       return allSize
-    }
+    },
+    allColor() {
+      let uniqueColor = [];
+      this.GET_CATALOG.map(item => item.image.map(item => uniqueColor.push(item.color)));
+      function unique (arr) {
+        let result = [];
+        arr.forEach(item => {
+          if (!result.includes(item)) {
+            result.push(item);
+          }
+        })
+        return result;
+      }
+      return unique(uniqueColor);
+    },
   },
   methods: {
     ...mapActions([
       'CATCH_CATALOG'
     ]),
     showSize() {
-      this.filter = true;
+      this.isFilterSize = true;
     },
     showColor() {
-      this.filterColor = true;
+      this.isFilterColor = true;
     },
     closeFilter() {
-      this.filter = false;
-      this.filterColor = false;
+      this.isFilterColor = false;
+      this.isFilterSize = false;
+      this.checkedSize = '';
+      this.checkedColor = '';
+      this.nameIndex = '';
     },
-    catchColor(i) {
-      let color = this.GET_CATALOG.filter(item => item.color === i.color)
-      this.CATCH_CATALOG(color)
+    takeSize(size, i) {
+      this.checkedSize = i;
+      this.isFilterSize = false
     },
-    selectName(i,index) {
+    takeColor(color,i) {
+      this.checkedColor = i;
+      this.isFilterColor = false
+    },
+    selectName(i, index) {
       let catalog = this.GET_CATEGORY.clothes.find(item => item.name === i.name);
       switch (i.name) {
         case 'trousers':
@@ -102,8 +143,13 @@ export default {
         case 'shoes':
           this.CATCH_CATALOG(catalog.shoes)
           break;
+        case 'out-wear':
+          this.CATCH_CATALOG(catalog.jacket)
+          break;
       }
       this.nameIndex = index;
+      this.checkedSize = '';
+      this.checkedColor = '';
     }
   }
 }
@@ -120,19 +166,22 @@ export default {
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
   border-radius: 20px;
   padding: 2%;
-  width: 100%;
+  width: 94%;
   height: 73%;
   display: flex;
   flex-direction: column;
+
   &-active {
     border-radius: 15px;
     padding: 1% 0;
     margin: 1.5%;
     cursor: pointer;
   }
+
   .activeName {
     border: 2px solid #f26659;
   }
+
   ::v-deep {
     button {
       padding: 2% 0;
@@ -140,53 +189,68 @@ export default {
       border: 2px solid #f26659;
       transition: .2s ease-in;
       width: 60%;
+
       &:hover {
         background: #f26659;
         color: #f0eff4;
       }
+
       &:active {
         background: linear-gradient(160deg, #8ca9d3, #f0eff4);
         border: none;
       }
     }
   }
+
   h2 {
     border-bottom: 1px solid #000000;
   }
+  .filter {
+    padding: 3%;
+    width: 400px;
+    height: max-content;
+    background: #ebc999;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+  .sizePosition {
+    position: absolute;
+    z-index: 3;
+    top: 43%;
+    left: 5%;
+  }
+  .colorPosition {
+    position: absolute;
+    z-index: 3;
+    top: 78%;
+    left: 5%;
+  }
   .check {
+    border-radius: 50%;
+    margin: 0 5% 5%;
+    width: 45px;
+    height: 45px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
+
+    .selected {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      margin: 5px 5px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     &-p {
-      margin-left: 3%;
+      margin: 0;
     }
   }
-  .filter {
-    position: absolute;
-    z-index: 3;
-    top: 50%;
-    left: 5%;
-    width: 400px;
-    height: 160px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    background: #ebc999;
-    border-radius: 20px;
-  }
-  .filterSize {
-    position: absolute;
-    z-index: 3;
-    top: 85%;
-    left: 5%;
-    width: 400px;
-    height: 160px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    background: #ebc999;
-    border-radius: 20px;
-  }
+
 }
 </style>

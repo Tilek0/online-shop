@@ -7,7 +7,7 @@
       </div>
       <div class="bagPack-item">
         <div class="bagPack-item-img" v-if="bug">
-          <img :src="require('../assets/' + item.image)" alt="dresses">
+          <img :src="require('../assets/' + item.image.img)" alt="dresses">
         </div>
         <div class="bagPack-item-content">
           <div class="bagPack-item-content-title">
@@ -22,7 +22,7 @@
             </div>
             <div>
               <p>{{item.price}}</p>
-              <p>{{item.color}}</p>
+              <p>{{item.image.color}}</p>
               <p>{{item.selectedSize}}</p>
             </div>
           </div>
@@ -91,10 +91,10 @@ export default {
   font-weight: bold;
   background: #ebc999;
   border-radius: 20px;
-  width: 100%;
+  width: max-content;
   height: 100%;
   margin-bottom: 12px;
-  padding-bottom: 2%;
+  padding: 1%;
   &-totalInfo {
     display: flex;
     justify-content: space-around;
