@@ -69,9 +69,11 @@ export default {
       nameIndex: '',
       isFilterSize: false,
       isFilterColor: false,
+      catalogRefresh: []
     }
   },
   mounted() {
+    this.catalogRefresh = JSON.parse(JSON.stringify(this.GET_CATALOG));
   },
   computed: {
     ...mapGetters([
@@ -114,6 +116,7 @@ export default {
       this.isFilterColor = true;
     },
     closeFilter() {
+      this.CATCH_CATALOG(this.catalogRefresh);
       this.isFilterColor = false;
       this.isFilterSize = false;
       this.checkedSize = '';
@@ -122,11 +125,17 @@ export default {
     },
     takeSize(size, i) {
       this.checkedSize = i;
-      this.isFilterSize = false
+      let catalogSize = JSON.parse(JSON.stringify(this.GET_CATALOG));
+      let filteredSize = catalogSize.filter(item => item.sizes.find(item => item === size));
+      this.CATCH_CATALOG(filteredSize);
+      this.isFilterSize = false;
     },
     takeColor(color,i) {
       this.checkedColor = i;
-      this.isFilterColor = false
+      let catalogColor = JSON.parse(JSON.stringify(this.GET_CATALOG));
+      let filteredColor = catalogColor.filter(item => item.image.find(item => item.color === color));
+      this.CATCH_CATALOG(filteredColor);
+      this.isFilterColor = false;
     },
     selectName(i, index) {
       let catalog = this.GET_CATEGORY.clothes.find(item => item.name === i.name);
