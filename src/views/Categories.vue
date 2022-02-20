@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <h1>Categories</h1>
+    <h1>{{ 'categories' | localize}}</h1>
     <div class="main-category">
       <div
           v-for="item in GET_CATEGORY.clothes"
@@ -11,7 +11,7 @@
         <div class="main-category-item_icon">
           <img :src="require('../assets/' + item.frontImg)" alt="#">
         </div>
-        <div class="main-category-item_desc">{{item.name}}</div>
+        <div class="main-category-item_desc">{{item.name | localize}}</div>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@ export default {
         case 'shoes':
           this.CATCH_CATALOG(catalog.shoes)
           break;
-        case 'out-wear':
+        case 'outwear':
           this.CATCH_CATALOG(catalog.jacket)
           break;
       }

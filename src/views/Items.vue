@@ -26,7 +26,7 @@
           </div>
           <div class="item-card_info__underTitle">
             <h3 :style="{transform: visualItem ? `translateZ(125px)` : `translateZ(0)`}">
-              Price: {{ product.price }}
+              {{ 'price'| localize }}: {{ product.price }} {{ 'currency' | localize}}
             </h3>
             <div class="item-card_info__underTitle__like" @click="like">
               <img src="../assets/icons/emptyLike.png" alt="like" v-if="!likeSwitch">
@@ -48,7 +48,7 @@
               ></div>
             </div>
           </div>
-          <h2>Size:</h2>
+          <h2>{{ 'size' | localize }}:</h2>
           <div class="item-card_info_sizes"
                v-for="(one,i) in product.sizes"
                :key="i"
@@ -69,7 +69,7 @@
                 class="item-card_info_purchase__btn"
                 @myButtonEvent="addToBug"
                 :class="{'item-card_info_purchase__btn__empty' : emptySize }"
-            >{{ buttonText }}
+            >{{ buttonText | localize}}
             </my-button>
           </div>
         </div>
@@ -89,7 +89,7 @@ export default {
   },
   data() {
     return {
-      buttonText: 'Add to bag',
+      buttonText: 'addToBag',
       emptySize: false,
       selectedSize: null,
       visualItem: false,
@@ -127,14 +127,14 @@ export default {
         delete image.colors;
         this.CATCH_CART(image);
       } else {
-        this.buttonText = 'Select size, color';
+        this.buttonText = 'selectSizeNote';
         this.emptySize = true;
       }
     },
     addSize(one) {
       this.selectedSize = one;
       this.emptySize = false;
-      this.buttonText = 'Add to bag';
+      this.buttonText = 'addToBag';
     },
     addMouse: function (e) {
       let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
@@ -249,7 +249,7 @@ export default {
               transition: .4s ease;
 
               &:hover {
-                transform: perspective(500px) translate3d(0, -5px, 100px);
+                transform: perspective(500px) translate3d(0, -5px, 65px);
               }
             }
           }

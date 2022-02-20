@@ -6,6 +6,7 @@ import Catalog from "../views/Catalog";
 import Items from "../views/Items";
 import ShoppingBag from "../views/ShoppingBag";
 import Gift from "../views/Gift";
+import Payment from "../views/Payment";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,11 @@ const routes = [
     path: "/Gift",
     name: "Gift",
     component: Gift,
+  },
+  {
+    path: "/Payment",
+    name: "Payment",
+    component: Payment,
   },
 ];
 

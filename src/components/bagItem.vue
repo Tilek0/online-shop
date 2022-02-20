@@ -2,8 +2,8 @@
   <div>
     <div class="bagPack" v-for="(item, index) of bug" :key="index">
       <div class="bagPack-totalInfo">
-        <p>{{item.name}} :item</p>
-        <p>Subtotal: {{item.ID}}</p>
+        <p>{{item.name}} :{{ 'item' | localize }}</p>
+        <p>{{ "subtotal" | localize }}: {{item.ID}}</p>
       </div>
       <div class="bagPack-item">
         <div class="bagPack-item-img" v-if="bug">
@@ -16,9 +16,9 @@
           </div>
           <div class="bagPack-item-content_info">
             <div>
-              <p>Price:</p>
-              <p>Colour:</p>
-              <p>Size:</p>
+              <p>{{ 'price' | localize }}:</p>
+              <p>{{ 'color' | localize }}:</p>
+              <p>{{ 'size' | localize }}:</p>
             </div>
             <div>
               <p>{{item.price}}</p>
@@ -27,7 +27,7 @@
             </div>
           </div>
           <div class="bagPack-item-content-quantity">
-            <p>Quantity:</p>
+            <p>{{ 'quantity' | localize }}:</p>
             <div class="bagPack-item-content-quantity-btn">
               <my-button @myButtonEvent="increment(index)">
                 <img src="../assets/icons/plus.png" alt="#">
@@ -91,7 +91,7 @@ export default {
   font-weight: bold;
   background: #ebc999;
   border-radius: 20px;
-  width: max-content;
+  width: 400px;
   height: 100%;
   margin-bottom: 12px;
   padding: 1%;
@@ -99,7 +99,7 @@ export default {
     display: flex;
     justify-content: space-around;
     p {
-      font-size: 20px;
+      font-size: 18px;
     }
   }
   &-item {
@@ -123,7 +123,6 @@ export default {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: 0 3%;
         p {
           font-size: 25px;
         }

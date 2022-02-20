@@ -1,29 +1,29 @@
 <template>
   <div>
-    <h2>Shopping Cart</h2>
+    <h2>{{ 'shoppingCart' | localize}}</h2>
     <h3
         v-if="!bagView.length"
         :style="{
           'font-size': '25px',
           color: '#f26659'
         }"
-    >CART IS EMPTY</h3>
+    >{{ 'cartIsEmpty' | localize}}</h3>
     <div class="bag">
       <div class="bag-item">
         <bag-item></bag-item>
       </div>
       <div class="bag-order" v-if="bagView.length">
-        <h2>Order Summary</h2>
+        <h2>{{ 'orderSummary' | localize}}</h2>
         <div class="bag-order_sub">
-          <p>Subtotal:</p>
+          <p>{{ 'subtotal' | localize }}:</p>
           <p>{{}}</p>
         </div>
         <div class="bag-order_total">
-          <p>Order Total:</p>
-          <p>{{}}</p>
+          <p>{{ 'orderTotal' | localize}}:</p>
+          <p>{{totalPrice}}</p>
         </div>
         <div class="bag-order-btn">
-          <my-button class="bag-order-btn_myBtn">Proceed to Checkout</my-button>
+          <my-button class="bag-order-btn_myBtn" @myButtonEvent="payment">{{ 'proceedToCheckout' | localize}}</my-button>
         </div>
       </div>
     </div>
@@ -42,16 +42,29 @@ export default {
   },
   data() {
     return {
-      bagView: ''
+      bagView: '',
     }
   },
   computed: {
     ...mapGetters([
       'GET_CART',
-    ])
+    ]),
+    totalPrice() {
+      const total = this.GET_CART.map(item => item.price);
+      let sum = 0;
+      for (let i = 0; i <= total.length; i++) {
+        sum += Number(total[i]);
+      }
+      return sum;
+    }
   },
   mounted() {
-    this.bagView = this.GET_CART
+    this.bagView = this.GET_CART;
+  },
+  methods: {
+    payment() {
+      this.$router.push('/Payment');
+    }
   }
 }
 </script>

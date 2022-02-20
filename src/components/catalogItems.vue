@@ -10,7 +10,7 @@
       <div class="catalog-items_desc">
         <div>
           <p>{{item.name}}</p>
-          <p>{{item.price}}</p>
+          <p>{{item.price}} {{ 'currency' | localize}}</p>
           <div class="catalog-items_desc_color"
                v-for="(color,i) in item.image"
                :key="i"
@@ -86,6 +86,7 @@ export default {
 
 <style lang="scss" scoped>
 .catalog {
+  display: flex;
   &-items {
     margin: 8px;
     display: flex;

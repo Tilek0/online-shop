@@ -6,8 +6,12 @@
           @closeModal="closeModal"
       ></modal-bag>
     </div>
+    <div class="search">
+    </div>
     <div @click="closeModal">
-      <router-view/>
+      <keep-alive>
+        <router-view />
+      </keep-alive>
     </div>
     <footer-nav ref="closeContact" class="footer"/>
   </div>
@@ -63,7 +67,7 @@ body {
   }
   .showModal {
     width: max-content;
-    padding-right: 2.2%;
+    padding-right: 3.3%;
     max-height: 65%;
     position: fixed;
     top: 10%;
@@ -72,6 +76,11 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     border-radius: 20px;
+  }
+  .search {
+    width: 70%;
+    height: max-content;
+    background: black;
   }
 }
 a {

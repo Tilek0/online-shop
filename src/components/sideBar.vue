@@ -7,12 +7,12 @@
           class="sideBar-active"
           @click="selectName(item,index)"
           :class="{activeName: nameIndex === index}"
-      >{{ item.name }}</p>
-      <my-button @myButtonEvent="closeFilter">Clear Filter</my-button>
+      >{{ item.name | localize}}</p>
+      <my-button @myButtonEvent="closeFilter">{{ 'clearFilter' | localize}}</my-button>
     </div>
     <div>
-      <h2>Size</h2>
-      <my-button @myButtonEvent="showSize">Select size</my-button>
+      <h2>{{'size' | localize}}</h2>
+      <my-button @myButtonEvent="showSize">{{ 'selectSize' | localize}}</my-button>
             <div class="filter sizePosition" v-show="isFilterSize">
               <div
                   class="check"
@@ -28,12 +28,12 @@
             </div>
     </div>
     <div>
-      <h2>Price</h2>
+      <h2>{{ 'price' | localize}}</h2>
       <input type="range">
     </div>
     <div>
-      <h2>Colour</h2>
-      <my-button @myButtonEvent="showColor">Select color</my-button>
+      <h2>{{ 'color' | localize}}</h2>
+      <my-button @myButtonEvent="showColor">{{ 'selectColor' | localize}}</my-button>
       <div class="filter colorPosition" v-show="isFilterColor">
         <div
             class="check"
@@ -152,7 +152,7 @@ export default {
         case 'shoes':
           this.CATCH_CATALOG(catalog.shoes)
           break;
-        case 'out-wear':
+        case 'outwear':
           this.CATCH_CATALOG(catalog.jacket)
           break;
       }

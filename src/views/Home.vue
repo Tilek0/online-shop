@@ -10,7 +10,7 @@
             @mouseleave="clearHover"
             @click="linkPage(item)"
         >
-          <my-button class="home-main-preCard-cards_text" @myButtonEvent="linkPage(item)">{{item.name}}</my-button>
+          <my-button class="home-main-preCard-cards_text" @myButtonEvent="linkPage(item)">{{item.name | localize}}</my-button>
           <div class="home-main-preCard-cards_png" :style="item.style">
             <img :src="require('../assets/'+ item.image)" alt="img">
           </div>
@@ -21,16 +21,16 @@
       </div>
     </div>
     <div class="home-gift">
-      <div class="home-gift_tag">Gifts</div>
+      <div class="home-gift_tag">{{ 'forGift' | localize}}</div>
       <div class="home-gift-adults">
         <div class="giftLinks">
-          <router-link to="/Gift" v-for="gift in gifts" :key="gift">{{ gift }}</router-link>
+          <router-link to="/Gift" v-for="gift in gifts" :key="gift">{{ gift | localize}}</router-link>
         </div>
         <img src="../assets/man&woman.jpg" alt="img" class="giftImg">
       </div>
       <div class="home-gift-kids">
         <div class="giftLinks">
-          <router-link to="/Gift" v-for="gift in gifts" :key="gift">{{ gift }}</router-link>
+          <router-link to="/Gift" v-for="gift in gifts" :key="gift">{{ gift | localize}}</router-link>
         </div>
         <img src="../assets/junior.jpg" alt="img" class="giftImg">
       </div>
@@ -61,8 +61,11 @@ export default {
         {backSide: 'boy.png',style: {right: '10.3%', width: '20%',}},
       ],
       hoverImage: '',
-      gifts: ['For Him','For Her'],
+      gifts: ['forHim','forHer'],
     }
+  },
+  mounted() {
+    this.CATCH_ALL_PRODUCTS();
   },
   computed: {
     ...mapGetters([
@@ -72,6 +75,7 @@ export default {
   methods: {
     ...mapActions([
       'CATCH_CATEGORY',
+      'CATCH_ALL_PRODUCTS',
     ]),
     showPhoto(i) {
       this.hoverImage = this.backImage.find((item, index) => {

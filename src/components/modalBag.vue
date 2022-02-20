@@ -1,7 +1,7 @@
 <template>
   <div class="modal">
     <div class="modal-title">
-      <h2>Shopping Cart</h2>
+      <h2>{{ 'shoppingCart' | localize }}</h2>
       <div class="modal-title-exit">
         <my-button @myButtonEvent="closeModal"><img src="../assets/icons/exit.png" alt="#"></my-button>
       </div>
@@ -10,11 +10,11 @@
       <my-button
           class="modal-buttons_btn"
           @myButtonEvent="bagLink"
-      >VIEW CART</my-button>
+      >{{ 'viewCart' | localize }}</my-button>
       <my-button
           class="modal-buttons_btn"
           @myButtonEvent="proceedLink"
-      >PROCEED TO CHECKOUT</my-button>
+      >{{ 'proceedToCheckout' | localize }}</my-button>
     </div>
     <div class="modal-bag">
       <div
@@ -22,7 +22,7 @@
           :style="{
             'font-size': '25px',
             color: '#f26659'
-          }">CART IS EMPTY</div>
+          }">{{ 'cartIsEmpty' | localize}}</div>
       <bag-item></bag-item>
     </div>
   </div>
@@ -59,7 +59,7 @@ export default {
       this.$router.push('/Bag');
     },
     proceedLink() {
-      this.$router.push('/Proceed');
+      this.$router.push('/Payment');
     }
   }
 }

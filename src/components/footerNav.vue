@@ -3,21 +3,21 @@
     <div class="nav-divider" @click="closeForm">
       <img src="../assets/icons/footer.svg" alt="shop">
     </div>
-    <div class="nav-button" @click="openAksForm">Ask me</div>
+    <div class="nav-button" @click="openAksForm">{{ 'askMe' | localize}}</div>
     <div class="nav-askForm" v-if="visibleForm">
       <div class="nav-askForm__tag">
-        <h2>Ask me</h2>
+        <h2>{{ 'askMe' | localize}}</h2>
         <my-button @myButtonEvent="closeForm">
           <img src="../assets/icons/exit.png" alt="#">
         </my-button>
       </div>
       <input type="email" placeholder="Example@example.com" v-model="form.email">
       <input type="text" placeholder="Name:" v-model="form.name">
-      <textarea placeholder="type text..." v-model="form.desc"/>
-      <my-button class="nav-askForm_btn">Send</my-button>
-      <my-button class="nav-askForm_btn" @myButtonEvent="resetForm">Clear</my-button>
+      <textarea placeholder="'type text...'" v-model="form.desc"/>
+      <my-button class="nav-askForm_btn">{{ 'send' | localize}}</my-button>
+      <my-button class="nav-askForm_btn" @myButtonEvent="resetForm">{{ 'clear' | localize}}</my-button>
     </div>
-    <h2 class="nav-askForm_text">Follow me on</h2>
+    <h2 class="nav-askForm_text">{{ 'followMeOn' | localize}}</h2>
     <div class="nav-contact">
       <a :href="icon.link" v-for="icon in social" :key="icon.name">
         <img

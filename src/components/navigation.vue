@@ -10,7 +10,7 @@
           :key="val.name"
           @mouseover="dropLinks(i)"
           @click="link(val)"
-      >{{ val.name }}
+      >{{ val.name | localize}}
       </div>
     </div>
     <div class="nav-hideLinks" v-if="hideLinks">
@@ -19,7 +19,7 @@
           v-for="item in hideLinks.clothes"
           :key="item.name"
           @click="nestedLink(item)"
-      >{{ item.name }}
+      >{{ item.name | localize}}
       </div>
     </div>
     <div class="nav-icons">
@@ -36,10 +36,18 @@
         <img src="../assets/icons/admin.png" alt="img">
       </div>
       <div @click="openModal">
-        <img src="../assets/icons/bag.png" alt="img" @mouseover="countPerspective = true"
+        <img src="../assets/icons/bag.png" alt="img" @mouseover="countMove = true"
              @mouseleave="countLeave">
-        <div class="nav-icons_bagCount" :class="{'nav-icons_dinamicStyle': countPerspective}">
+        <div class="nav-icons_bagCount" :class="{'nav-icons_dinamicStyle': countMove}">
           {{ this.GET_CART.length }}
+        </div>
+      </div>
+      <div class="nav-icons__switch">
+        <div class="switch" @click="switchLocale">
+          <span class="switch-slider"
+                :style="{transform: IsLocale ? 'translateX(85%)': '',
+                 background: IsLocale ? '#8ca9d3' : '#f26659'}"
+          >{{localeName}}</span>
         </div>
       </div>
     </div>
@@ -48,39 +56,75 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import {debounce} from "lodash/function";
 
 export default {
   name: "navigation",
   data() {
     return {
-      countPerspective: false,
+      locale: [
+        'ru-RU',
+        'en-US'
+      ],
+      countMove: false,
       searchText: '',
       hideLinks: '',
+      foundFilter: '',
+      IsLocale: false,
     }
   },
   mounted() {
-    if (this.product.find(item => item.name === 'HOME')) {
-      return ''
-    } else {
-      this.product.push({name: 'HOME'});
+    this.CATCH_FOR_FILTER();
+  },
+  watch: {
+    searchText: function(searchText) {
+      this.setQuery(searchText);
     }
   },
   computed: {
     ...mapGetters([
       'GET_CART',
       'GET_PRODUCTS',
+      'GET_FOR_FILTER',
     ]),
     product() {
-      let product = [];
-      product = this.GET_PRODUCTS;
-      return product;
+      return this.GET_PRODUCTS;
+    },
+    localeName() {
+      if (this.IsLocale) {
+        this.CHANGE_LOCALE(this.locale[0]);
+        return this.locale[0];
+      }else {
+        this.CHANGE_LOCALE(this.locale[1]);
+        return this.locale[1];
+      }
     }
   },
   methods: {
     ...mapActions([
-        'CATCH_CATEGORY',
-        'CATCH_CATALOG'
+      'CATCH_CATEGORY',
+      'CATCH_CATALOG',
+      'CATCH_SEARCH',
+      'CATCH_FOR_FILTER',
+      'CHANGE_LOCALE',
     ]),
+    switchLocale() {
+      this.IsLocale = !this.IsLocale;
+    },
+    setQuery: debounce(function (searchText){
+      if (searchText) {
+        this.foundFilter = this.GET_FOR_FILTER.filter(item => {
+          return item.name.toLowerCase() === searchText.toLowerCase();
+        })
+        if (this.foundFilter.length) {
+          this.CATCH_CATALOG(this.foundFilter);
+          if (this.$route.path !== '/Catalog') {
+            this.$router.push('/Catalog');
+          }
+          return '';
+        }
+      }
+    }, 500),
     link(i) {
       let category = this.product.find(item => {
         return item.name === i.name;
@@ -95,37 +139,37 @@ export default {
         if (this.$route.fullPath !== '/Categories') {
           this.$router.push('/Categories');
         }
-        return ''
+        return '';
       }
     },
     dropLinks(i) {
       this.hideLinks = this.product.find((item, index) => {
-        return index === i
+        return index === i;
       });
     },
     nestedLink(i) {
       let catalog = this.hideLinks.clothes.find(item => item.name === i.name);
       switch (i.name) {
         case 'trousers':
-          this.CATCH_CATALOG(catalog.trousers)
+          this.CATCH_CATALOG(catalog.trousers);
           break;
         case 'coat':
-          this.CATCH_CATALOG(catalog.coat)
+          this.CATCH_CATALOG(catalog.coat);
           break;
         case 'shirts':
-          this.CATCH_CATALOG(catalog.shirts)
+          this.CATCH_CATALOG(catalog.shirts);
           break;
         case 'shoes':
-          this.CATCH_CATALOG(catalog.shoes)
+          this.CATCH_CATALOG(catalog.shoes);
           break;
-        case 'out-wear':
-          this.CATCH_CATALOG(catalog.jacket)
+        case 'outwear':
+          this.CATCH_CATALOG(catalog.jacket);
           break;
       }
       if (this.$route.fullPath !== '/Catalog') {
-        this.$router.push('/Catalog')
+        this.$router.push('/Catalog');
       }
-      return ''
+      return '';
     },
     clearText() {
       this.searchText = '';
@@ -134,7 +178,7 @@ export default {
       this.$emit('openModal');
     },
     countLeave() {
-      this.countPerspective = false;
+      this.countMove = false;
     }
   }
 }
@@ -163,6 +207,7 @@ $color-pink: #f26659;
   .to {
     color: black;
     font-size: 18px;
+    margin: 0 6px;
 
     &:hover {
       color: $color-pink;
@@ -181,7 +226,7 @@ $color-pink: #f26659;
     border-bottom-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
-    width: 25%;
+    width: auto;
     padding: 10px 0;
     display: flex;
     flex-direction: row;
@@ -283,10 +328,41 @@ $color-pink: #f26659;
     &_bagCount {
       position: absolute;
       top: 70%;
-      left: 100%;
+      left: 70%;
       font-weight: bold;
       font-size: 20px;
       transition: .5s;
+    }
+    &__switch {
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 100px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(2px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-right-color: rgba(255, 255, 255, 0.3);
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+        border-radius: 40px;
+        &-slider {
+          position: absolute;
+          cursor: pointer;
+          right: 0;
+          height: 45px;
+          width: 45px;
+          background: $color-pink;
+          left: 0;
+          bottom: 6.5%;
+          border-radius: 50%;
+          transition: 0.3s cubic-bezier(0.42, 0, 0, 1.68);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #f0eff4;
+        }
+      }
     }
   }
 }

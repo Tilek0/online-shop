@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Catalog</h2>
+    <h2>{{ 'catalog'| localize }}</h2>
     <div class="main">
       <div class="filterSide"></div>
       <div class="sideNav">
