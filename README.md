@@ -9,7 +9,10 @@ npm install
 ```
 npm run serve
 ```
-
+### Compiles and hot-reloads for start db.json server
+```
+npm run jsonsv
+```
 ### Compiles and minifies for production
 ```
 npm run build
