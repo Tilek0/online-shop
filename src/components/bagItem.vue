@@ -3,7 +3,7 @@
     <div class="bagPack" v-for="(item, index) of bug" :key="index">
       <div class="bagPack-totalInfo">
         <p>{{item.name}} :{{ 'item' | localize }}</p>
-        <p>{{ "subtotal" | localize }}: {{item.ID}}</p>
+        <p>{{ "subtotal" | localize }}: {{item.price}}</p>
       </div>
       <div class="bagPack-item">
         <div class="bagPack-item-img" v-if="bug">
@@ -104,7 +104,6 @@ export default {
   }
   &-item {
     display: flex;
-    justify-content: space-around;
     &-img {
       width: 200px;
       height: 100%;
@@ -125,6 +124,7 @@ export default {
         justify-content: space-between;
         p {
           font-size: 25px;
+          color: slategrey;
         }
         img {
           width: 25px;
@@ -144,6 +144,7 @@ export default {
       &_info {
         display: flex;
         justify-content: space-around;
+        text-align: start;
       }
       &-quantity {
         display: flex;

@@ -16,7 +16,7 @@
         <h2>{{ 'orderSummary' | localize}}</h2>
         <div class="bag-order_sub">
           <p>{{ 'subtotal' | localize }}:</p>
-          <p>{{}}</p>
+          <p>{{totalPrice}}</p>
         </div>
         <div class="bag-order_total">
           <p>{{ 'orderTotal' | localize}}:</p>

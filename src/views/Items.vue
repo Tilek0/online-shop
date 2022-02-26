@@ -226,6 +226,7 @@ export default {
 
           h1 {
             font-size: 3rem;
+            color: slategrey;
             transition: all 0.75s ease-out;
           }
         }

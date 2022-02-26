@@ -134,7 +134,7 @@ export default {
             background: transparent;
             border: 2px solid #f26659;
             transition: .2s ease-in;
-            width: 100%;
+            width: max-content;
             font-size: 25px;
             &:hover {
               background: #f26659;
