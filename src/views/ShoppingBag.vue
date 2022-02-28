@@ -16,11 +16,11 @@
         <h2>{{ 'orderSummary' | localize}}</h2>
         <div class="bag-order_sub">
           <p>{{ 'subtotal' | localize }}:</p>
-          <p>{{totalPrice}}</p>
+          <p>{{totalPrice}} {{ 'currency' | localize}}</p>
         </div>
         <div class="bag-order_total">
           <p>{{ 'orderTotal' | localize}}:</p>
-          <p>{{totalPrice}}</p>
+          <p>{{totalPrice}} {{ 'currency' | localize}}</p>
         </div>
         <div class="bag-order-btn">
           <my-button class="bag-order-btn_myBtn" @myButtonEvent="payment">{{ 'proceedToCheckout' | localize}}</my-button>

@@ -3,7 +3,7 @@
     <div class="bagPack" v-for="(item, index) of bug" :key="index">
       <div class="bagPack-totalInfo">
         <p>{{item.name}} :{{ 'item' | localize }}</p>
-        <p>{{ "subtotal" | localize }}: {{item.price}}</p>
+        <p>{{ "subtotal" | localize }}: {{item.price}} {{ 'currency' | localize}}</p>
       </div>
       <div class="bagPack-item">
         <div class="bagPack-item-img" v-if="bug">
@@ -21,7 +21,7 @@
               <p>{{ 'size' | localize }}:</p>
             </div>
             <div>
-              <p>{{item.price}}</p>
+              <p>{{item.price}} {{ 'currency' | localize}}</p>
               <p>{{item.image.color}}</p>
               <p>{{item.selectedSize}}</p>
             </div>
