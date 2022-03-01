@@ -77,7 +77,7 @@ export default new Vuex.Store({
   actions: {
     async CATCH_ALL_PRODUCTS({commit}){
       try {
-        await axios.get('https://tilek-online-shop.netlify.app/products',
+        await axios.get('https://wear-online-shop.herokuapp.com/products',
         ).then((products) => {
           commit('PUT_ALL_PRODUCTS', products.data);
           return products
@@ -89,7 +89,7 @@ export default new Vuex.Store({
     },
     async CATCH_FOR_FILTER({commit}) {
       try {
-        await axios.get('https://tilek-online-shop.netlify.app/filter',
+        await axios.get('https://wear-online-shop.herokuapp.com/filter',
         ).then((filteredProducts) => {
           commit('PUT_FOR_FILTER', filteredProducts.data)
           return filteredProducts
