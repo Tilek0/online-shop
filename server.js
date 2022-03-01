@@ -14,4 +14,5 @@ const port = process.env.PORT || 3000;
 server.use(middlewares);
 server.use(router);
 app.listen(port);
+server.listen(port)
 console.log('Listening on port' + port);
