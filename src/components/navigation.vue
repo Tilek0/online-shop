@@ -42,7 +42,7 @@
           {{ this.GET_CART.length }}
         </div>
       </div>
-      <div class="nav-icons__switch">
+      <div class="nav-icons__preSwitch">
         <div class="switch" @click="switchLocale">
           <span class="switch-slider"
                 :style="{transform: IsLocale ? 'translateX(85%)': '',
@@ -185,8 +185,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$search-time: 800ms;
-$reset-time: 150ms;
 $color-pink: #f26659;
 .nav {
   position: fixed;
@@ -250,7 +248,7 @@ $color-pink: #f26659;
     border-bottom-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
-    width: 25%;
+    width: content-box;
     padding: 10px 0;
     display: flex;
     flex-direction: row;
@@ -333,7 +331,7 @@ $color-pink: #f26659;
       font-size: 20px;
       transition: .5s;
     }
-    &__switch {
+    &__preSwitch {
       .switch {
         position: relative;
         display: inline-block;
@@ -361,6 +359,49 @@ $color-pink: #f26659;
           align-items: center;
           justify-content: center;
           color: #f0eff4;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1200px) {
+  .nav {
+    &-hideLinks {
+
+    }
+    &-icons {
+      img {
+        width: 15px;
+      }
+      &_search {
+        div {
+          &:after {
+            width: 3px;
+            height: 15px;
+            top: 20px;
+          }
+
+          input {
+            font-size: 14px;
+            width: 8px;
+            height: 8px;
+            border-radius: 35px;
+            &:focus, :not(:placeholder-shown) {
+              width: 180px;
+            }
+          }
+        }
+      }
+      &__preSwitch {
+        .switch {
+          width: 70px;
+          height: 40px;
+          font-size: 12px;
+          &-slider {
+            height: 30px;
+            width: 30px;
+            bottom: 10%;
+          }
         }
       }
     }

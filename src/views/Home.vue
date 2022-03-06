@@ -89,12 +89,13 @@ export default {
       let category = this.GET_PRODUCTS.find(item => {
         return item.name === i.name;
       })
-      this.CATCH_CATEGORY(category)
-      this.$router.push('/Categories')
-    }
-  }
+      this.CATCH_CATEGORY(category);
+      this.$router.push('/Categories');
+    },
+  },
 };
 </script>
+
 <style lang="scss" scoped>
 .home {
   padding: 0;
@@ -128,6 +129,13 @@ export default {
         &:hover {
           background: rgba(255, 255, 255, 0.9);
         }
+        &_text {
+          width: 50%;
+          position: absolute;
+          top: 40%;
+          left: 30%;
+          z-index: 3;
+        }
         ::v-deep {
           button {
             padding: 8%;
@@ -146,13 +154,7 @@ export default {
             }
           }
         }
-        &_text {
-          width: 50%;
-          position: absolute;
-          top: 40%;
-          left: 30%;
-          z-index: 3;
-        }
+
         &_png {
           height: 100%;
           z-index: 1;
@@ -196,11 +198,11 @@ export default {
       position: absolute;
       width: 100%;
       height: 100%;
+      font-size: 60px;
       :nth-child(1) {
         position: absolute;
         top: 50%;
         left: 25%;
-        font-size: 60px;
         padding: .5% 2%;
         &::after{
           padding-right: 40%;
@@ -224,7 +226,6 @@ export default {
         position: absolute;
         top: 50%;
         right: 20%;
-        font-size: 60px;
         padding: .5% 2%;
         &::after{
           content: "";
@@ -268,6 +269,67 @@ export default {
       align-self: flex-end;
       &:hover {
         transform: scale(1.2);
+      }
+    }
+  }
+}
+@media (max-width: 1400px) {
+  .home {
+    &-main {
+      &-preCard {
+        &-cards {
+          ::v-deep {
+            button {
+              font-size: 1.3rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1200px) {
+  .home {
+    &-main {
+      &-preCard {
+        &-cards {
+          ::v-deep {
+            button {
+              font-size: 1em;
+            }
+          }
+        }
+      }
+    }
+    &-gift {
+      &_tag {
+        font-size: 4rem;
+      }
+      .giftLinks {
+        font-size: 3rem;
+      }
+    }
+  }
+}
+@media (max-width: 990px) {
+  .home {
+    &-main {
+      &-preCard {
+        &-cards {
+          &_text {
+            left: 20%;
+          }
+          ::v-deep {
+            button {
+              font-size: .9rem;
+            }
+          }
+        }
+      }
+    }
+    &-gift {
+      .giftLinks {
+        font-size: 2rem;
       }
     }
   }

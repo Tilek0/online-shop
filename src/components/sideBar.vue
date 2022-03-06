@@ -188,7 +188,7 @@ export default {
   }
 
   .activeName {
-    border: 2px solid #f26659;
+    border: 1px solid #f26659;
   }
 
   ::v-deep {
@@ -260,6 +260,44 @@ export default {
       margin: 0;
     }
   }
-
+}
+@media (max-height: 750px) {
+  .sideBar {
+    p {
+      font-size: 14px;
+    }
+    h2 {
+      font-size: 16px;
+    }
+    ::v-deep {
+      button {
+        padding: 1% 0;
+        background: transparent;
+        border: 1px solid #f26659;
+        width: 40%;
+      }
+    }
+    .filter {
+      padding: 3%;
+      width: 200px;
+      height: max-content;
+    }
+    .sizePosition {
+      left: 10%;
+    }
+    .colorPosition {
+      top: 73%;
+      left: 10%;
+    }
+    .check {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 8%;
+      .selected {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
 }
 </style>

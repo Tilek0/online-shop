@@ -63,11 +63,12 @@ export default {
 <style lang="scss" scoped>
 .main {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   &-category {
     margin-top: 5%;
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     &-item {
       display: flex;
       flex-direction: column;
@@ -80,6 +81,7 @@ export default {
       border-bottom-color: rgba(255, 255, 255, 0.1);
       box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
       transition: .5s ease;
+      margin-bottom: 4%;
       &:hover {
         color: #f26659;
         transform: translate(-3%,-8%);
