@@ -1,76 +1,80 @@
 <template>
-  <div class="main">
-    <div
-        class="item"
-        @mousemove="addMouse"
-        @mouseenter="changeMouse"
-        @mouseleave="resetMouse"
-    >
+  <div>
+    <mobile-items :data_item="data_item" v-if="GET_MOBILE"/>
+    <div class="main" v-else>
       <div
-          class="item-card"
-          :style="rotateStyle"
+
+          class="item"
+          @mousemove="addMouse"
+          @mouseenter="changeMouse"
+          @mouseleave="resetMouse"
       >
-        <div class="item-card_staff" v-if="product">
-          <div class="item-card_staff_circle"></div>
-          <img
-              :src="require('../assets/' + product.image[checkedColor].img)"
-              alt="shop"
-              :style="{transform: visualItem ? `translateZ(200px) rotate(-25deg)` : `translateZ(0) rotate(0)`}"
-          >
-        </div>
-        <div class="item-card_info">
-          <div class="item-card_info__title">
-            <h1 :style="{transform: visualItem ? `translateZ(150px)` : `translateZ(0)`}">
-              {{ product.name }}
-            </h1>
+        <div
+            class="item-card"
+            :style="rotateStyle"
+        >
+          <div class="item-card_staff" v-if="data_item">
+            <div class="item-card_staff_circle"></div>
+            <img
+                :src="require('../assets/' + data_item.image[checkedColor].img)"
+                alt="shop"
+                :style="{transform: visualItem ? `translateZ(200px) rotate(-25deg)` : `translateZ(0) rotate(0)`}"
+            >
           </div>
-          <div class="item-card_info__underTitle">
-            <h3 :style="{transform: visualItem ? `translateZ(125px)` : `translateZ(0)`}">
-              {{ 'price'| localize }}: {{ product.price }} {{ 'currency' | localize}}
-            </h3>
-            <div class="item-card_info__underTitle__like" @click="like">
-              <img src="../assets/icons/emptyLike.png" alt="like" v-if="!likeSwitch">
-              <img src="../assets/icons/like.png" alt="like" v-else>
+          <div class="item-card_info">
+            <div class="item-card_info__title">
+              <h1 :style="{transform: visualItem ? `translateZ(150px)` : `translateZ(0)`}">
+                {{ data_item.name }}
+              </h1>
             </div>
-            <div
-                v-for="(color,i) in product.image"
-                :key="i"
-                class="item-card_info__underTitle__color"
-                :style="{
+            <div class="item-card_info__underTitle">
+              <h3 :style="{transform: visualItem ? `translateZ(125px)` : `translateZ(0)`}">
+                {{ 'price'| localize }}: {{ data_item.price }} {{ 'currency' | localize}}
+              </h3>
+              <div class="item-card_info__underTitle__like" @click="like">
+                <img src="../assets/icons/emptyLike.png" alt="like" v-if="!likeSwitch">
+                <img src="../assets/icons/like.png" alt="like" v-else>
+              </div>
+              <div
+                  v-for="(color,i) in data_item.image"
+                  :key="i"
+                  class="item-card_info__underTitle__color"
+                  :style="{
                   background: i === checkedColor ? '#f26659' : '',
                   transform: visualItem ? `translateZ(100px) translateY(-8px)` : `translateZ(0) translateY(0)`
                   }"
+              >
+                <div
+                    @click="takeColor(i)"
+                    class="item-card_info__underTitle__color__selected"
+                    :style="{background: color.color}"
+                ></div>
+              </div>
+            </div>
+            <h2>{{ 'size' | localize }}:</h2>
+            <div class="item-card_info_sizes"
+                 v-for="(one,i) in data_item.sizes"
+                 :key="i"
+                 :style="{transform: visualItem ? `translateZ(100px) translateY(-8px)` : `translateZ(0) translateY(0)`}"
             >
               <div
-                  @click="takeColor(i)"
-                  class="item-card_info__underTitle__color__selected"
-                  :style="{background: color.color}"
-              ></div>
+                  class="item-card_info_sizes__btn"
+                  @click="addSize(one)"
+                  :class="{activeSize: one === selectedSize}"
+              >{{ one }}
+              </div>
             </div>
-          </div>
-          <h2>{{ 'size' | localize }}:</h2>
-          <div class="item-card_info_sizes"
-               v-for="(one,i) in product.sizes"
-               :key="i"
-               :style="{transform: visualItem ? `translateZ(100px) translateY(-8px)` : `translateZ(0) translateY(0)`}"
-          >
             <div
-                class="item-card_info_sizes__btn"
-                @click="addSize(one)"
-                :class="{activeSize: one === selectedSize}"
-            >{{ one }}
+                class="item-card_info_purchase"
+                :style="{transform: visualItem ? `translateZ(75px)` : `translateZ(0)`}"
+            >
+              <my-button
+                  class="item-card_info_purchase__btn"
+                  @myButtonEvent="addToBug"
+                  :class="{'item-card_info_purchase__btn__empty' : emptySize }"
+              >{{ buttonText | localize}}
+              </my-button>
             </div>
-          </div>
-          <div
-              class="item-card_info_purchase"
-              :style="{transform: visualItem ? `translateZ(75px)` : `translateZ(0)`}"
-          >
-            <my-button
-                class="item-card_info_purchase__btn"
-                @myButtonEvent="addToBug"
-                :class="{'item-card_info_purchase__btn__empty' : emptySize }"
-            >{{ buttonText | localize}}
-            </my-button>
           </div>
         </div>
       </div>
@@ -79,63 +83,33 @@
 </template>
 
 <script>
+import mobileItems from "../mobile/mobileItems";
 import myButton from "../components/myButton";
-import {mapActions, mapGetters} from "vuex";
+import itemMixin from "../mixins/itemMixin";
+import {mapGetters} from "vuex";
 
 export default {
   name: "item",
   components: {
+    mobileItems,
     myButton
   },
   data() {
     return {
-      buttonText: 'addToBag',
-      emptySize: false,
-      selectedSize: null,
       visualItem: false,
       rotateStyle: {
         transform: ''
       },
       likeSwitch: false,
-      checkedColor: 0,
     }
   },
-  mounted() {
-
-  },
-
+  mixins: [itemMixin],
   computed: {
     ...mapGetters([
-      'GET_PRODUCT',
+        'GET_MOBILE',
     ]),
-    product() {
-      let getProduct = this.GET_PRODUCT
-      getProduct.ID = this.uid;
-      return getProduct
-    }
   },
-
   methods: {
-    ...mapActions([
-      'CATCH_CART',
-    ]),
-    addToBug() {
-      if (this.selectedSize !== null) {
-        let image = JSON.parse(JSON.stringify(this.product));
-        image.selectedSize = this.selectedSize;
-        image.image = image.image[this.checkedColor];
-        delete image.colors;
-        this.CATCH_CART(image);
-      } else {
-        this.buttonText = 'selectSizeNote';
-        this.emptySize = true;
-      }
-    },
-    addSize(one) {
-      this.selectedSize = one;
-      this.emptySize = false;
-      this.buttonText = 'addToBag';
-    },
     addMouse: function (e) {
       let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
       let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
@@ -149,10 +123,6 @@ export default {
       this.visualItem = false
       this.rotateStyle.transition = `all 0.5s ease`;
       this.rotateStyle.transform = `rotateY(0) rotateX(0)`;
-    },
-    takeColor (i) {
-      this.checkedColor = i;
-
     },
     like() {
       this.likeSwitch = !this.likeSwitch;
@@ -180,7 +150,7 @@ export default {
     &-card {
       transform-style: preserve-3d;
       background: #f0eff4;
-      min-height: 85vh;
+      min-height: 70vh;
       width: 35rem;
       border-radius: 30px;
       padding: 1rem 4rem;

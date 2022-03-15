@@ -13,6 +13,8 @@ export default new Vuex.Store({
     searchProducts: [],
     cart: [],
     locale: 'en-US',
+    isMobile: false,
+    mobileModal: false,
   },
   mutations: {
     PUT_ALL_PRODUCTS(state, products){
@@ -34,7 +36,7 @@ export default new Vuex.Store({
       let isProductExists = false;
       if (state.cart.length) {
         state.cart.map(function (item) {
-          if (item.ID === product.ID && item.image.color === product.image.color && item.selectedSize === product.selectedSize) {
+          if (item.id === product.id && item.image.color === product.image.color && item.selectedSize === product.selectedSize) {
             isProductExists = true;
             item.quantity++;
           }
@@ -45,9 +47,6 @@ export default new Vuex.Store({
       } else {
         state.cart.push(product)
       }
-    },
-    PUT_SEARCH(state, product) {
-      state.searchProduct = product
     },
     REMOVE_FROM_CART: (state, index) => {
       state.cart.splice(index, 1)
@@ -72,12 +71,19 @@ export default new Vuex.Store({
     },
     SET_LOCALE: (state, locale) => {
       state.locale = locale
+    },
+    SET_MOBILE: (state, boolean) => {
+      state.isMobile = boolean
+    },
+    SET_MOBILE_MODAL: (state, boolean) => {
+      state.mobileModal = boolean
     }
   },
   actions: {
     async CATCH_ALL_PRODUCTS({commit}){
       try {
-        await axios.get('https://wear-online-shop.herokuapp.com/products',
+        // await axios.get('https://wear-online-shop.herokuapp.com/products',
+        await axios.get('http://localhost:3000/products',
         ).then((products) => {
           commit('PUT_ALL_PRODUCTS', products.data);
           return products
@@ -89,7 +95,8 @@ export default new Vuex.Store({
     },
     async CATCH_FOR_FILTER({commit}) {
       try {
-        await axios.get('https://wear-online-shop.herokuapp.com/filter',
+        // await axios.get('https://wear-online-shop.herokuapp.com/filter',
+        await axios.get('http://localhost:3000/filter',
         ).then((filteredProducts) => {
           commit('PUT_FOR_FILTER', filteredProducts.data)
           return filteredProducts
@@ -111,9 +118,6 @@ export default new Vuex.Store({
     CATCH_CART({commit}, product) {
       commit('PUT_CART', product)
     },
-    CATCH_SEARCH({commit}, product) {
-      commit('PUT_SEARCH', product)
-    },
     INCREMENT_PRODUCT({commit}, index) {
       commit('INCREMENT', index)
     },
@@ -131,6 +135,12 @@ export default new Vuex.Store({
     },
     CHANGE_LOCALE({commit}, locale) {
       commit('SET_LOCALE', locale)
+    },
+    CHANGE_MOBILE({commit}, boolean) {
+      commit('SET_MOBILE', boolean)
+    },
+    CLOSE_MOBILE_MODAL({commit}, boolean) {
+      commit('SET_MOBILE_MODAL', boolean)
     }
   },
   getters: {
@@ -154,6 +164,12 @@ export default new Vuex.Store({
     },
     GET_LOCALE(state) {
       return state.locale;
+    },
+    GET_MOBILE(state) {
+      return state.isMobile;
+    },
+    GET_MOBILE_MODAL(state) {
+      return state.mobileModal
     }
   },
   modules: {},

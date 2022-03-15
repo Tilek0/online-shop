@@ -7,7 +7,7 @@ import Items from "../views/Items";
 import ShoppingBag from "../views/ShoppingBag";
 import Gift from "../views/Gift";
 import Payment from "../views/Payment";
-
+import mobileCart from "../mobile/mobileCart";
 Vue.use(VueRouter);
 
 const routes = [
@@ -20,6 +20,7 @@ const routes = [
     path: "/Categories",
     name: "Categories",
     component: Categories,
+    props: true,
   },
   {
     path: "/Catalog",
@@ -30,11 +31,17 @@ const routes = [
     path: "/Items",
     name: "Items",
     component: Items,
+    props: true,
   },
   {
     path: "/Bag",
     name: "ShoppingBag",
     component: ShoppingBag,
+  },
+  {
+    path: "/MobileCart",
+    name: "mobileCart",
+    component: mobileCart,
   },
   {
     path: "/Gift",

@@ -3,8 +3,8 @@
     <div class="nav-divider" @click="closeForm">
       <img src="../assets/icons/footer.svg" alt="shop">
     </div>
-    <div class="nav-button" @click="openAksForm">{{ 'askMe' | localize}}</div>
-    <div class="nav-askForm" v-if="visibleForm">
+    <div class="nav-button grassCard" @click="openAksForm">{{ 'askMe' | localize}}</div>
+    <div class="nav-askForm grassCard" v-if="visibleForm">
       <div class="nav-askForm__tag">
         <h2>{{ 'askMe' | localize}}</h2>
         <my-button @myButtonEvent="closeForm">
@@ -13,12 +13,12 @@
       </div>
       <input type="email" placeholder="Example@example.com" v-model="form.email">
       <input type="text" placeholder="Name:" v-model="form.name">
-      <textarea placeholder="'type text...'" v-model="form.desc"/>
+      <textarea placeholder="type text..." v-model="form.desc"/>
       <my-button class="nav-askForm_btn">{{ 'send' | localize}}</my-button>
       <my-button class="nav-askForm_btn" @myButtonEvent="resetForm">{{ 'clear' | localize}}</my-button>
     </div>
     <h2 class="nav-askForm_text">{{ 'followMeOn' | localize}}</h2>
-    <div class="nav-contact">
+    <div class="nav-contact grassCard">
       <a :href="icon.link" v-for="icon in social" :key="icon.name">
         <img
             :src="require('../assets/icons/' + icon.src)" alt="social" >
@@ -102,6 +102,7 @@ export default {
     position: absolute;
     width: 100%;
     bottom: 0;
+    top: 0;
     left: 0;
     z-index: -1;
     img {
@@ -111,17 +112,11 @@ export default {
   }
   &-button {
     position: absolute;
-    bottom: 10rem;
+    top: -1rem;
     left: 50%;
     font-size: 18px;
     font-weight: bold;
     padding: 10px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-right-color: rgba(255, 255, 255, 0.3);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
     transition: .2s ease-in;
     &:hover {
@@ -136,12 +131,6 @@ export default {
     bottom: 0;
     left: 45%;
     padding: 8px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-right-color: rgba(255, 255, 255, 0.3);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
     transition: .8s all;
     &__tag {
@@ -165,7 +154,7 @@ export default {
     }
     &_text {
       position: absolute;
-      top: -11.5rem;
+      top: 10px;
       right: 18%;
     }
     input {
@@ -208,14 +197,8 @@ export default {
   &-contact {
     position: absolute;
     right: 8%;
-    bottom: 60px;
+    top: 4rem;
     width: 25%;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-right-color: rgba(255, 255, 255, 0.3);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
     padding: 5px;
     img {

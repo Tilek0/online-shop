@@ -1,38 +1,41 @@
 <template>
-  <div class="home">
-    <div class="home-main">
-      <div class="home-main-preCard">
-        <div
-            class="home-main-preCard-cards"
-            v-for="(item,index) in mainPage"
-            :key="item.name"
-            @mouseover="showPhoto(index)"
-            @mouseleave="clearHover"
-            @click="linkPage(item)"
-        >
-          <my-button class="home-main-preCard-cards_text" @myButtonEvent="linkPage(item)">{{item.name | localize}}</my-button>
-          <div class="home-main-preCard-cards_png" :style="item.style">
-            <img :src="require('../assets/'+ item.image)" alt="img">
+  <div>
+    <mobile-home v-if="GET_MOBILE" />
+    <div class="home" v-else>
+      <div class="home-main">
+        <div class="home-main-preCard">
+          <div
+              class="home-main-preCard-cards grassCard"
+              v-for="(item,index) in mainPage"
+              :key="item.name"
+              @mouseover="showPhoto(index)"
+              @mouseleave="clearHover"
+              @click="linkPage(item)"
+          >
+            <my-button class="home-main-preCard-cards_text" @myButtonEvent="linkPage(item)">{{item.name | localize}}</my-button>
+            <div class="home-main-preCard-cards_png" :style="item.style">
+              <img :src="require('../assets/'+ item.image)" alt="img">
+            </div>
+          </div>
+          <div class="home-main-preCard-backPng" v-if="hoverImage.backSide" :style="hoverImage.style">
+            <img :src="require('../assets/'+ hoverImage.backSide)" alt="#">
           </div>
         </div>
-        <div class="home-main-preCard-backPng" v-if="hoverImage.backSide" :style="hoverImage.style">
-          <img :src="require('../assets/'+ hoverImage.backSide)" alt="#">
-        </div>
       </div>
-    </div>
-    <div class="home-gift">
-      <div class="home-gift_tag">{{ 'forGift' | localize}}</div>
-      <div class="home-gift-adults">
-        <div class="giftLinks">
-          <router-link to="/Gift" v-for="gift in gifts" :key="gift">{{ gift | localize}}</router-link>
+      <div class="home-gift">
+        <div class="home-gift_tag">{{ 'forGift' | localize}}</div>
+        <div class="home-gift-adults">
+          <div class="giftLinks">
+            <router-link to="/Gift" v-for="gift in gifts" :key="gift">{{ gift | localize}}</router-link>
+          </div>
+          <img src="../assets/man&woman.jpg" alt="img" class="giftImg">
         </div>
-        <img src="../assets/man&woman.jpg" alt="img" class="giftImg">
-      </div>
-      <div class="home-gift-kids">
-        <div class="giftLinks">
-          <router-link to="/Gift" v-for="gift in gifts" :key="gift">{{ gift | localize}}</router-link>
+        <div class="home-gift-kids">
+          <div class="giftLinks">
+            <router-link to="/Gift" v-for="gift in gifts" :key="gift">{{ gift | localize}}</router-link>
+          </div>
+          <img src="../assets/junior.jpg" alt="img" class="giftImg">
         </div>
-        <img src="../assets/junior.jpg" alt="img" class="giftImg">
       </div>
     </div>
   </div>
@@ -40,11 +43,13 @@
 
 <script>
 import myButton from "../components/myButton";
+import mobileHome from "../mobile/mobileHome";
 import {mapGetters,mapActions} from "vuex";
 export default {
   name: "Home",
   components: {
-    myButton
+    myButton,
+    mobileHome
   },
   data() {
     return {
@@ -70,6 +75,7 @@ export default {
   computed: {
     ...mapGetters([
       'GET_PRODUCTS',
+      'GET_MOBILE'
     ])
   },
   methods: {
@@ -90,7 +96,7 @@ export default {
         return item.name === i.name;
       })
       this.CATCH_CATEGORY(category);
-      this.$router.push('/Categories');
+      this.$router.push({name: 'Categories', query: {category: i.name}});
     },
   },
 };
@@ -117,12 +123,6 @@ export default {
         width: 15%;
         height: 70%;
         border-radius: 25px;
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(2px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-right-color: rgba(255, 255, 255, 0.3);
-        border-bottom-color: rgba(255, 255, 255, 0.1);
-        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
         overflow: hidden;
         position: relative;
         transition: .4s ease-out;

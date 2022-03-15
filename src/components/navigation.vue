@@ -3,7 +3,7 @@
     <div class="nav-divider">
       <img src="../assets/icons/waves.svg" alt="img">
     </div>
-    <div class="nav-link">
+    <div class="nav-link grassCard">
       <div
           class="to"
           v-for="(val,i) in product"
@@ -13,7 +13,7 @@
       >{{ val.name | localize}}
       </div>
     </div>
-    <div class="nav-hideLinks" v-if="hideLinks">
+    <div class="nav-hideLinks grassCard" v-if="hideLinks">
       <div
           class="to"
           v-for="item in hideLinks.clothes"
@@ -36,14 +36,14 @@
         <img src="../assets/icons/admin.png" alt="img">
       </div>
       <div @click="openModal">
-        <img src="../assets/icons/bag.png" alt="img" @mouseover="countMove = true"
+        <img src="../assets/icons/bag.png" alt="img" class="grassCard" @mouseover="countMove = true"
              @mouseleave="countLeave">
         <div class="nav-icons_bagCount" :class="{'nav-icons_dinamicStyle': countMove}">
           {{ this.GET_CART.length }}
         </div>
       </div>
       <div class="nav-icons__preSwitch">
-        <div class="switch" @click="switchLocale">
+        <div class="switch grassCard" @click="switchLocale">
           <span class="switch-slider"
                 :style="{transform: IsLocale ? 'translateX(85%)': '',
                  background: IsLocale ? '#8ca9d3' : '#f26659'}"
@@ -56,75 +56,32 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import {debounce} from "lodash/function";
+import navigationMixin from "../mixins/navigationMixin";
 
 export default {
   name: "navigation",
   data() {
     return {
-      locale: [
-        'ru-RU',
-        'en-US'
-      ],
       countMove: false,
-      searchText: '',
       hideLinks: '',
-      foundFilter: '',
-      IsLocale: false,
     }
   },
-  mounted() {
-    this.CATCH_FOR_FILTER();
-  },
-  watch: {
-    searchText: function(searchText) {
-      this.setQuery(searchText);
-    }
-  },
+  mixins: [navigationMixin],
   computed: {
     ...mapGetters([
-      'GET_CART',
       'GET_PRODUCTS',
-      'GET_FOR_FILTER',
     ]),
     product() {
       return this.GET_PRODUCTS;
     },
-    localeName() {
-      if (this.IsLocale) {
-        this.CHANGE_LOCALE(this.locale[0]);
-        return this.locale[0];
-      }else {
-        this.CHANGE_LOCALE(this.locale[1]);
-        return this.locale[1];
-      }
-    }
+
   },
   methods: {
     ...mapActions([
       'CATCH_CATEGORY',
-      'CATCH_CATALOG',
-      'CATCH_SEARCH',
-      'CATCH_FOR_FILTER',
-      'CHANGE_LOCALE',
     ]),
-    switchLocale() {
-      this.IsLocale = !this.IsLocale;
-    },
-    setQuery: debounce(function (searchText){
-      if (searchText) {
-        this.foundFilter = this.GET_FOR_FILTER.filter(item => {
-          return item.name.toLowerCase() === searchText.toLowerCase();
-        })
-        if (this.foundFilter.length) {
-          this.CATCH_CATALOG(this.foundFilter);
-          if (this.$route.path !== '/Catalog') {
-            this.$router.push('/Catalog');
-          }
-          return '';
-        }
-      }
-    }, 500),
+
+
     link(i) {
       let category = this.product.find(item => {
         return item.name === i.name;
@@ -217,12 +174,6 @@ $color-pink: #f26659;
     position: absolute;
     top: 8%;
     left: 4%;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-right-color: rgba(255, 255, 255, 0.3);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
     width: auto;
     padding: 10px 0;
@@ -241,12 +192,6 @@ $color-pink: #f26659;
     position: absolute;
     top: 80%;
     left: 4%;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-right-color: rgba(255, 255, 255, 0.3);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
     width: content-box;
     padding: 10px 0;
@@ -269,12 +214,6 @@ $color-pink: #f26659;
 
     img {
       width: 27px;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(2px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-right-color: rgba(255, 255, 255, 0.3);
-      border-bottom-color: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
       padding: 13px;
       border-radius: 20px;
       transition: .5s;
@@ -337,12 +276,6 @@ $color-pink: #f26659;
         display: inline-block;
         width: 100px;
         height: 50px;
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(2px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-right-color: rgba(255, 255, 255, 0.3);
-        border-bottom-color: rgba(255, 255, 255, 0.1);
-        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
         border-radius: 40px;
         &-slider {
           position: absolute;

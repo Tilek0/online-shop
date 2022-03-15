@@ -1,11 +1,11 @@
 <template>
-  <div class="sideBar">
+  <div class="sideBar grassCard">
     <div>
       <p
           v-for="(item,index) in GET_CATEGORY.clothes"
           :key="index"
           class="sideBar-active"
-          @click="selectName(item,index)"
+          @click="toCatalog(item,index)"
           :class="{activeName: nameIndex === index}"
       >{{ item.name | localize}}</p>
       <my-button @myButtonEvent="closeFilter">{{ 'clearFilter' | localize}}</my-button>
@@ -137,23 +137,22 @@ export default {
       this.CATCH_CATALOG(filteredColor);
       this.isFilterColor = false;
     },
-    selectName(i, index) {
-      let catalog = this.GET_CATEGORY.clothes.find(item => item.name === i.name);
+    toCatalog(i, index) {
       switch (i.name) {
         case 'trousers':
-          this.CATCH_CATALOG(catalog.trousers)
+          this.CATCH_CATALOG(i.trousers)
           break;
         case 'coat':
-          this.CATCH_CATALOG(catalog.coat)
+          this.CATCH_CATALOG(i.coat)
           break;
         case 'shirts':
-          this.CATCH_CATALOG(catalog.shirts)
+          this.CATCH_CATALOG(i.shirts)
           break;
         case 'shoes':
-          this.CATCH_CATALOG(catalog.shoes)
+          this.CATCH_CATALOG(i.shoes)
           break;
         case 'outwear':
-          this.CATCH_CATALOG(catalog.jacket)
+          this.CATCH_CATALOG(i.jacket)
           break;
       }
       this.nameIndex = index;
@@ -167,12 +166,6 @@ export default {
 <style lang="scss" scoped>
 .sideBar {
   position: relative;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(2px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-right-color: rgba(255, 255, 255, 0.3);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
   border-radius: 20px;
   padding: 2%;
   width: 94%;

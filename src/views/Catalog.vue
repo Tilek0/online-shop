@@ -1,7 +1,8 @@
 <template>
   <div>
     <h2>{{ 'catalog'| localize }}</h2>
-    <div class="main">
+    <mobile-catalog v-if="GET_MOBILE"/>
+    <div class="main" v-else>
       <div class="filterSide"></div>
       <div class="sideNav">
         <side-bar></side-bar>
@@ -14,18 +15,23 @@
 </template>
 
 <script>
+import mobileCatalog from "../mobile/mobileCatalog";
 import catalogItems from "../components/catalogItems";
 import sideBar from "../components/sideBar";
+import {mapGetters} from "vuex";
 
 export default {
   name: "Catalog",
   components: {
+    mobileCatalog,
     catalogItems,
     sideBar,
   },
-  data() {
-    return {}
-  },
+  computed: {
+    ...mapGetters([
+        'GET_MOBILE'
+    ])
+  }
 }
 </script>
 
@@ -57,6 +63,4 @@ export default {
     left: .5%;
   }
 }
-
-
 </style>

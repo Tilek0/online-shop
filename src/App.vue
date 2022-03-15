@@ -1,41 +1,66 @@
 <template>
   <div id="app">
-    <navigation @openModal="openModal" class="navigation"/>
-    <div class="showModal" v-if="modalView">
-      <modal-bag
-          @closeModal="closeModal"
-      ></modal-bag>
-    </div>
-    <div class="search">
+    <div v-if="!GET_MOBILE">
+      <navigation @openModal="openModal" class="navigation"/>
+      <div class="showModal" v-if="modalView">
+        <modal-bag
+            @closeModal="closeModal"
+        ></modal-bag>
+      </div>
     </div>
     <div @click="closeModal">
       <router-view />
     </div>
-    <footer-nav ref="closeContact" class="footer"/>
+    <mobile-nav v-if="GET_MOBILE"/>
+    <footer-nav v-else ref="closeContact" />
   </div>
 </template>
 <script>
 import navigation from "./components/navigation";
 import footerNav from "./components/footerNav";
 import modalBag from "./components/modalBag";
+import mobileNav from "./mobile/mobileNav";
+import {mapActions, mapGetters} from "vuex";
 export default {
   components: {
     navigation,
     footerNav,
     modalBag,
+    mobileNav
   },
   data() {
     return {
       modalView: false,
     }
   },
+  created() {
+    let mobileWidth = 820;
+    if (window.screen.width <= mobileWidth) {
+      this.CHANGE_MOBILE('true')
+      document.body.style.background = '#f0eff4';
+    }
+  },
+  computed: {
+    ...mapGetters([
+        'GET_MOBILE'
+    ]),
+  },
   methods: {
+    ...mapActions([
+      'CHANGE_MOBILE',
+      'CLOSE_MOBILE_MODAL'
+    ]),
     openModal() {
-      this.modalView = true;
+      if (!this.GET_MOBILE) {
+        this.modalView = true;
+      }
     },
     closeModal() {
-      this.modalView = false;
-      this.$refs.closeContact.visibleForm = false;
+      this.CLOSE_MOBILE_MODAL(false)
+      if (!this.GET_MOBILE){
+        this.modalView = false;
+        this.$refs.closeContact.visibleForm = false;
+      }
     }
   }
 };
@@ -47,8 +72,7 @@ body {
   box-sizing: border-box;
   font-family: Arial, serif;
   font-size: 16px;
-  background-color: #f0eff4;
-  background-image: url("data:image/svg+xml,%3Csvg width='40' height='1' viewBox='0 0 40 1' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v1H0z' fill='%238ca9d3' fill-opacity='0.60' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background: linear-gradient(0.25turn, #8ca9d3, #f0eff4, #f26659);
 }
 #app {
   font-family: Arial, serif;
@@ -74,11 +98,6 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     border-radius: 20px;
-  }
-  .search {
-    width: 70%;
-    height: max-content;
-    background: black;
   }
 }
 a {

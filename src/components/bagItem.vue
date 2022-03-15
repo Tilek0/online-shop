@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="bagPack" v-for="(item, index) of bug" :key="index">
+    <div class="bagPack" v-for="(item, index) of GET_CART" :key="index">
       <div class="bagPack-totalInfo">
         <p>{{item.name}} :{{ 'item' | localize }}</p>
         <p>{{ "subtotal" | localize }}: {{item.price}} {{ 'currency' | localize}}</p>
       </div>
       <div class="bagPack-item">
-        <div class="bagPack-item-img" v-if="bug">
+        <div class="bagPack-item-img" v-if="GET_CART">
           <img :src="require('../assets/' + item.image.img)" alt="dresses">
         </div>
         <div class="bagPack-item-content">
@@ -46,42 +46,10 @@
 </template>
 
 <script>
-import myButton from "./myButton";
-import {mapActions, mapGetters} from "vuex";
+import cartMixin from "../mixins/cartMixin";
 export default {
   name: "bagItem",
-  components: {
-    myButton
-  },
-  data() {
-    return {
-      bug: '',
-    }
-  },
-  computed: {
-    ...mapGetters([
-        'GET_CART',
-    ]),
-  },
-  mounted() {
-    this.bug = this.GET_CART;
-  },
-  methods: {
-    ...mapActions([
-      'DELETE_FROM_CART',
-      'INCREMENT_PRODUCT',
-      'DECREMENT_PRODUCT'
-    ]),
-    deleteCard(i) {
-      this.DELETE_FROM_CART(i)
-    },
-    increment(i) {
-      this.INCREMENT_PRODUCT(i)
-    },
-    decrement(i) {
-      this.DECREMENT_PRODUCT(i)
-    }
-  }
+  mixins: [cartMixin],
 }
 </script>
 

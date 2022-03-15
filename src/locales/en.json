@@ -36,5 +36,7 @@
   "HOME": "HOME",
   "clear": "clear",
   "send": "send",
-  "currency": "$"
+  "currency": "$",
+  "setLanguage": "set the language",
+  "clickOn": "click on search"
 }

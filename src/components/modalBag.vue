@@ -1,5 +1,5 @@
 <template>
-  <div class="modal">
+  <div class="modal grassCard">
     <div class="modal-title">
       <h2>{{ 'shoppingCart' | localize }}</h2>
       <div class="modal-title-exit">
@@ -71,12 +71,7 @@ export default {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(2px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-right-color: rgba(255, 255, 255, 0.3);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+
   border-radius: 20px;
   padding: 3%;
   &-title {

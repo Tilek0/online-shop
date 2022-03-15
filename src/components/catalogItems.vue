@@ -1,7 +1,7 @@
 <template>
   <div class="catalog">
-    <div class="catalog-items" v-for="(item,index) in catalog" :key="index">
-      <div class="catalog-items_img"  @click="toCard(item)">
+    <div class="catalog-items grassCard" v-for="(item,index) in catalog" :key="index">
+      <div class="catalog-items_img"  @click="toItem(item)">
         <img
             :src="require(`../assets/${item.image[index === firstColor ? secondColor : 0].img}`)"
             alt="img"
@@ -33,45 +33,18 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions} from "vuex";
+import catalogMixin from "../mixins/catalogMixin";
 
 export default {
   name: "catalogItems",
-  data() {
-    return {
-      like: false,
-      firstColor: 0,
-      secondColor: 0,
-    }
-  },
-  watch: {
-    catalog() {
-      this.firstColor = 0;
-      this.secondColor = 0;
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'GET_CATALOG',
-    ]),
-    catalog() {
-      return this.GET_CATALOG;
-    }
-  },
+  mixins: [catalogMixin],
   methods: {
     ...mapActions([
-      'CATCH_PRODUCT',
       'INCREMENT_LIKE_CATALOG',
       'DECREMENT_LIKE_CATALOG',
     ]),
-    toCard(i) {
-      this.CATCH_PRODUCT(i);
-      this.$router.push('/Items');
-    },
-    takeColor(color,index,i) {
-      this.firstColor = index;
-      this.secondColor = i;
-    },
+
     likeSwitch(i) {
       this.like = !this.like;
       if (this.like === true) {
@@ -93,12 +66,6 @@ export default {
     flex-direction: column;
     transition: .3s ease-in;
     border-radius: 15px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-right-color: rgba(255, 255, 255, 0.3);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
     &:hover {
       color: #f26659;
       box-shadow: 7px 20px 20px 3px rgba(0, 0, 0, .4);

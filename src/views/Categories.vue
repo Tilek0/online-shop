@@ -1,11 +1,12 @@
 <template>
   <div class="main">
     <h1>{{ 'categories' | localize}}</h1>
-    <div class="main-category">
+    <mobile-categories :category_data="category_data" v-if="GET_MOBILE"/>
+    <div class="main-category" v-else>
       <div
           v-for="item in GET_CATEGORY.clothes"
           :key="item.name"
-          class="main-category-item"
+          class="main-category-item grassCard"
           @click="toCatalog(item)"
       >
         <div class="main-category-item_icon">
@@ -18,45 +19,21 @@
 </template>
 
 <script>
-import {mapGetters,mapActions} from "vuex";
+import mobileCategories from "../mobile/mobileCategories";
+import categoryMixin from "../mixins/categoryMixin";
+import {mapGetters} from "vuex";
 export default {
   name: "Categories",
-  data () {
-    return {
-
-    }
+  components: {
+    mobileCategories
   },
+  mixins: [categoryMixin],
   computed: {
     ...mapGetters([
       'GET_CATEGORY',
+      'GET_MOBILE'
     ]),
   },
-  methods: {
-    ...mapActions([
-      'CATCH_CATALOG'
-    ]),
-    toCatalog(i) {
-      let catalog = this.GET_CATEGORY.clothes.find(item => item.name === i.name);
-      switch (i.name) {
-        case 'trousers':
-          this.CATCH_CATALOG(catalog.trousers)
-          break;
-        case 'coat':
-          this.CATCH_CATALOG(catalog.coat)
-          break;
-        case 'shirts':
-          this.CATCH_CATALOG(catalog.shirts)
-          break;
-        case 'shoes':
-          this.CATCH_CATALOG(catalog.shoes)
-          break;
-        case 'outwear':
-          this.CATCH_CATALOG(catalog.jacket)
-          break;
-      }
-      this.$router.push('/Catalog')
-    }
-  }
 }
 </script>
 
@@ -74,12 +51,6 @@ export default {
       flex-direction: column;
       position: relative;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(2px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-right-color: rgba(255, 255, 255, 0.3);
-      border-bottom-color: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
       transition: .5s ease;
       margin-bottom: 4%;
       &:hover {
