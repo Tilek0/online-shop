@@ -38,5 +38,7 @@
   "send": "отправить",
   "currency": "₽",
   "setLanguage": "установить язык",
-  "clickOn": "нажмите на поиск"
+  "clickOn": "нажмите на поиск",
+  "back": "назад",
+  "appDescription": "Cайт был создан на Vue js без использование css фреймворков. Есть медиа-запросы. Использовались: scss, Vuex, Router, mixins, localstorage, json-server, lodash, vue-unique-id, axios. Кастомное решения: на подобии i18n и wow.js, директива, глобальный css class. МОБИЛЬНАЯ ВЕРСИЯ СРАБАТЫВАЕТ ПРИ ШИРИНЕ МЕНЬШЕ 820px ПОСЛЕ ПЕРЕЗАГРУЗКИ!!!"
 }

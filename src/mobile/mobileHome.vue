@@ -18,7 +18,7 @@
 
 <script>
 import myButton from "../components/myButton.vue";
-import {mapActions, mapGetters} from "vuex";
+import homeMixin from "../mixins/homeMixin";
 export default {
   name: "mobileHome",
   components: {
@@ -29,28 +29,12 @@ export default {
       homePage: [
         {name: 'MAN', src: 'man.png'},
         {name: 'WOMAN', src: 'woman.png'},
-        {name: 'BOY', src: 'boy.png'},
         {name: 'GIRL', src: 'girl.png'},
+        {name: 'BOY', src: 'boy.png'},
       ]
     }
   },
-  mounted() {
-    this.CATCH_ALL_PRODUCTS();
-  },
-  computed: {
-    ...mapGetters([
-      'GET_PRODUCTS'
-    ])
-  },
-  methods: {
-    ...mapActions([
-      'CATCH_ALL_PRODUCTS'
-    ]),
-    toCategory(i) {
-      let category = this.GET_PRODUCTS.find(item => item.name === i)
-      this.$router.push({name: 'Categories', query: {category: i}, params: {category_data: category}});
-    }
-  }
+  mixins: [homeMixin],
 }
 </script>
 

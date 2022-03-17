@@ -1,15 +1,16 @@
 <template>
   <div class="mobileMain">
+    <div @click="back" class="grassCard" :style="{width: '75px', height: '17px' ,'margin': '3%', padding: '1%'}">{{ 'back' | localize}}</div>
     <div class="mobileItem grassCard" v-scroll-animation>
-      <div class="mobileItem-image" v-if="data_item">
-        <img :src="require('../assets/' + data_item.image[checkedColor].img)" alt="#" v-scroll-animation>
+      <div class="mobileItem-image" v-if="GET_PRODUCT">
+        <img :src="require('../assets/' + GET_PRODUCT.image[checkedColor].img)" alt="#" v-scroll-animation>
       </div>
       <div class="mobileItem-desc grassCard">
-        <h2>{{data_item.name}}</h2>
+        <h2>{{GET_PRODUCT.name}}</h2>
         <div class="mobileItem-desc_text" v-scroll-animation>
-          <p>{{ 'price'| localize }}: {{ data_item.price }} {{ 'currency' | localize}}</p>
+          <p>{{ 'price'| localize }}: {{ GET_PRODUCT.price }} {{ 'currency' | localize}}</p>
           <div
-              v-for="(color,i) in data_item.image"
+              v-for="(color,i) in GET_PRODUCT.image"
               :key="i"
               class="mobileItem-desc_text__color"
               :style="{
@@ -25,7 +26,7 @@
         </div>
         <p>{{ 'size' | localize }}:</p>
         <div class="mobileItem-desc_size"
-             v-for="(one,i) in data_item.sizes"
+             v-for="(one,i) in GET_PRODUCT.sizes"
              :key="i"
         >
           <div
@@ -58,6 +59,11 @@ export default {
     myButton
   },
   mixins: [itemMixin],
+  methods: {
+    back() {
+      this.$router.go(-1)
+    }
+  }
 }
 </script>
 
@@ -66,9 +72,10 @@ export default {
   width: 100%;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding-top: 4%;
-  margin-bottom: 3%;
+  margin-bottom: 7%;
   .before-enter {
     transition: all 1s ease;
     opacity: 0;

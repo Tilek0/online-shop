@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div @click="back" class="grassCard" :style="{width: '75px', height: '17px' ,'margin': '3%', padding: '1%'}">{{ 'back' | localize}}</div>
     <div class="mobileCart">
       <h2>{{ 'shoppingCart' | localize}}</h2>
       <h3
@@ -84,6 +85,9 @@ export default {
   methods: {
     payment() {
       this.$router.push('/Payment');
+    },
+    back() {
+      this.$router.go(-1)
     }
   }
 }
