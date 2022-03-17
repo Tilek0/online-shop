@@ -38,7 +38,5 @@
   "send": "send",
   "currency": "$",
   "setLanguage": "set the language",
-  "clickOn": "click on search",
-  "back": "back",
-  "appDescription": "The site was created on Vue js without the use of css frameworks. There are media queries. Used: scss, Vuex, Router, mixins, localstorage, json-server, lodash, vue-unique-id, axios. Custom solutions: similar to i18n and wow.js, directive, global css class. MOBILE VERSION WILL WORK IF WIDTH LESS THAN 820px AFTER RELOAD!!!"
+  "clickOn": "click on search"
 }

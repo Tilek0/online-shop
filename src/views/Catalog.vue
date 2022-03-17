@@ -43,8 +43,6 @@ export default {
   position: relative;
 
   .catalog {
-    width: 100%;
-    height: 100%;
     margin-top: 3%;
     display: flex;
     flex-wrap: wrap;

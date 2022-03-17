@@ -10,9 +10,9 @@
               :key="item.name"
               @mouseover="showPhoto(index)"
               @mouseleave="clearHover"
-              @click="toCategory(item.name)"
+              @click="linkPage(item)"
           >
-            <my-button class="home-main-preCard-cards_text" @myButtonEvent="toCategory(item.name)">{{item.name | localize}}</my-button>
+            <my-button class="home-main-preCard-cards_text" @myButtonEvent="linkPage(item)">{{item.name | localize}}</my-button>
             <div class="home-main-preCard-cards_png" :style="item.style">
               <img :src="require('../assets/'+ item.image)" alt="img">
             </div>
@@ -44,8 +44,7 @@
 <script>
 import myButton from "../components/myButton";
 import mobileHome from "../mobile/mobileHome";
-import {mapGetters} from "vuex";
-import homeMixin from "../mixins/homeMixin";
+import {mapGetters,mapActions} from "vuex";
 export default {
   name: "Home",
   components: {
@@ -70,13 +69,20 @@ export default {
       gifts: ['forHim','forHer'],
     }
   },
-  mixins: [homeMixin],
+  mounted() {
+    this.CATCH_ALL_PRODUCTS();
+  },
   computed: {
     ...mapGetters([
+      'GET_PRODUCTS',
       'GET_MOBILE'
     ])
   },
   methods: {
+    ...mapActions([
+      'CATCH_CATEGORY',
+      'CATCH_ALL_PRODUCTS',
+    ]),
     showPhoto(i) {
       this.hoverImage = this.backImage.find((item, index) => {
         return index === i;
@@ -84,6 +90,13 @@ export default {
     },
     clearHover() {
       this.hoverImage = '';
+    },
+    linkPage(i) {
+      let category = this.GET_PRODUCTS.find(item => {
+        return item.name === i.name;
+      })
+      this.CATCH_CATEGORY(category);
+      this.$router.push({name: 'Categories', query: {category: i.name}});
     },
   },
 };

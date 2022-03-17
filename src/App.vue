@@ -1,14 +1,11 @@
 <template>
   <div id="app">
     <div v-if="!GET_MOBILE">
-      <navigation @openModal="openModal" @openReadme="openReadme" class="navigation"/>
+      <navigation @openModal="openModal" class="navigation"/>
       <div class="showModal" v-if="modalView">
         <modal-bag
             @closeModal="closeModal"
         ></modal-bag>
-      </div>
-      <div class="raedMe" v-if="isReadme">
-        {{ 'appDescription' | localize}}
       </div>
     </div>
     <div @click="closeModal">
@@ -34,7 +31,6 @@ export default {
   data() {
     return {
       modalView: false,
-      isReadme: false,
     }
   },
   created() {
@@ -54,11 +50,6 @@ export default {
       'CHANGE_MOBILE',
       'CLOSE_MOBILE_MODAL'
     ]),
-    openReadme() {
-      if (!this.GET_MOBILE) {
-        this.isReadme = true;
-      }
-    },
     openModal() {
       if (!this.GET_MOBILE) {
         this.modalView = true;
@@ -68,7 +59,6 @@ export default {
       this.CLOSE_MOBILE_MODAL(false)
       if (!this.GET_MOBILE){
         this.modalView = false;
-        this.isReadme = false;
         this.$refs.closeContact.visibleForm = false;
       }
     }
@@ -96,15 +86,6 @@ body {
   height: 100%;
   .navigation {
     z-index: 10;
-  }
-  .raedMe {
-    position: absolute;
-    background: #8ca9d3;
-    top: 10%;
-    right: 5%;
-    z-index: 3;
-    border-radius: 20px;
-    padding: 1%;
   }
   .showModal {
     width: max-content;

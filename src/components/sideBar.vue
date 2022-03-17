@@ -2,7 +2,7 @@
   <div class="sideBar grassCard">
     <div>
       <p
-          v-for="(item,index) in GET_CATEGORY"
+          v-for="(item,index) in GET_CATEGORY.clothes"
           :key="index"
           class="sideBar-active"
           @click="toCatalog(item,index)"

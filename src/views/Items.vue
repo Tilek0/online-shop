@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mobile-items v-if="GET_MOBILE"/>
+    <mobile-items :data_item="data_item" v-if="GET_MOBILE"/>
     <div class="main" v-else>
       <div
 
@@ -13,10 +13,10 @@
             class="item-card"
             :style="rotateStyle"
         >
-          <div class="item-card_staff">
+          <div class="item-card_staff" v-if="data_item">
             <div class="item-card_staff_circle"></div>
             <img
-                :src="require('../assets/' + GET_PRODUCT.image[checkedColor].img)"
+                :src="require('../assets/' + data_item.image[checkedColor].img)"
                 alt="shop"
                 :style="{transform: visualItem ? `translateZ(200px) rotate(-25deg)` : `translateZ(0) rotate(0)`}"
             >
@@ -24,19 +24,19 @@
           <div class="item-card_info">
             <div class="item-card_info__title">
               <h1 :style="{transform: visualItem ? `translateZ(150px)` : `translateZ(0)`}">
-                {{ GET_PRODUCT.name }}
+                {{ data_item.name }}
               </h1>
             </div>
             <div class="item-card_info__underTitle">
               <h3 :style="{transform: visualItem ? `translateZ(125px)` : `translateZ(0)`}">
-                {{ 'price'| localize }}: {{ GET_PRODUCT.price }} {{ 'currency' | localize}}
+                {{ 'price'| localize }}: {{ data_item.price }} {{ 'currency' | localize}}
               </h3>
               <div class="item-card_info__underTitle__like" @click="like">
                 <img src="../assets/icons/emptyLike.png" alt="like" v-if="!likeSwitch">
                 <img src="../assets/icons/like.png" alt="like" v-else>
               </div>
               <div
-                  v-for="(color,i) in GET_PRODUCT.image"
+                  v-for="(color,i) in data_item.image"
                   :key="i"
                   class="item-card_info__underTitle__color"
                   :style="{
@@ -53,7 +53,7 @@
             </div>
             <h2>{{ 'size' | localize }}:</h2>
             <div class="item-card_info_sizes"
-                 v-for="(one,i) in GET_PRODUCT.sizes"
+                 v-for="(one,i) in data_item.sizes"
                  :key="i"
                  :style="{transform: visualItem ? `translateZ(100px) translateY(-8px)` : `translateZ(0) translateY(0)`}"
             >

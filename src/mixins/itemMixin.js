@@ -1,6 +1,14 @@
-import {mapActions, mapGetters} from "vuex";
+import {mapActions} from "vuex";
 
 export default {
+    props: {
+        data_item: {
+            type: Object,
+            default() {
+                return {}
+            }
+        }
+    },
     data() {
         return {
             buttonText: 'addToBag',
@@ -9,18 +17,13 @@ export default {
             checkedColor: 0,
         }
     },
-    computed: {
-        ...mapGetters([
-            'GET_PRODUCT'
-        ])
-    },
     methods: {
         ...mapActions([
             'CATCH_CART',
         ]),
         addToBug() {
             if (this.selectedSize !== null) {
-                let image = JSON.parse(JSON.stringify(this.GET_PRODUCT));
+                let image = JSON.parse(JSON.stringify(this.data_item));
                 image.id = this.uid;
                 image.selectedSize = this.selectedSize;
                 image.image = image.image[this.checkedColor];

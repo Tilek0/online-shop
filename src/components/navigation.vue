@@ -32,8 +32,8 @@
           >
         </div>
       </div>
-      <div @click="openReadme">
-        <img src="../assets/icons/admin.png" alt="img" class="grassCard">
+      <div>
+        <img src="../assets/icons/admin.png" alt="img">
       </div>
       <div @click="openModal">
         <img src="../assets/icons/bag.png" alt="img" class="grassCard" @mouseover="countMove = true"
@@ -86,7 +86,7 @@ export default {
       let category = this.product.find(item => {
         return item.name === i.name;
       })
-      this.CATCH_CATEGORY(category.clothes)
+      this.CATCH_CATEGORY(category)
       if (category.name === 'HOME') {
         if (this.$route.fullPath !== '/') {
           this.$router.push('/');
@@ -105,21 +105,22 @@ export default {
       });
     },
     nestedLink(i) {
+      let catalog = this.hideLinks.clothes.find(item => item.name === i.name);
       switch (i.name) {
         case 'trousers':
-          this.CATCH_CATALOG(i.trousers);
+          this.CATCH_CATALOG(catalog.trousers);
           break;
         case 'coat':
-          this.CATCH_CATALOG(i.coat);
+          this.CATCH_CATALOG(catalog.coat);
           break;
         case 'shirts':
-          this.CATCH_CATALOG(i.shirts);
+          this.CATCH_CATALOG(catalog.shirts);
           break;
         case 'shoes':
-          this.CATCH_CATALOG(i.shoes);
+          this.CATCH_CATALOG(catalog.shoes);
           break;
         case 'outwear':
-          this.CATCH_CATALOG(i.jacket);
+          this.CATCH_CATALOG(catalog.jacket);
           break;
       }
       if (this.$route.fullPath !== '/Catalog') {
@@ -129,9 +130,6 @@ export default {
     },
     clearText() {
       this.searchText = '';
-    },
-    openReadme() {
-      this.$emit('openReadme')
     },
     openModal() {
       this.$emit('openModal');

@@ -1,4 +1,4 @@
-import {mapActions, mapGetters} from "vuex";
+import {mapGetters} from "vuex";
 
 export default {
     data() {
@@ -23,12 +23,8 @@ export default {
         }
     },
     methods: {
-        ...mapActions([
-            'CATCH_PRODUCT'
-        ]),
         toItem(item) {
-            this.CATCH_PRODUCT(item)
-            this.$router.push({name: 'Items', query:{product: item.name}})
+            this.$router.push({name: 'Items', query:{product: item} ,params: {data_item: item}})
         },
         takeColor(color,index,i) {
             this.firstColor = index;
