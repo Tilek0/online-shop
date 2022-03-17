@@ -3,9 +3,9 @@ import {mapActions} from "vuex";
 export default  {
     props: {
         category_data: {
-            type: Object,
+            type: Array,
             default() {
-                return {}
+                return []
             }
         }
     },

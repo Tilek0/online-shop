@@ -1,15 +1,15 @@
 <template>
   <div class="main">
     <h1>{{ 'categories' | localize}}</h1>
-    <mobile-categories :category_data="category_data" v-if="GET_MOBILE"/>
+    <mobile-categories :category_data="GET_CATEGORY.length ? GET_CATEGORY : category_data" v-if="GET_MOBILE"/>
     <div class="main-category" v-else>
       <div
-          v-for="item in GET_CATEGORY.clothes"
+          v-for="item in GET_CATEGORY.length ? GET_CATEGORY : category_data"
           :key="item.name"
           class="main-category-item grassCard"
           @click="toCatalog(item)"
       >
-        <div class="main-category-item_icon">
+        <div class="main-category-item_icon" v-if="item.frontImg">
           <img :src="require('../assets/' + item.frontImg)" alt="#">
         </div>
         <div class="main-category-item_desc">{{item.name | localize}}</div>
@@ -27,6 +27,7 @@ export default {
   components: {
     mobileCategories
   },
+
   mixins: [categoryMixin],
   computed: {
     ...mapGetters([

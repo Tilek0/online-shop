@@ -57,6 +57,7 @@
           class="mobileNav-cartLength"
           :style="{top: activeCart ? '-37%' : '22%'}"
       >{{GET_CART.length}}</p>
+      <p v-show="GET_MOBILE_MODAL" class="mobileNav-readme">{{ 'appDescription' | localize}}</p>
     </div>
   </div>
 </template>
@@ -124,7 +125,7 @@ export default {
           }
           break;
         case 'Profile':
-          this.CLOSE_MOBILE_MODAL(true)
+          this.CLOSE_MOBILE_MODAL(true);
           this.isSearch = false;
           this.activeCart = false;
           break;
@@ -329,6 +330,14 @@ export default {
     color: red;
     font-weight: bold;
     transition: .5s ease;
+  }
+  &-readme {
+    position: absolute;
+    padding: 1%;
+    z-index: 3;
+    top: -20rem;
+    right: 0;
+    background: #8ca9d3;
   }
 }
 

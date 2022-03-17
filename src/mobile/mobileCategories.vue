@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div class="mobileCategories" v-if="category_data.clothes.length">
+    <div @click="back" class="grassCard" :style="{width: '75px', height: '17px' ,'margin': '3%', padding: '1%'}">{{ 'back' | localize}}</div>
+    <div class="mobileCategories" v-if="category_data.length">
       <div
-          v-for="(item,i) in category_data.clothes"
+          v-for="(item,i) in category_data"
           :key="i"
           class="mobileCategories-item grassCard"
           v-scroll-animation
@@ -25,6 +26,11 @@ export default {
     myButton
   },
   mixins: [categoryMixin],
+  methods: {
+    back() {
+      this.$router.go(-1)
+    }
+  }
 }
 </script>
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div @click="back" class="grassCard" :style="{width: '75px', height: '17px' ,'margin': '3%', padding: '1%'}">{{ 'back' | localize}}</div>
     <div class="mobileCatalog" v-if="catalog.length">
       <div
           v-for="(item,index) in catalog"
@@ -39,6 +40,11 @@ import catalogMixin from "../mixins/catalogMixin";
 export default {
   name: "mobileCatalog",
   mixins: [catalogMixin],
+  methods: {
+    back() {
+      this.$router.go(-1)
+    }
+  }
 }
 </script>
 

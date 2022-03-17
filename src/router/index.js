@@ -31,7 +31,6 @@ const routes = [
     path: "/Items",
     name: "Items",
     component: Items,
-    props: true,
   },
   {
     path: "/Bag",
