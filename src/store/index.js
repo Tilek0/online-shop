@@ -1,11 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import CommonActions from "./actions/actions";
-import apiRequests from "./actions/apiRequests"
+import apiRequests from "./actions/apiRequests";
 import mutations from "./mutations/mutations";
 import getters from "./getters/getters";
 
-const actions = {...CommonActions,...apiRequests}
+const actions = { ...CommonActions, ...apiRequests };
 Vue.use(Vuex);
 
 export default new Vuex.Store({

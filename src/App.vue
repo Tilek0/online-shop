@@ -14,7 +14,7 @@
     <div @click="closeModal">
       <router-view />
     </div>
-    <mobile-nav v-if="GET_MOBILE"/>
+    <mobile-nav v-if="GET_MOBILE" class="mobileNav"/>
     <footer-nav v-else ref="closeContact" />
   </div>
 </template>
@@ -117,6 +117,11 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     border-radius: 20px;
+  }
+  .mobileNav {
+    position: fixed;
+    left: 0;
+    bottom: 0;
   }
 }
 a {
